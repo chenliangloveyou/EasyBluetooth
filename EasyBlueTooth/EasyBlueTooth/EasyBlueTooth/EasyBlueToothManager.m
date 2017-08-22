@@ -24,7 +24,7 @@
         share = [[EasyBlueToothManager alloc]init];
         dispatch_queue_t queue = dispatch_queue_create("com.easyBluetootth.demo", 0);
 
-        share->_centerManager = [[EasyCenterManager alloc]initWithQueue:queue];
+        share->_centerManager = [[EasyCenterManager alloc]initWithQueue:queue options:nil];
     });
     return share;
 }
