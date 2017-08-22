@@ -8,9 +8,11 @@
 
 #import "ViewController.h"
 
-#import "EasyBlueToothManager.h"
+#import "CommonBlueTooth.h"
+
 @interface ViewController ()
 
+@property (nonatomic,strong)CommonBlueTooth *sysBlueTooth ;
 @property (weak, nonatomic) IBOutlet UIButton *findDevices;
 @property (weak, nonatomic) IBOutlet UIButton *connectDevice;
 
@@ -20,27 +22,23 @@
 
 - (void)dealloc
 {
+    _sysBlueTooth = nil ;
 }
 - (IBAction)findDevices:(id)sender {
     
-//  [[EasyBlueToothManager shareInstance]searchDeviceWithName:@"hxsb" timeInterval:5 callBack:^(EasyPeripheral *peripheral) {
-//     [[EasyBlueToothManager shareInstance]connectDeviceWihtPeripheral:peripheral callback:^(NSError *error) {
-//         if (nil == error) {
-//             [[EasyBlueToothManager shareInstance]writeDataWithPeripheral:peripheral data:nil writeUUID:@"0xff01" callback:^(NSData *data, NSError *error) {
-//                 [[EasyBlueToothManager shareInstance] notifyDataWithPeripheral:peripheral notifyUUID:@"ff01" withCallback:^(NSData *data, NSError *error) {
-//                     if (data) {
-//                         NSLog(@"%@",data);
-//                     }
-//                 }];
-//             }];
-//         }
-//     }];
-//  }];
+    
+    //查找设备
+    [self.sysBlueTooth scanDevicescallBack:^(BaseBlueTooth *blueTooth, NSArray *devices, NSError *error) {
+        
+    } disConnectedCallback:^(BaseBlueTooth *blueTooth, DisconnectType disConnectType) {
+        
+    }];
     
 }
 - (IBAction)connectDevice:(id)sender {
     
-   
+    [self.sysBlueTooth connectDeviceWithUUID:nil sendOrder:nil];
+    
     //[self.sysBlueTooth connectDeviceWithUUID:nil orderType:0 sweatRate:0];
 }
 
@@ -48,7 +46,25 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     
+   
     
+    self.sysBlueTooth.StateChangedCallback = ^(BaseBlueTooth *blueTooth ,StateType stateType){
+       
+    };
+    self.sysBlueTooth.DisconnectedCallback = ^(BaseBlueTooth *blueTooth,DisconnectType disConnectType){
+        
+    };
+    self.sysBlueTooth.receivedDataCallBack = ^(BaseBlueTooth *blueTooth,id receivedData){
+        
+    };
+}
+
+- (CommonBlueTooth *)sysBlueTooth
+{
+    if (nil == _sysBlueTooth) {
+        _sysBlueTooth = [[CommonBlueTooth alloc]initWithBlueToothType:BlueToothTypeSweat];
+    }
+    return _sysBlueTooth ;
 }
 
 - (void)didReceiveMemoryWarning {
