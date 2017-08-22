@@ -1,0 +1,722 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		68815D011F48A44C00F99E2D /* UIView+Ext.m in Sources */ = {isa = PBXBuildFile; fileRef = 68815D001F48A44C00F99E2D /* UIView+Ext.m */; };
+		AD32B2071F4A79D600A1746C /* ExampleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AD32B1EC1F4A79D600A1746C /* ExampleCell.m */; };
+		AD32B2081F4A79D600A1746C /* ExampleCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AD32B1ED1F4A79D600A1746C /* ExampleCell.xib */; };
+		AD32B2091F4A79D600A1746C /* ExampleTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD32B1EF1F4A79D600A1746C /* ExampleTableViewController.m */; };
+		AD32B20A1F4A79D600A1746C /* ToolCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AD32B1F21F4A79D600A1746C /* ToolCell.m */; };
+		AD32B20B1F4A79D600A1746C /* ToolCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AD32B1F31F4A79D600A1746C /* ToolCell.xib */; };
+		AD32B20C1F4A79D600A1746C /* ToolDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AD32B1F51F4A79D600A1746C /* ToolDetailCell.m */; };
+		AD32B20D1F4A79D600A1746C /* ToolDetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AD32B1F61F4A79D600A1746C /* ToolDetailCell.xib */; };
+		AD32B20E1F4A79D600A1746C /* ToolDetailHeaderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AD32B1F81F4A79D600A1746C /* ToolDetailHeaderCell.m */; };
+		AD32B20F1F4A79D600A1746C /* ToolDetailHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = AD32B1FA1F4A79D600A1746C /* ToolDetailHeaderView.m */; };
+		AD32B2101F4A79D600A1746C /* ToolDetailHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AD32B1FB1F4A79D600A1746C /* ToolDetailHeaderView.xib */; };
+		AD32B2111F4A79D600A1746C /* ToolDetailOperationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AD32B1FD1F4A79D600A1746C /* ToolDetailOperationCell.m */; };
+		AD32B2121F4A79D600A1746C /* ToolDetailOperationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AD32B1FE1F4A79D600A1746C /* ToolDetailOperationCell.xib */; };
+		AD32B2131F4A79D600A1746C /* ToolDetailOperationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD32B2001F4A79D600A1746C /* ToolDetailOperationViewController.m */; };
+		AD32B2141F4A79D600A1746C /* ToolDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD32B2021F4A79D600A1746C /* ToolDetailViewController.m */; };
+		AD32B2151F4A79D600A1746C /* ToolInputView.m in Sources */ = {isa = PBXBuildFile; fileRef = AD32B2041F4A79D600A1746C /* ToolInputView.m */; };
+		AD32B2161F4A79D600A1746C /* ToolViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD32B2061F4A79D600A1746C /* ToolViewController.m */; };
+		AD7DCAB11E7A5E9F00589BBA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = AD7DCAB01E7A5E9F00589BBA /* main.m */; };
+		AD7DCAB41E7A5E9F00589BBA /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = AD7DCAB31E7A5E9F00589BBA /* AppDelegate.m */; };
+		AD7DCAB71E7A5E9F00589BBA /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD7DCAB61E7A5E9F00589BBA /* ViewController.m */; };
+		AD7DCABA1E7A5E9F00589BBA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AD7DCAB81E7A5E9F00589BBA /* Main.storyboard */; };
+		AD7DCABC1E7A5E9F00589BBA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AD7DCABB1E7A5E9F00589BBA /* Assets.xcassets */; };
+		AD7DCABF1E7A5E9F00589BBA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AD7DCABD1E7A5E9F00589BBA /* LaunchScreen.storyboard */; };
+		AD7DCACA1E7A5EA000589BBA /* EasyBlueToothTests.m in Sources */ = {isa = PBXBuildFile; fileRef = AD7DCAC91E7A5EA000589BBA /* EasyBlueToothTests.m */; };
+		AD7DCAD51E7A5EA000589BBA /* EasyBlueToothUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = AD7DCAD41E7A5EA000589BBA /* EasyBlueToothUITests.m */; };
+		AD92FA121F42D8D100D8B811 /* EasyBlueToothManager.m in Sources */ = {isa = PBXBuildFile; fileRef = AD92F9FF1F42D8D100D8B811 /* EasyBlueToothManager.m */; };
+		AD92FA141F42D8D100D8B811 /* EasyCenterManager.m in Sources */ = {isa = PBXBuildFile; fileRef = AD92FA041F42D8D100D8B811 /* EasyCenterManager.m */; };
+		AD92FA151F42D8D100D8B811 /* EasyCharacteristic.m in Sources */ = {isa = PBXBuildFile; fileRef = AD92FA061F42D8D100D8B811 /* EasyCharacteristic.m */; };
+		AD92FA161F42D8D100D8B811 /* EasyDescriptor.m in Sources */ = {isa = PBXBuildFile; fileRef = AD92FA081F42D8D100D8B811 /* EasyDescriptor.m */; };
+		AD92FA171F42D8D100D8B811 /* EasyPeripheral.m in Sources */ = {isa = PBXBuildFile; fileRef = AD92FA0A1F42D8D100D8B811 /* EasyPeripheral.m */; };
+		AD92FA181F42D8D100D8B811 /* EasyProfiles.m in Sources */ = {isa = PBXBuildFile; fileRef = AD92FA0C1F42D8D100D8B811 /* EasyProfiles.m */; };
+		AD92FA191F42D8D100D8B811 /* EasyService.m in Sources */ = {isa = PBXBuildFile; fileRef = AD92FA0E1F42D8D100D8B811 /* EasyService.m */; };
+		AD92FA1A1F42D8D100D8B811 /* EasyUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = AD92FA111F42D8D100D8B811 /* EasyUtils.m */; };
+		AD92FA1D1F42D8F900D8B811 /* EasyBean.m in Sources */ = {isa = PBXBuildFile; fileRef = AD92FA1C1F42D8F900D8B811 /* EasyBean.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		AD7DCAC61E7A5EA000589BBA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AD7DCAA41E7A5E9F00589BBA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = AD7DCAAB1E7A5E9F00589BBA;
+			remoteInfo = EasyBlueTooth;
+		};
+		AD7DCAD11E7A5EA000589BBA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AD7DCAA41E7A5E9F00589BBA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = AD7DCAAB1E7A5E9F00589BBA;
+			remoteInfo = EasyBlueTooth;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		68815CFF1F48A44C00F99E2D /* UIView+Ext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Ext.h"; sourceTree = "<group>"; };
+		68815D001F48A44C00F99E2D /* UIView+Ext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Ext.m"; sourceTree = "<group>"; };
+		AD32B1EB1F4A79D600A1746C /* ExampleCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExampleCell.h; sourceTree = "<group>"; };
+		AD32B1EC1F4A79D600A1746C /* ExampleCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExampleCell.m; sourceTree = "<group>"; };
+		AD32B1ED1F4A79D600A1746C /* ExampleCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ExampleCell.xib; sourceTree = "<group>"; };
+		AD32B1EE1F4A79D600A1746C /* ExampleTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExampleTableViewController.h; sourceTree = "<group>"; };
+		AD32B1EF1F4A79D600A1746C /* ExampleTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExampleTableViewController.m; sourceTree = "<group>"; };
+		AD32B1F11F4A79D600A1746C /* ToolCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ToolCell.h; sourceTree = "<group>"; };
+		AD32B1F21F4A79D600A1746C /* ToolCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ToolCell.m; sourceTree = "<group>"; };
+		AD32B1F31F4A79D600A1746C /* ToolCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ToolCell.xib; sourceTree = "<group>"; };
+		AD32B1F41F4A79D600A1746C /* ToolDetailCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ToolDetailCell.h; sourceTree = "<group>"; };
+		AD32B1F51F4A79D600A1746C /* ToolDetailCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ToolDetailCell.m; sourceTree = "<group>"; };
+		AD32B1F61F4A79D600A1746C /* ToolDetailCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ToolDetailCell.xib; sourceTree = "<group>"; };
+		AD32B1F71F4A79D600A1746C /* ToolDetailHeaderCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ToolDetailHeaderCell.h; sourceTree = "<group>"; };
+		AD32B1F81F4A79D600A1746C /* ToolDetailHeaderCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ToolDetailHeaderCell.m; sourceTree = "<group>"; };
+		AD32B1F91F4A79D600A1746C /* ToolDetailHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ToolDetailHeaderView.h; sourceTree = "<group>"; };
+		AD32B1FA1F4A79D600A1746C /* ToolDetailHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ToolDetailHeaderView.m; sourceTree = "<group>"; };
+		AD32B1FB1F4A79D600A1746C /* ToolDetailHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ToolDetailHeaderView.xib; sourceTree = "<group>"; };
+		AD32B1FC1F4A79D600A1746C /* ToolDetailOperationCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ToolDetailOperationCell.h; sourceTree = "<group>"; };
+		AD32B1FD1F4A79D600A1746C /* ToolDetailOperationCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ToolDetailOperationCell.m; sourceTree = "<group>"; };
+		AD32B1FE1F4A79D600A1746C /* ToolDetailOperationCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ToolDetailOperationCell.xib; sourceTree = "<group>"; };
+		AD32B1FF1F4A79D600A1746C /* ToolDetailOperationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ToolDetailOperationViewController.h; sourceTree = "<group>"; };
+		AD32B2001F4A79D600A1746C /* ToolDetailOperationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ToolDetailOperationViewController.m; sourceTree = "<group>"; };
+		AD32B2011F4A79D600A1746C /* ToolDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ToolDetailViewController.h; sourceTree = "<group>"; };
+		AD32B2021F4A79D600A1746C /* ToolDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ToolDetailViewController.m; sourceTree = "<group>"; };
+		AD32B2031F4A79D600A1746C /* ToolInputView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ToolInputView.h; sourceTree = "<group>"; };
+		AD32B2041F4A79D600A1746C /* ToolInputView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ToolInputView.m; sourceTree = "<group>"; };
+		AD32B2051F4A79D600A1746C /* ToolViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ToolViewController.h; sourceTree = "<group>"; };
+		AD32B2061F4A79D600A1746C /* ToolViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ToolViewController.m; sourceTree = "<group>"; };
+		AD7DCAAC1E7A5E9F00589BBA /* EasyBlueTooth.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EasyBlueTooth.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		AD7DCAB01E7A5E9F00589BBA /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		AD7DCAB21E7A5E9F00589BBA /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		AD7DCAB31E7A5E9F00589BBA /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		AD7DCAB51E7A5E9F00589BBA /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		AD7DCAB61E7A5E9F00589BBA /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		AD7DCAB91E7A5E9F00589BBA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		AD7DCABB1E7A5E9F00589BBA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		AD7DCABE1E7A5E9F00589BBA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		AD7DCAC01E7A5E9F00589BBA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		AD7DCAC51E7A5EA000589BBA /* EasyBlueToothTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EasyBlueToothTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		AD7DCAC91E7A5EA000589BBA /* EasyBlueToothTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EasyBlueToothTests.m; sourceTree = "<group>"; };
+		AD7DCACB1E7A5EA000589BBA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		AD7DCAD01E7A5EA000589BBA /* EasyBlueToothUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EasyBlueToothUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		AD7DCAD41E7A5EA000589BBA /* EasyBlueToothUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EasyBlueToothUITests.m; sourceTree = "<group>"; };
+		AD7DCAD61E7A5EA000589BBA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		AD92F9FE1F42D8D100D8B811 /* EasyBlueToothManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EasyBlueToothManager.h; sourceTree = "<group>"; };
+		AD92F9FF1F42D8D100D8B811 /* EasyBlueToothManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EasyBlueToothManager.m; sourceTree = "<group>"; };
+		AD92FA031F42D8D100D8B811 /* EasyCenterManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EasyCenterManager.h; sourceTree = "<group>"; };
+		AD92FA041F42D8D100D8B811 /* EasyCenterManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EasyCenterManager.m; sourceTree = "<group>"; };
+		AD92FA051F42D8D100D8B811 /* EasyCharacteristic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EasyCharacteristic.h; sourceTree = "<group>"; };
+		AD92FA061F42D8D100D8B811 /* EasyCharacteristic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EasyCharacteristic.m; sourceTree = "<group>"; };
+		AD92FA071F42D8D100D8B811 /* EasyDescriptor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EasyDescriptor.h; sourceTree = "<group>"; };
+		AD92FA081F42D8D100D8B811 /* EasyDescriptor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EasyDescriptor.m; sourceTree = "<group>"; };
+		AD92FA091F42D8D100D8B811 /* EasyPeripheral.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EasyPeripheral.h; sourceTree = "<group>"; };
+		AD92FA0A1F42D8D100D8B811 /* EasyPeripheral.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EasyPeripheral.m; sourceTree = "<group>"; };
+		AD92FA0B1F42D8D100D8B811 /* EasyProfiles.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EasyProfiles.h; sourceTree = "<group>"; };
+		AD92FA0C1F42D8D100D8B811 /* EasyProfiles.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EasyProfiles.m; sourceTree = "<group>"; };
+		AD92FA0D1F42D8D100D8B811 /* EasyService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EasyService.h; sourceTree = "<group>"; };
+		AD92FA0E1F42D8D100D8B811 /* EasyService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EasyService.m; sourceTree = "<group>"; };
+		AD92FA101F42D8D100D8B811 /* EasyUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EasyUtils.h; sourceTree = "<group>"; };
+		AD92FA111F42D8D100D8B811 /* EasyUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EasyUtils.m; sourceTree = "<group>"; };
+		AD92FA1B1F42D8F900D8B811 /* EasyBean.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EasyBean.h; sourceTree = "<group>"; };
+		AD92FA1C1F42D8F900D8B811 /* EasyBean.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EasyBean.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		AD7DCAA91E7A5E9F00589BBA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AD7DCAC21E7A5EA000589BBA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AD7DCACD1E7A5EA000589BBA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		AD32B1EA1F4A79D600A1746C /* Example */ = {
+			isa = PBXGroup;
+			children = (
+				AD32B1EB1F4A79D600A1746C /* ExampleCell.h */,
+				AD32B1EC1F4A79D600A1746C /* ExampleCell.m */,
+				AD32B1ED1F4A79D600A1746C /* ExampleCell.xib */,
+				AD32B1EE1F4A79D600A1746C /* ExampleTableViewController.h */,
+				AD32B1EF1F4A79D600A1746C /* ExampleTableViewController.m */,
+			);
+			path = Example;
+			sourceTree = "<group>";
+		};
+		AD32B1F01F4A79D600A1746C /* Tool */ = {
+			isa = PBXGroup;
+			children = (
+				AD32B1F11F4A79D600A1746C /* ToolCell.h */,
+				AD32B1F21F4A79D600A1746C /* ToolCell.m */,
+				AD32B1F31F4A79D600A1746C /* ToolCell.xib */,
+				AD32B1F41F4A79D600A1746C /* ToolDetailCell.h */,
+				AD32B1F51F4A79D600A1746C /* ToolDetailCell.m */,
+				AD32B1F61F4A79D600A1746C /* ToolDetailCell.xib */,
+				AD32B1F71F4A79D600A1746C /* ToolDetailHeaderCell.h */,
+				AD32B1F81F4A79D600A1746C /* ToolDetailHeaderCell.m */,
+				AD32B1F91F4A79D600A1746C /* ToolDetailHeaderView.h */,
+				AD32B1FA1F4A79D600A1746C /* ToolDetailHeaderView.m */,
+				AD32B1FB1F4A79D600A1746C /* ToolDetailHeaderView.xib */,
+				AD32B1FC1F4A79D600A1746C /* ToolDetailOperationCell.h */,
+				AD32B1FD1F4A79D600A1746C /* ToolDetailOperationCell.m */,
+				AD32B1FE1F4A79D600A1746C /* ToolDetailOperationCell.xib */,
+				AD32B1FF1F4A79D600A1746C /* ToolDetailOperationViewController.h */,
+				AD32B2001F4A79D600A1746C /* ToolDetailOperationViewController.m */,
+				AD32B2011F4A79D600A1746C /* ToolDetailViewController.h */,
+				AD32B2021F4A79D600A1746C /* ToolDetailViewController.m */,
+				AD32B2031F4A79D600A1746C /* ToolInputView.h */,
+				AD32B2041F4A79D600A1746C /* ToolInputView.m */,
+				AD32B2051F4A79D600A1746C /* ToolViewController.h */,
+				AD32B2061F4A79D600A1746C /* ToolViewController.m */,
+			);
+			path = Tool;
+			sourceTree = "<group>";
+		};
+		AD7DCAA31E7A5E9F00589BBA = {
+			isa = PBXGroup;
+			children = (
+				AD7DCAAE1E7A5E9F00589BBA /* EasyBlueTooth */,
+				AD7DCAC81E7A5EA000589BBA /* EasyBlueToothTests */,
+				AD7DCAD31E7A5EA000589BBA /* EasyBlueToothUITests */,
+				AD7DCAAD1E7A5E9F00589BBA /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		AD7DCAAD1E7A5E9F00589BBA /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				AD7DCAAC1E7A5E9F00589BBA /* EasyBlueTooth.app */,
+				AD7DCAC51E7A5EA000589BBA /* EasyBlueToothTests.xctest */,
+				AD7DCAD01E7A5EA000589BBA /* EasyBlueToothUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		AD7DCAAE1E7A5E9F00589BBA /* EasyBlueTooth */ = {
+			isa = PBXGroup;
+			children = (
+				AD92F9DE1F42978000D8B811 /* EasyBlueTooth */,
+				AD7DCAB21E7A5E9F00589BBA /* AppDelegate.h */,
+				AD7DCAB31E7A5E9F00589BBA /* AppDelegate.m */,
+				AD7DCAB51E7A5E9F00589BBA /* ViewController.h */,
+				AD7DCAB61E7A5E9F00589BBA /* ViewController.m */,
+				AD32B1F01F4A79D600A1746C /* Tool */,
+				AD32B1EA1F4A79D600A1746C /* Example */,
+				AD7DCAB81E7A5E9F00589BBA /* Main.storyboard */,
+				AD7DCABB1E7A5E9F00589BBA /* Assets.xcassets */,
+				AD7DCABD1E7A5E9F00589BBA /* LaunchScreen.storyboard */,
+				AD7DCAC01E7A5E9F00589BBA /* Info.plist */,
+				AD7DCAAF1E7A5E9F00589BBA /* Supporting Files */,
+			);
+			path = EasyBlueTooth;
+			sourceTree = "<group>";
+		};
+		AD7DCAAF1E7A5E9F00589BBA /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				AD7DCAB01E7A5E9F00589BBA /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		AD7DCAC81E7A5EA000589BBA /* EasyBlueToothTests */ = {
+			isa = PBXGroup;
+			children = (
+				AD7DCAC91E7A5EA000589BBA /* EasyBlueToothTests.m */,
+				AD7DCACB1E7A5EA000589BBA /* Info.plist */,
+			);
+			path = EasyBlueToothTests;
+			sourceTree = "<group>";
+		};
+		AD7DCAD31E7A5EA000589BBA /* EasyBlueToothUITests */ = {
+			isa = PBXGroup;
+			children = (
+				AD7DCAD41E7A5EA000589BBA /* EasyBlueToothUITests.m */,
+				AD7DCAD61E7A5EA000589BBA /* Info.plist */,
+			);
+			path = EasyBlueToothUITests;
+			sourceTree = "<group>";
+		};
+		AD92F9DE1F42978000D8B811 /* EasyBlueTooth */ = {
+			isa = PBXGroup;
+			children = (
+				AD92FA001F42D8D100D8B811 /* EasyCore */,
+				AD92FA0F1F42D8D100D8B811 /* EasyUtils */,
+				AD92F9FE1F42D8D100D8B811 /* EasyBlueToothManager.h */,
+				AD92F9FF1F42D8D100D8B811 /* EasyBlueToothManager.m */,
+			);
+			path = EasyBlueTooth;
+			sourceTree = "<group>";
+		};
+		AD92FA001F42D8D100D8B811 /* EasyCore */ = {
+			isa = PBXGroup;
+			children = (
+				AD92FA031F42D8D100D8B811 /* EasyCenterManager.h */,
+				AD92FA041F42D8D100D8B811 /* EasyCenterManager.m */,
+				AD92FA091F42D8D100D8B811 /* EasyPeripheral.h */,
+				AD92FA0A1F42D8D100D8B811 /* EasyPeripheral.m */,
+				AD92FA0D1F42D8D100D8B811 /* EasyService.h */,
+				AD92FA0E1F42D8D100D8B811 /* EasyService.m */,
+				AD92FA051F42D8D100D8B811 /* EasyCharacteristic.h */,
+				AD92FA061F42D8D100D8B811 /* EasyCharacteristic.m */,
+				AD92FA071F42D8D100D8B811 /* EasyDescriptor.h */,
+				AD92FA081F42D8D100D8B811 /* EasyDescriptor.m */,
+				AD92FA0B1F42D8D100D8B811 /* EasyProfiles.h */,
+				AD92FA0C1F42D8D100D8B811 /* EasyProfiles.m */,
+			);
+			path = EasyCore;
+			sourceTree = "<group>";
+		};
+		AD92FA0F1F42D8D100D8B811 /* EasyUtils */ = {
+			isa = PBXGroup;
+			children = (
+				68815CFF1F48A44C00F99E2D /* UIView+Ext.h */,
+				68815D001F48A44C00F99E2D /* UIView+Ext.m */,
+				AD92FA101F42D8D100D8B811 /* EasyUtils.h */,
+				AD92FA111F42D8D100D8B811 /* EasyUtils.m */,
+				AD92FA1B1F42D8F900D8B811 /* EasyBean.h */,
+				AD92FA1C1F42D8F900D8B811 /* EasyBean.m */,
+			);
+			path = EasyUtils;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		AD7DCAAB1E7A5E9F00589BBA /* EasyBlueTooth */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AD7DCAD91E7A5EA000589BBA /* Build configuration list for PBXNativeTarget "EasyBlueTooth" */;
+			buildPhases = (
+				AD7DCAA81E7A5E9F00589BBA /* Sources */,
+				AD7DCAA91E7A5E9F00589BBA /* Frameworks */,
+				AD7DCAAA1E7A5E9F00589BBA /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = EasyBlueTooth;
+			productName = EasyBlueTooth;
+			productReference = AD7DCAAC1E7A5E9F00589BBA /* EasyBlueTooth.app */;
+			productType = "com.apple.product-type.application";
+		};
+		AD7DCAC41E7A5EA000589BBA /* EasyBlueToothTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AD7DCADC1E7A5EA000589BBA /* Build configuration list for PBXNativeTarget "EasyBlueToothTests" */;
+			buildPhases = (
+				AD7DCAC11E7A5EA000589BBA /* Sources */,
+				AD7DCAC21E7A5EA000589BBA /* Frameworks */,
+				AD7DCAC31E7A5EA000589BBA /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				AD7DCAC71E7A5EA000589BBA /* PBXTargetDependency */,
+			);
+			name = EasyBlueToothTests;
+			productName = EasyBlueToothTests;
+			productReference = AD7DCAC51E7A5EA000589BBA /* EasyBlueToothTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		AD7DCACF1E7A5EA000589BBA /* EasyBlueToothUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AD7DCADF1E7A5EA000589BBA /* Build configuration list for PBXNativeTarget "EasyBlueToothUITests" */;
+			buildPhases = (
+				AD7DCACC1E7A5EA000589BBA /* Sources */,
+				AD7DCACD1E7A5EA000589BBA /* Frameworks */,
+				AD7DCACE1E7A5EA000589BBA /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				AD7DCAD21E7A5EA000589BBA /* PBXTargetDependency */,
+			);
+			name = EasyBlueToothUITests;
+			productName = EasyBlueToothUITests;
+			productReference = AD7DCAD01E7A5EA000589BBA /* EasyBlueToothUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		AD7DCAA41E7A5E9F00589BBA /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0820;
+				ORGANIZATIONNAME = chenSir;
+				TargetAttributes = {
+					AD7DCAAB1E7A5E9F00589BBA = {
+						CreatedOnToolsVersion = 8.2.1;
+						DevelopmentTeam = 6E6MDA8TQW;
+						ProvisioningStyle = Automatic;
+					};
+					AD7DCAC41E7A5EA000589BBA = {
+						CreatedOnToolsVersion = 8.2.1;
+						ProvisioningStyle = Automatic;
+						TestTargetID = AD7DCAAB1E7A5E9F00589BBA;
+					};
+					AD7DCACF1E7A5EA000589BBA = {
+						CreatedOnToolsVersion = 8.2.1;
+						ProvisioningStyle = Automatic;
+						TestTargetID = AD7DCAAB1E7A5E9F00589BBA;
+					};
+				};
+			};
+			buildConfigurationList = AD7DCAA71E7A5E9F00589BBA /* Build configuration list for PBXProject "EasyBlueTooth" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = AD7DCAA31E7A5E9F00589BBA;
+			productRefGroup = AD7DCAAD1E7A5E9F00589BBA /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				AD7DCAAB1E7A5E9F00589BBA /* EasyBlueTooth */,
+				AD7DCAC41E7A5EA000589BBA /* EasyBlueToothTests */,
+				AD7DCACF1E7A5EA000589BBA /* EasyBlueToothUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		AD7DCAAA1E7A5E9F00589BBA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AD32B20D1F4A79D600A1746C /* ToolDetailCell.xib in Resources */,
+				AD32B20B1F4A79D600A1746C /* ToolCell.xib in Resources */,
+				AD32B2101F4A79D600A1746C /* ToolDetailHeaderView.xib in Resources */,
+				AD32B2081F4A79D600A1746C /* ExampleCell.xib in Resources */,
+				AD7DCABF1E7A5E9F00589BBA /* LaunchScreen.storyboard in Resources */,
+				AD7DCABC1E7A5E9F00589BBA /* Assets.xcassets in Resources */,
+				AD32B2121F4A79D600A1746C /* ToolDetailOperationCell.xib in Resources */,
+				AD7DCABA1E7A5E9F00589BBA /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AD7DCAC31E7A5EA000589BBA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AD7DCACE1E7A5EA000589BBA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		AD7DCAA81E7A5E9F00589BBA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AD32B2071F4A79D600A1746C /* ExampleCell.m in Sources */,
+				AD32B20C1F4A79D600A1746C /* ToolDetailCell.m in Sources */,
+				AD92FA121F42D8D100D8B811 /* EasyBlueToothManager.m in Sources */,
+				AD92FA141F42D8D100D8B811 /* EasyCenterManager.m in Sources */,
+				AD32B2161F4A79D600A1746C /* ToolViewController.m in Sources */,
+				AD32B20A1F4A79D600A1746C /* ToolCell.m in Sources */,
+				AD92FA171F42D8D100D8B811 /* EasyPeripheral.m in Sources */,
+				AD32B2131F4A79D600A1746C /* ToolDetailOperationViewController.m in Sources */,
+				AD92FA151F42D8D100D8B811 /* EasyCharacteristic.m in Sources */,
+				AD32B20F1F4A79D600A1746C /* ToolDetailHeaderView.m in Sources */,
+				AD32B2141F4A79D600A1746C /* ToolDetailViewController.m in Sources */,
+				AD32B20E1F4A79D600A1746C /* ToolDetailHeaderCell.m in Sources */,
+				AD92FA1A1F42D8D100D8B811 /* EasyUtils.m in Sources */,
+				AD92FA1D1F42D8F900D8B811 /* EasyBean.m in Sources */,
+				AD92FA161F42D8D100D8B811 /* EasyDescriptor.m in Sources */,
+				68815D011F48A44C00F99E2D /* UIView+Ext.m in Sources */,
+				AD7DCAB71E7A5E9F00589BBA /* ViewController.m in Sources */,
+				AD92FA181F42D8D100D8B811 /* EasyProfiles.m in Sources */,
+				AD7DCAB41E7A5E9F00589BBA /* AppDelegate.m in Sources */,
+				AD32B2091F4A79D600A1746C /* ExampleTableViewController.m in Sources */,
+				AD92FA191F42D8D100D8B811 /* EasyService.m in Sources */,
+				AD32B2111F4A79D600A1746C /* ToolDetailOperationCell.m in Sources */,
+				AD32B2151F4A79D600A1746C /* ToolInputView.m in Sources */,
+				AD7DCAB11E7A5E9F00589BBA /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AD7DCAC11E7A5EA000589BBA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AD7DCACA1E7A5EA000589BBA /* EasyBlueToothTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AD7DCACC1E7A5EA000589BBA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AD7DCAD51E7A5EA000589BBA /* EasyBlueToothUITests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		AD7DCAC71E7A5EA000589BBA /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = AD7DCAAB1E7A5E9F00589BBA /* EasyBlueTooth */;
+			targetProxy = AD7DCAC61E7A5EA000589BBA /* PBXContainerItemProxy */;
+		};
+		AD7DCAD21E7A5EA000589BBA /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = AD7DCAAB1E7A5E9F00589BBA /* EasyBlueTooth */;
+			targetProxy = AD7DCAD11E7A5EA000589BBA /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		AD7DCAB81E7A5E9F00589BBA /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				AD7DCAB91E7A5E9F00589BBA /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		AD7DCABD1E7A5E9F00589BBA /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				AD7DCABE1E7A5E9F00589BBA /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		AD7DCAD71E7A5EA000589BBA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		AD7DCAD81E7A5EA000589BBA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		AD7DCADA1E7A5EA000589BBA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 6E6MDA8TQW;
+				INFOPLIST_FILE = EasyBlueTooth/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = chenSir.EasyBlueTooth;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		AD7DCADB1E7A5EA000589BBA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 6E6MDA8TQW;
+				INFOPLIST_FILE = EasyBlueTooth/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = chenSir.EasyBlueTooth;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		AD7DCADD1E7A5EA000589BBA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = EasyBlueToothTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = chenSir.EasyBlueToothTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/EasyBlueTooth.app/EasyBlueTooth";
+			};
+			name = Debug;
+		};
+		AD7DCADE1E7A5EA000589BBA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = EasyBlueToothTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = chenSir.EasyBlueToothTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/EasyBlueTooth.app/EasyBlueTooth";
+			};
+			name = Release;
+		};
+		AD7DCAE01E7A5EA000589BBA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = EasyBlueToothUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = chenSir.EasyBlueToothUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = EasyBlueTooth;
+			};
+			name = Debug;
+		};
+		AD7DCAE11E7A5EA000589BBA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = EasyBlueToothUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = chenSir.EasyBlueToothUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = EasyBlueTooth;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		AD7DCAA71E7A5E9F00589BBA /* Build configuration list for PBXProject "EasyBlueTooth" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AD7DCAD71E7A5EA000589BBA /* Debug */,
+				AD7DCAD81E7A5EA000589BBA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		AD7DCAD91E7A5EA000589BBA /* Build configuration list for PBXNativeTarget "EasyBlueTooth" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AD7DCADA1E7A5EA000589BBA /* Debug */,
+				AD7DCADB1E7A5EA000589BBA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		AD7DCADC1E7A5EA000589BBA /* Build configuration list for PBXNativeTarget "EasyBlueToothTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AD7DCADD1E7A5EA000589BBA /* Debug */,
+				AD7DCADE1E7A5EA000589BBA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		AD7DCADF1E7A5EA000589BBA /* Build configuration list for PBXNativeTarget "EasyBlueToothUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AD7DCAE01E7A5EA000589BBA /* Debug */,
+				AD7DCAE11E7A5EA000589BBA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = AD7DCAA41E7A5E9F00589BBA /* Project object */;
+}
