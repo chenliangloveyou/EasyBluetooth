@@ -30,7 +30,6 @@
 @property (nonatomic, strong) NSMutableArray *readDataArray ;
 @property (nonatomic, strong) NSMutableArray *writeDataArray ;
 @property (nonatomic, strong) NSMutableArray *notifyDataArray ;
-@property (nonatomic, strong) NSMutableArray *indicateDataArray ;
 
 @end
 
@@ -307,13 +306,7 @@
     }
     return _notifyDataArray ;
 }
-- (NSMutableArray *)indicateDataArray
-{
-    if (nil == _indicateDataArray) {
-        _indicateDataArray = [NSMutableArray arrayWithCapacity:kARRAYMAXCOUNT];
-    }
-    return _indicateDataArray ;
-}
+
 
 - (NSMutableArray<EasyDescriptor *> *)descriptorArray
 {

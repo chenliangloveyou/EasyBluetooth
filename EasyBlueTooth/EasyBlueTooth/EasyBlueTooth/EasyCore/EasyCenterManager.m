@@ -105,36 +105,30 @@
         }
     }];
     
+    
     [self.manager scanForPeripheralsWithServices:service options:options];
-    
-    [self performSelector:@selector(stopScanDevices)
-               withObject:nil
-               afterDelay:timeInterval];
-    
-}
 
-- (void)stopScanDevices
-{
-    [self stopScanDevice];
+    //指定时间通知外部，扫描完成
+    kWeakSelf(self)
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(timeInterval * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        
+        _isScanning = NO ;
+        
+        if (weakself.manager.isScanning && _blueToothSearchDeviceCallback) {
+            _blueToothSearchDeviceCallback(nil,!_isScanning);
+            [weakself.manager stopScan];
+        }
+        
+    });
 }
 
 - (void)stopScanDevice
 {
-    [NSObject cancelPreviousPerformRequestsWithTarget:self
-                                             selector:@selector(stopScanDevices)
-                                               object:nil];
+ 
     if (_isScanning) {
-        [self.manager stopScan];
         _isScanning = NO ;
     }
-    
-    NSArray *allKeys = [self.foundDeviceDict allKeys];
-    if (allKeys.count) {
-        EasyPeripheral *tempP = self.foundDeviceDict[allKeys.lastObject];
-        if (tempP && _blueToothSearchDeviceCallback) {
-            _blueToothSearchDeviceCallback(tempP , !_isScanning );
-        }
-    }
+    [self.manager stopScan];
     
 }
 
@@ -217,8 +211,7 @@
 
 - (void)centralManager:(CBCentralManager *)central didDiscoverPeripheral:(CBPeripheral *)peripheral advertisementData:(NSDictionary *)advertisementData RSSI:(NSNumber *)RSSI
 {
-    NSString *foundDevice = [NSString stringWithFormat:@"\n发现一个设备 - %@ - %@" ,peripheral.name,RSSI] ;
-    EasyLog(@"%@ %@", [NSThread currentThread] , foundDevice );
+    EasyLog(@"%@\n", [NSString stringWithFormat:@"发现一个设备 - %@ - %@" ,peripheral.name,RSSI] );
     
     //去掉重复搜索到的设备
     NSInteger existedIndex = -1 ;
@@ -242,6 +235,7 @@
     }else if (existedIndex%10 == 0){//扫描到的此个设备超过10次
         EasyPeripheral *tempP = self.foundDeviceDict[peripheral.identifier];
         tempP.RSSI = RSSI ;
+        tempP.deviceScanCount = 0 ;
         tempP.advertisementData = advertisementData ;
         if (_blueToothSearchDeviceCallback) {
             _blueToothSearchDeviceCallback(tempP , !self.isScanning );
@@ -304,6 +298,7 @@
     
     NSAssert(existedP, @"attention: you should deal with this error");
     
+    existedP.errorDescription = error ;
     [existedP dealDeviceConnectWithError:error];
     
 }
@@ -335,7 +330,8 @@
         NSAssert(NO, @"attention: you should deal with this error");
     }
     
-    
+    existedP.errorDescription = error ;
+
     if (error) {
         [existedP dealDisconnectWithError:error];
     }
@@ -345,7 +341,7 @@
 
 - (NSArray *)retrieveConnectedPeripheralsWithServices:(NSArray *)serviceUUIDs
 {
-    EasyLog(@"\n蓝牙获取系统已连接上的设备：%@",serviceUUIDs);
+    EasyLog(@"\n根据服务的id获取所有系统已连接上的设备：%@",serviceUUIDs);
 
     if (!serviceUUIDs.count) {
         return @[];
@@ -363,7 +359,7 @@
 
 - (NSArray *)retrievePeripheralsWithIdentifiers:(NSArray *)identifiers
 {
-    EasyLog(@"\n蓝牙获取系统已连接上的设备：%@",identifiers);
+    EasyLog(@"\n蓝牙获取系统所有已知设备：%@",identifiers);
 
     NSArray *resultArray = [self.manager retrievePeripheralsWithIdentifiers:identifiers];
     

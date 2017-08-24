@@ -40,7 +40,7 @@
 //    if (_stateChangedCallback) {
 //        [self.peripheral removeObserver:self forKeyPath:@"state"];
 //    }
-    EasyLog(@"\n%@设备已销毁 %zd",self,self.deviceScanCount);
+    EasyLog(@"\n%@设备已销毁 %zd",self.name,self.deviceScanCount);
     _peripheral.delegate = nil ;
 }
 
@@ -223,6 +223,10 @@
 //    [self.centerManager.connectedDeviceDict removeObjectForKey:self.identifier];
 }
 
+- (void)resetDeviceScanCount
+{
+    self.deviceScanCount = -1 ;
+}
 
 - (void)discoverAllDeviceServiceWithCallback:(blueToothFindServiceCallback)callback
 {

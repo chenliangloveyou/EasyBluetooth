@@ -88,7 +88,6 @@ typedef void (^blueToothFindDescriptorCallback)(NSArray<EasyDescriptor *> *descr
 @property (nonatomic, strong, readonly) NSMutableArray *readDataArray ;
 @property (nonatomic, strong, readonly) NSMutableArray *writeDataArray ;
 @property (nonatomic, strong, readonly) NSMutableArray *notifyDataArray ;
-@property (nonatomic, strong, readonly) NSMutableArray *indicateDataArray ;
 
 /**
  * 初始化方法

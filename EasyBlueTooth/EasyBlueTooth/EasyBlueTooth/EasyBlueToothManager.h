@@ -14,30 +14,35 @@
 #import "EasyPeripheral.h"
 #import "EasyDescriptor.h"
 
-typedef NS_ENUM(NSUInteger , blueToothStateChangeType) {
-    blueToothStateChangeTypeConnectedDevice ,
-    
-};
 
-typedef void (^blueToothStateChangeCallback)(blueToothStateChangeType state , NSError *error);
+/**
+ * 模糊搜索设备规则
+ * 用户可以自定义，更具peripheral里面的名称，广播数据，RSSI来赛选需要的连接的设备
+ */
+typedef BOOL (^blueToothScanRule)(EasyPeripheral *peripheral);
+
+/**
+ * 搜索到设备回调
+ * peripheral 已经连接上的设备
+ * error是扫描错误信息
+ */
+typedef void (^blueToothScanCallback)(EasyPeripheral *peripheral , NSError *error );
 
 
+/**
+ * 搜索到设备回调
+ * peripheralDict 里面是所有符合规则的设备。key:peripheral value:error(如果error里面有值，说面连接出现错误，需要处理)
+ * error是扫描错误信息
+ */
+typedef void (^blueToothScanAllCallback)(NSArray<EasyPeripheral *> *deviceArray , NSError *error );
 
-
-//读写操作回调
-typedef void (^blueToothOperationCallBack)(NSData *data , NSError *error);
-
-//模糊搜索设备规则
-typedef BOOL (^blueToothSearchDeviceRule)(NSString *peripheralName);
 
 @interface EasyBlueToothManager : NSObject
 
 
-
-@property (nonatomic,assign)BOOL autoCollectDevice ;//自动重连设备
-
-@property (nonatomic, assign)blueToothStateChangeType stateType ;//设备连接的状态
-
+/**
+ * 单例
+ */
 + (instancetype)shareInstance ;
 
 #pragma mark - 扫描设备
@@ -46,6 +51,22 @@ typedef BOOL (^blueToothSearchDeviceRule)(NSString *peripheralName);
 
 - (void)stopScanDevice ;
 
+- (void)connectDeviceWithName:(NSString *)name
+                      timeout:(NSInteger)timeout
+                     callback:(blueToothScanCallback)callback ;
+
+
+- (void)connectDeviceWithRule:(blueToothScanRule)rule
+                      timeout:(NSInteger)timeout
+                     callback:(blueToothScanCallback)callback ;
+
+- (void)connectAllDeviceWithName:(NSString *)name
+                      timeout:(NSInteger)timeout
+                     callback:(blueToothScanAllCallback)callback ;
+
+- (void)connectAllDeviceWithRule:(blueToothScanRule)rule
+                      timeout:(NSInteger)timeout
+                     callback:(blueToothScanAllCallback)callback ;
 /**
  * timeInterval 搜索设备所用的时间
  * searchDeviceCallBack 每搜索到一个设备 就会 回调这个block
@@ -115,69 +136,69 @@ typedef BOOL (^blueToothSearchDeviceRule)(NSString *peripheralName);
  * uuid 数据需要写入到哪个特征下面
  * writeCallback 写入数据后的回调
  */
-- (void)writeDataWithPeripheral:(EasyPeripheral *)peripheral
-                           data:(NSData *)data
-                      writeUUID:(NSString *)uuid
-                       callback:(blueToothOperationCallBack)writeCallback ;
-
-/**
- * peripheral 写数据的设备
- * uuid 需要读取数据的特征
- * writeCallback 读取数据后的回调
- */
-- (void)readValueWithPeripheral:(EasyPeripheral *)peripheral
-                        readUUID:(NSString *)uuid
-                       callback:(blueToothOperationCallBack)writeCallback ;
-
-/**
- * 建议此方法放在读写操作的前面
- */
-
-/**
- * peripheral 写数据的设备
- * uuid 需要监听的特征值
- * writeCallback 读取数据后的回调
- */
-- (void)notifyDataWithPeripheral:(EasyPeripheral *)peripheral
-                      notifyUUID:(NSString *)uuid
-                    withCallback:(blueToothOperationCallBack )callback ;
-
-/**
- * peripheral 写数据的设备
- * data  需要写入的数据
- * descroptor 需要往描述下写入数据
- * writeCallback 读取数据后的回调
- */
-- (void)writeDescroptorWithPeripheral:(EasyPeripheral *)peripheral
-                                 data:(NSData *)data
-                           descroptor:(EasyDescriptor *)descroptor
-                             callback:(blueToothOperationCallBack)writeCallback ;
-
-/**
- * peripheral 需要读取描述的设备
- * descroptor 需要往描述下写入数据
- * writeCallback 读取数据后的回调
- */
-- (void)readDescroptorWithPeripheral:(EasyPeripheral *)peripheral
-                          descroptor:(EasyDescriptor *)descroptor
-                            callback:(blueToothOperationCallBack)writeCallback ;
+//- (void)writeDataWithPeripheral:(EasyPeripheral *)peripheral
+//                           data:(NSData *)data
+//                      writeUUID:(NSString *)uuid
+//                       callback:(blueToothOperationCallBack)writeCallback ;
+//
+///**
+// * peripheral 写数据的设备
+// * uuid 需要读取数据的特征
+// * writeCallback 读取数据后的回调
+// */
+//- (void)readValueWithPeripheral:(EasyPeripheral *)peripheral
+//                        readUUID:(NSString *)uuid
+//                       callback:(blueToothOperationCallBack)writeCallback ;
+//
+///**
+// * 建议此方法放在读写操作的前面
+// */
+//
+///**
+// * peripheral 写数据的设备
+// * uuid 需要监听的特征值
+// * writeCallback 读取数据后的回调
+// */
+//- (void)notifyDataWithPeripheral:(EasyPeripheral *)peripheral
+//                      notifyUUID:(NSString *)uuid
+//                    withCallback:(blueToothOperationCallBack )callback ;
+//
+///**
+// * peripheral 写数据的设备
+// * data  需要写入的数据
+// * descroptor 需要往描述下写入数据
+// * writeCallback 读取数据后的回调
+// */
+//- (void)writeDescroptorWithPeripheral:(EasyPeripheral *)peripheral
+//                                 data:(NSData *)data
+//                           descroptor:(EasyDescriptor *)descroptor
+//                             callback:(blueToothOperationCallBack)writeCallback ;
+//
+///**
+// * peripheral 需要读取描述的设备
+// * descroptor 需要往描述下写入数据
+// * writeCallback 读取数据后的回调
+// */
+//- (void)readDescroptorWithPeripheral:(EasyPeripheral *)peripheral
+//                          descroptor:(EasyDescriptor *)descroptor
+//                            callback:(blueToothOperationCallBack)writeCallback ;
 
 #pragma mark - 断开操作
 
 /*
  * peripheral 需要断开的设备
- */
-- (void)disconnectWithPeripheral:(EasyPeripheral *)peripheral ;
-
-/*
- * identifier 需要断开的设备UUID
- */
-- (void)disconnectWithIdentifier:(NSUUID *)identifier ;
-
-/*
- * 断开所有连接的设备
- */
-- (void)disconnectAllPeripheral ;
+// */
+//- (void)disconnectWithPeripheral:(EasyPeripheral *)peripheral ;
+//
+///*
+// * identifier 需要断开的设备UUID
+// */
+//- (void)disconnectWithIdentifier:(NSUUID *)identifier ;
+//
+///*
+// * 断开所有连接的设备
+// */
+//- (void)disconnectAllPeripheral ;
 
 
 #pragma mark - 简便方法
@@ -188,14 +209,14 @@ typedef BOOL (^blueToothSearchDeviceRule)(NSString *peripheralName);
  *
  *
  */
-- (void)connectWithDeviceName:(NSString *)deviceName
-                 scanInterval:(NSTimeInterval)timeInterval
-                  serviceUUID:(NSString *)serviceUUID
-                    writeUUID:(NSString *)writeUUID
-                   notifyUUID:(NSString *)notifyUUID
-                    writeData:(NSData *)data
-          stateChangeCallback:(blueToothStateChangeCallback *)stateChangeCallback
-         receivedDataCallback:(blueToothOperationCallBack *)receivedDataCallback ;
+//- (void)connectWithDeviceName:(NSString *)deviceName
+//                 scanInterval:(NSTimeInterval)timeInterval
+//                  serviceUUID:(NSString *)serviceUUID
+//                    writeUUID:(NSString *)writeUUID
+//                   notifyUUID:(NSString *)notifyUUID
+//                    writeData:(NSData *)data
+//          stateChangeCallback:(blueToothStateChangeCallback *)stateChangeCallback
+//         receivedDataCallback:(blueToothOperationCallBack *)receivedDataCallback ;
 @end
 
 

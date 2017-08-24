@@ -58,17 +58,14 @@
 {
     if (section < self.dataArray.count ) {
         NSString *tempString = self.dataArray[section];
-        if ([tempString isEqualToString:@"Write"]) {
+        if ([tempString isEqualToString:@"Write"]||[tempString isEqualToString:@"WriteWithoutResponse"]) {
             return self.characteristic.writeDataArray.count + 1 ;
         }
         else if ([tempString isEqualToString:@"Read"]){
             return self.characteristic.readDataArray.count + 1;
         }
-        else if ([tempString isEqualToString:@"Notify"]){
+        else if ([tempString isEqualToString:@"Notify"]||[tempString isEqualToString:@"Indicate"]){
             return self.characteristic.notifyDataArray.count + 1 ;
-        }
-        else if ([tempString isEqualToString:@"Indicate"]){
-            return self.characteristic.indicateDataArray.count + 1 ;
         }
         else{
             return 0 ;
@@ -89,7 +86,7 @@
 {
     ToolDetailOperationCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([ToolDetailOperationCell class]) forIndexPath:indexPath];
   
-    cell.isOperation  = (!indexPath.section)&&(!indexPath.row);
+    cell.isOperation  = (indexPath.section<self.dataArray.count)&&(!indexPath.row);
  
     if (indexPath.section < self.dataArray.count ) {
         
@@ -100,18 +97,16 @@
                 cell.title = [NSString stringWithFormat:@"%@",self.characteristic.isNotifying?@"Stop notification ":@"Tap to start notification"];
             }
         }else{
-            if ([tempString isEqualToString:@"Write"]) {
+            if ([tempString isEqualToString:@"Write"] ||[tempString isEqualToString:@"WriteWithoutResponse"]) {
                 cell.title = self.characteristic.writeDataArray[indexPath.row-1] ;
             }
             else if ([tempString isEqualToString:@"Read"]){
                 cell.title = self.characteristic.readDataArray[indexPath.row-1] ;
             }
-            else if ([tempString isEqualToString:@"Notify"]){
+            else if ([tempString isEqualToString:@"Notify"]||[tempString isEqualToString:@"Indicate"]){
                 cell.title = self.characteristic.notifyDataArray[indexPath.row-1] ;
             }
-            else if ([tempString isEqualToString:@"Indicate"]){
-                cell.title = self.characteristic.indicateDataArray[indexPath.row-1] ;
-            }
+            
         }
         
     }
@@ -131,7 +126,7 @@
     if (indexPath.section < self.dataArray.count && !indexPath.row) {
         NSString *tempString = self.dataArray[indexPath.section];
         
-        if ([tempString isEqualToString:@"Write"]) {
+        if ([tempString isEqualToString:@"Write"]||[tempString isEqualToString:@"WriteWithoutResponse"]) {
             _inputView =[ToolInputView toolInputViewWithCallback:^(NSString *number) {
                 _inputView = nil;
                 
@@ -155,7 +150,7 @@
             [self.characteristic readValueWithCallback:^(EasyCharacteristic *characteristic, NSData *data, NSError *error) {
             }];
         }
-        else if ([tempString isEqualToString:@"Notify"]){
+        else if ([tempString isEqualToString:@"Notify"]||[tempString isEqualToString:@"Indicate"]){
             [self.characteristic notifyWithValue:!self.characteristic.isNotifying callback:^(EasyCharacteristic *characteristic, NSData *data, NSError *error) {
                 kWeakSelf(self)
                 queueMainStart
@@ -164,9 +159,7 @@
             }];
             
         }
-        else if ([tempString isEqualToString:@"Indicate"]){
-            
-        }
+        
     }
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section

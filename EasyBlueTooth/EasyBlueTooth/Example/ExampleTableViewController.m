@@ -10,6 +10,9 @@
 #import "ExampleCell.h"
 
 #import "EasyUtils.h"   
+#import "EFShowView.h"
+#import "EasyBlueToothManager.h"
+#import "ExampleDetailViewController.h"
 
 @interface ExampleTableViewController ()
 
@@ -19,34 +22,19 @@
 
 @implementation ExampleTableViewController
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
     
-    // Uncomment the following line to preserve selection between presentations.
      self.clearsSelectionOnViewWillAppear = NO;
     
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([ExampleCell class]) bundle:nil] forCellReuseIdentifier:NSStringFromClass([ExampleCell class])];
     self.tableView.tableHeaderView = [self tableHeaderView];
     
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-}
-
-- (UIView *)tableHeaderView
-{
-    UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH , 100)];
-    label.text = @"请选择一种连接方式";
-    label.textAlignment = NSTextAlignmentCenter ;
-    label.font = [UIFont boldSystemFontOfSize:20];
-    return label ;
-}
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 
-#pragma mark - Table view data source
+#pragma mark - Tableview datasource
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
@@ -56,18 +44,6 @@
 {
     return [ExampleCell cellHieght] ;
 }
-- (NSArray *)dataArray
-{
-    if (nil == _dataArray) {
-        _dataArray = @[@"扫描所有设备并连接",
-                       @"扫描确定设备名称的设备并连接",
-                       @"指定扫描设备规则并连接",
-                       @"扫描地址并连接",
-                       @"本地保存地址直接连接设备",
-                       @"一行代码连接设备"];
-    }
-    return _dataArray ;
-}
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {  
@@ -75,7 +51,87 @@
     cell.titleString = self.dataArray[indexPath.row];
     return cell;
 }
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    [[EasyBlueToothManager shareInstance] connectAllDeviceWithName:@"NFHY" timeout:10 callback:^(NSArray<EasyPeripheral *> *deviceArray, NSError *error) {
+        
+        if (deviceArray.count > 0) {
+            ExampleDetailViewController *vc = [[ExampleDetailViewController alloc]init];
+            vc.deviceArray = deviceArray ;
+            [self.navigationController pushViewController:vc animated:YES];
+            
+            NSLog(@"%@", deviceArray);
+        }
+        else{
+            [EFShowView showText:error.description];
+        }
+    }];
+    
+    
+//    [[EasyBlueToothManager shareInstance] connectDeviceWithRule:^BOOL(EasyPeripheral *peripheral) {
+//        if ([peripheral.name isEqualToString:@"EFHY"]) {
+//            return YES ;
+//        }
+//        else{
+//            return NO ;
+//        }
+//    } timeout:10 callback:^(EasyPeripheral *peripheral, NSError *error) {
+//        if (!error) {
+//            ToolDetailViewController  *vc = [[ToolDetailViewController alloc]init];
+//            vc.peripheral = peripheral ;
+//            [self.navigationController pushViewController:vc animated:YES];
+//        }
+//        else{
+//            [EFShowView showText:error.description];
+//        }
+//        NSLog(@"%@ == %@",peripheral,error);
+//    }];
+//    [[EasyBlueToothManager shareInstance] connectDeviceWithName:@"NFHY" timeout:10 callback:^(EasyPeripheral *peripheral, NSError *error) {
+//        
+//        if (!error) {
+//            ToolDetailViewController  *vc = [[ToolDetailViewController alloc]init];
+//            vc.peripheral = peripheral ;
+//            [self.navigationController pushViewController:vc animated:YES];
+//        }
+//        else{
+//            [EFShowView showText:error.description];
+//        }
+//        NSLog(@"%@ == %@",peripheral,error);
+//        
+//    }];
+    
+}
 
+#pragma mark - getter
+
+- (UIView *)tableHeaderView
+{
+    UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH , 100)];
+    label.text = @"请选择一种连接方式";
+    label.textAlignment = NSTextAlignmentCenter ;
+    label.font = [UIFont boldSystemFontOfSize:20];
+    return label ;
+}
+
+- (NSArray *)dataArray
+{
+    if (nil == _dataArray) {
+        _dataArray = @[@"指定名称连接设备",
+                       @"指定规则连接设备",
+                       @"扫描指定保存到本地的设备",
+                       @"连接指定规则的所有设备",
+                       @"一行代码连接设备"];
+    }
+    return _dataArray ;
+}
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
 
 /*
 // Override to support conditional editing of the table view.

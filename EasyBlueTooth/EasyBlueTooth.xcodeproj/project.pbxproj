@@ -13,6 +13,7 @@
 		AD15522D1F4C39B800DBBBDC /* SVProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = AD1552291F4C39B800DBBBDC /* SVProgressHUD.bundle */; };
 		AD15522E1F4C39B800DBBBDC /* SVProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = AD15522B1F4C39B800DBBBDC /* SVProgressHUD.m */; };
 		AD1552311F4D7E1B00DBBBDC /* EFShowView.m in Sources */ = {isa = PBXBuildFile; fileRef = AD1552301F4D7E1B00DBBBDC /* EFShowView.m */; };
+		AD1552341F4EB6AC00DBBBDC /* ExampleDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD1552331F4EB6AC00DBBBDC /* ExampleDetailViewController.m */; };
 		AD32B2071F4A79D600A1746C /* ExampleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AD32B1EC1F4A79D600A1746C /* ExampleCell.m */; };
 		AD32B2081F4A79D600A1746C /* ExampleCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AD32B1ED1F4A79D600A1746C /* ExampleCell.xib */; };
 		AD32B2091F4A79D600A1746C /* ExampleTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD32B1EF1F4A79D600A1746C /* ExampleTableViewController.m */; };
@@ -76,6 +77,8 @@
 		AD15522B1F4C39B800DBBBDC /* SVProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVProgressHUD.m; sourceTree = "<group>"; };
 		AD15522F1F4D7E1B00DBBBDC /* EFShowView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EFShowView.h; sourceTree = "<group>"; };
 		AD1552301F4D7E1B00DBBBDC /* EFShowView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EFShowView.m; sourceTree = "<group>"; };
+		AD1552321F4EB6AC00DBBBDC /* ExampleDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExampleDetailViewController.h; sourceTree = "<group>"; };
+		AD1552331F4EB6AC00DBBBDC /* ExampleDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExampleDetailViewController.m; sourceTree = "<group>"; };
 		AD32B1EB1F4A79D600A1746C /* ExampleCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExampleCell.h; sourceTree = "<group>"; };
 		AD32B1EC1F4A79D600A1746C /* ExampleCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExampleCell.m; sourceTree = "<group>"; };
 		AD32B1ED1F4A79D600A1746C /* ExampleCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ExampleCell.xib; sourceTree = "<group>"; };
@@ -192,6 +195,8 @@
 				AD32B1EB1F4A79D600A1746C /* ExampleCell.h */,
 				AD32B1EC1F4A79D600A1746C /* ExampleCell.m */,
 				AD32B1ED1F4A79D600A1746C /* ExampleCell.xib */,
+				AD1552321F4EB6AC00DBBBDC /* ExampleDetailViewController.h */,
+				AD1552331F4EB6AC00DBBBDC /* ExampleDetailViewController.m */,
 			);
 			path = Example;
 			sourceTree = "<group>";
@@ -488,6 +493,7 @@
 				AD32B20F1F4A79D600A1746C /* ToolDetailHeaderView.m in Sources */,
 				AD32B2141F4A79D600A1746C /* ToolDetailViewController.m in Sources */,
 				AD32B20E1F4A79D600A1746C /* ToolDetailHeaderCell.m in Sources */,
+				AD1552341F4EB6AC00DBBBDC /* ExampleDetailViewController.m in Sources */,
 				AD92FA1A1F42D8D100D8B811 /* EasyUtils.m in Sources */,
 				AD92FA161F42D8D100D8B811 /* EasyDescriptor.m in Sources */,
 				AD1552251F4C345000DBBBDC /* ExampleModel.m in Sources */,

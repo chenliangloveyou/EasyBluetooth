@@ -32,6 +32,12 @@
     
     [self.tableView reloadData];
 }
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [self.centerManager stopScanDevice];
+    
+}
 - (void)viewDidLoad
 {
     [super viewDidLoad] ;
@@ -39,17 +45,16 @@
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([ToolCell class]) bundle:nil] forCellReuseIdentifier:NSStringFromClass([ToolCell class])];
     
     kWeakSelf(self)
-    [self.centerManager scanDeviceWithTimeInterval:LONG_MAX
-                                          services:@[]
-                                           options:@{ CBCentralManagerScanOptionAllowDuplicatesKey: @YES }
-                                          callBack:^(EasyPeripheral *peripheral, BOOL isfinish) {
-        [weakself managerScanedDevice:peripheral];
+    [self.centerManager scanDeviceWithTimeInterval:LONG_MAX services:@[]  options:@{ CBCentralManagerScanOptionAllowDuplicatesKey: @YES }  callBack:^(EasyPeripheral *peripheral, BOOL isfinish) {
+        if (peripheral) {
+            [weakself managerScanedDevice:peripheral];
+        }
     }];
     
     self.centerManager.stateChangeCallback = ^(EasyCenterManager *manager, CBManagerState state) {
         [weakself managerStateChanged:state];
     };
-
+    
 }
 
 #pragma mark - bluetooth callback
@@ -152,7 +157,8 @@
         ToolDetailViewController *tooD = [[ToolDetailViewController alloc]init];
         tooD.peripheral = peripheral ;
         [weakself.navigationController  pushViewController:tooD animated:YES];
-    }else{
+    }
+    else{
         [SVProgressHUD showInfoWithStatus:@"正在连接设备..."];
         [peripheral connectDeviceWithDisconnectCallback:^(EasyPeripheral *peripheral, NSError *error) {
             [weakself deviceDisconnect:peripheral error:error];

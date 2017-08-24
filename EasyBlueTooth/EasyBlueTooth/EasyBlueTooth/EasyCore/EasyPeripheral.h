@@ -84,11 +84,14 @@ typedef void (^blueToothFindServiceCallback)(EasyPeripheral *peripheral , NSArra
 //@property (nonatomic, assign) NSTimeInterval rssiReadInterval;
 
 /**
- *当前设备状态
+ * 当前设备状态
  */
 @property (nonatomic, assign)CBPeripheralState state ;
 
-
+/**
+ * 当前设备的错误信息
+ */
+@property (nonatomic,strong)NSError *errorDescription ;
 
 /**
  * 设备中所有的服务
@@ -135,6 +138,10 @@ typedef void (^blueToothFindServiceCallback)(EasyPeripheral *peripheral , NSArra
  */
 - (void)disconnectDevice;
 
+/**
+ * 重置设备被发现次数
+ */
+- (void)resetDeviceScanCount ;
 /**
  * 读取设备的RSSI
  */

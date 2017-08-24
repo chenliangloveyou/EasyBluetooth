@@ -61,8 +61,8 @@
     [self.view addSubview:self.tableView];
 
     [SVProgressHUD showInfoWithStatus:@"获取服务..."];
-    
     kWeakSelf(self)
+
     [self.peripheral discoverAllDeviceServiceWithCallback:^(EasyPeripheral *peripheral, NSArray<EasyService *> *serviceArray, NSError *error) {
         
         NSLog(@"%@  == %@",serviceArray,error);
