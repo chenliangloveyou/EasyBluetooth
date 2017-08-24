@@ -214,11 +214,11 @@
 				AD32B1F91F4A79D600A1746C /* ToolDetailHeaderView.h */,
 				AD32B1FA1F4A79D600A1746C /* ToolDetailHeaderView.m */,
 				AD32B1FB1F4A79D600A1746C /* ToolDetailHeaderView.xib */,
+				AD32B1FF1F4A79D600A1746C /* ToolDetailOperationViewController.h */,
+				AD32B2001F4A79D600A1746C /* ToolDetailOperationViewController.m */,
 				AD32B1FC1F4A79D600A1746C /* ToolDetailOperationCell.h */,
 				AD32B1FD1F4A79D600A1746C /* ToolDetailOperationCell.m */,
 				AD32B1FE1F4A79D600A1746C /* ToolDetailOperationCell.xib */,
-				AD32B1FF1F4A79D600A1746C /* ToolDetailOperationViewController.h */,
-				AD32B2001F4A79D600A1746C /* ToolDetailOperationViewController.m */,
 				AD32B2031F4A79D600A1746C /* ToolInputView.h */,
 				AD32B2041F4A79D600A1746C /* ToolInputView.m */,
 			);

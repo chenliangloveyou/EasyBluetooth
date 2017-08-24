@@ -88,9 +88,10 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     ToolDetailOperationCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([ToolDetailOperationCell class]) forIndexPath:indexPath];
+  
+    cell.isOperation  = (!indexPath.section)&&(!indexPath.row);
+ 
     if (indexPath.section < self.dataArray.count ) {
-        
-        cell.isOperation = !indexPath.row ;
         
         NSString *tempString = self.dataArray[indexPath.section];
         if (indexPath.row == 0) {
@@ -134,6 +135,9 @@
             _inputView =[ToolInputView toolInputViewWithCallback:^(NSString *number) {
                 _inputView = nil;
                 
+                if (number.length == 0) {
+                    return  ;
+                }
                 NSData *data = [EasyUtils convertHexStrToData:number];
                 
                 //fe6a
@@ -163,7 +167,6 @@
         else if ([tempString isEqualToString:@"Indicate"]){
             
         }
-        
     }
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section

@@ -28,7 +28,7 @@ typedef void (^blueToothStateChangeCallback)(blueToothStateChangeType state , NS
 typedef void (^blueToothOperationCallBack)(NSData *data , NSError *error);
 
 //模糊搜索设备规则
-typedef BOOL (^blueToothSearchDeviceRule)(NSString *peripheralName, NSDictionary *advertisementData, NSNumber *RSSI);
+typedef BOOL (^blueToothSearchDeviceRule)(NSString *peripheralName);
 
 @interface EasyBlueToothManager : NSObject
 

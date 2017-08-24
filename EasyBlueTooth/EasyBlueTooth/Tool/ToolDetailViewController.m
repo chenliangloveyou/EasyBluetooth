@@ -22,14 +22,40 @@
 @property (nonatomic,strong)UITableView *tableView ;
 @property (nonatomic,strong)NSArray *advertisementArray ;
 
-@property (nonatomic,assign)BOOL isShowfirstSection ;//第一行是否打开
+@property (nonatomic,assign)__block BOOL isShowfirstSection ;//第一行是否打开
+
+@property (nonatomic,assign)BOOL exitBreakUp ;//
 @end
 
 @implementation ToolDetailViewController
 
-- (void)viewDidLoad {
+- (void)dealloc
+{
+    //如果你想退出界面断开与设备的连接。就加上这句
+    if (_exitBreakUp) {
+        [self.peripheral disconnectDevice];
+    }
+}
+- (void)barbuttonClick:(UIBarButtonItem *)button
+{
+    if ([button.title isEqualToString:@"退出断开连接"]) {
+        _exitBreakUp = NO ;
+        [button setTitle:@"退出不断开连接"];
+    }
+    else{
+        _exitBreakUp = YES ;
+        [button setTitle:@"退出断开连接"];
+    }
+}
+
+- (void)viewDidLoad
+{
     [super viewDidLoad];
 
+    _exitBreakUp = YES ;
+    UIBarButtonItem *item = [[UIBarButtonItem alloc]initWithTitle:@"退出断开连接" style:UIBarButtonItemStylePlain target:self action:@selector(barbuttonClick:)];
+    self.navigationItem.rightBarButtonItem = item ;
+    
     self.advertisementArray = [self.peripheral.advertisementData allKeys];
 
     [self.view addSubview:self.tableView];
@@ -45,7 +71,9 @@
             NSLog(@" %@  = %@",tempS.UUID ,tempS.description);
 
             [tempS discoverCharacteristicWithCallback:^(NSArray<EasyCharacteristic *> *characteristics, NSError *error) {
-                NSLog(@" %@  = %@",characteristics , error );                for (EasyCharacteristic *tempC in characteristics) {
+                NSLog(@" %@  = %@",characteristics , error );
+                
+                for (EasyCharacteristic *tempC in characteristics) {
                     [tempC discoverDescriptorWithCallback:^(NSArray<EasyDescriptor *> *descriptorArray, NSError *error) {
                         NSLog(@"%@ ====", descriptorArray)  ;
                         if (descriptorArray.count > 0) {
@@ -134,6 +162,7 @@
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
+    
     ToolDetailHeaderCell *headerView = (ToolDetailHeaderCell *)[tableView dequeueReusableHeaderFooterViewWithIdentifier:NSStringFromClass([ToolDetailHeaderCell class])];
     NSString *serviceName = @"advertisement data" ;
     if (section) {
@@ -144,7 +173,7 @@
     headerView.sectionState = section==0 ? self.isShowfirstSection : -1 ;
     kWeakSelf(self)
     headerView.callback = ^(BOOL isHidden){
-        _isShowfirstSection = isHidden ;
+        weakself.isShowfirstSection = isHidden ;
         [weakself.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationFade];
     };
     return headerView ;

@@ -23,7 +23,7 @@
 {
     ToolDetailHeaderView *view = [[[NSBundle mainBundle] loadNibNamed:NSStringFromClass([ToolDetailHeaderView class]) owner:nil options:nil]firstObject] ;
     view.nameLabel.text = peripheral.name ;
-    view.uuidLabel.text = [NSString stringWithFormat:@"UUID:%@",peripheral.identifier] ;
+    view.uuidLabel.text = [NSString stringWithFormat:@"UUID:%@",peripheral.identifier.UUIDString] ;
     switch (peripheral.state) {
         case CBPeripheralStateConnected:
             view.stateLabel.text = @"已连接";

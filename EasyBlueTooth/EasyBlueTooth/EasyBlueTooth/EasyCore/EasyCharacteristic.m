@@ -200,7 +200,6 @@
                     _notifyDataOperateCallback(self,self.value,error);
                 }
                 [self addDataToArrayWithType:OperationTypeNotify data:self.characteristic.value];
-                //                [[self mutableArrayValueForKey:@"notifyDataArray"] addObject:self.characteristic.value];
             }
         default:
             break;
@@ -256,7 +255,7 @@
 
 - (void)addDataToArrayWithType:(OperationType)type data:(NSData *)data
 {
-    NSAssert(NO, @"can't add an empty object to array");
+    NSAssert(data, @"can't add an empty object to array");
     
     switch (type) {
         case OperationTypeWrite:
@@ -275,7 +274,9 @@
             if (self.notifyDataArray.count >= kARRAYMAXCOUNT) {
                 [self.notifyDataArray removeLastObject];
             }
-            [self.notifyDataArray insertObject:data atIndex:0];
+            [[self mutableArrayValueForKey:@"notifyDataArray"] insertObject:data atIndex:0];
+
+//            [self.notifyDataArray insertObject:data atIndex:0];
             break;
         default:
             break;

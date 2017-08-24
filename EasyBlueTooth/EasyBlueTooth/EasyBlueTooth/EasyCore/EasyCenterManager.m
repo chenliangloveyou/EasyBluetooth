@@ -105,10 +105,7 @@
         }
     }];
     
-    //    options = @{ CBCentralManagerScanOptionAllowDuplicatesKey: @YES };
-    
     [self.manager scanForPeripheralsWithServices:service options:options];
-    
     
     [self performSelector:@selector(stopScanDevices)
                withObject:nil
@@ -130,6 +127,15 @@
         [self.manager stopScan];
         _isScanning = NO ;
     }
+    
+    NSArray *allKeys = [self.foundDeviceDict allKeys];
+    if (allKeys.count) {
+        EasyPeripheral *tempP = self.foundDeviceDict[allKeys.lastObject];
+        if (tempP && _blueToothSearchDeviceCallback) {
+            _blueToothSearchDeviceCallback(tempP , !_isScanning );
+        }
+    }
+    
 }
 
 - (void)removeAllScanFoundDevice
@@ -163,6 +169,7 @@
 
 - (void)centralManagerDidUpdateState:(CBCentralManager *)central
 {
+    EasyLog(@"\n蓝牙状态发生改变：%@ - %zd",central , central.state);
     //状态改变，清除所有连接 和发现的设别
     if (_centerState != central.state) {
         [self disConnectAllDevice];
@@ -194,6 +201,8 @@
 #warning 处理
 - (void)centralManager:(CBCentralManager *)central willRestoreState:(NSDictionary<NSString *, id> *)dict
 {
+    EasyLog(@"\n蓝牙状态即将重置：%@ - %zd",central , dict);
+
     //dict中会传入如下键值对
     /*
      3 //恢复连接的外设数组
@@ -208,7 +217,7 @@
 
 - (void)centralManager:(CBCentralManager *)central didDiscoverPeripheral:(CBPeripheral *)peripheral advertisementData:(NSDictionary *)advertisementData RSSI:(NSNumber *)RSSI
 {
-    NSString *foundDevice = [NSString stringWithFormat:@"发现一个设备 - %@ - %@" ,peripheral.name,RSSI] ;
+    NSString *foundDevice = [NSString stringWithFormat:@"\n发现一个设备 - %@ - %@" ,peripheral.name,RSSI] ;
     EasyLog(@"%@ %@", [NSThread currentThread] , foundDevice );
     
     //去掉重复搜索到的设备
@@ -222,13 +231,20 @@
         }
     }
     
-    if (existedIndex == -1 || existedIndex%10 == 0 ) {//扫描到了新设别
+    if (existedIndex == -1 ) {//扫描到了新设别
         EasyPeripheral *easyP = [[EasyPeripheral alloc]initWithPeripheral:peripheral central:self];
         easyP.RSSI = RSSI ;
         easyP.advertisementData = advertisementData ;
         [self.foundDeviceDict setObject:easyP forKey:easyP.identifier];
         if (_blueToothSearchDeviceCallback) {
             _blueToothSearchDeviceCallback(easyP , !self.isScanning );
+        }
+    }else if (existedIndex%10 == 0){//扫描到的此个设备超过10次
+        EasyPeripheral *tempP = self.foundDeviceDict[peripheral.identifier];
+        tempP.RSSI = RSSI ;
+        tempP.advertisementData = advertisementData ;
+        if (_blueToothSearchDeviceCallback) {
+            _blueToothSearchDeviceCallback(tempP , !self.isScanning );
         }
     }
 }
@@ -237,6 +253,7 @@
 
 - (void)centralManager:(CBCentralManager *)central didConnectPeripheral:(CBPeripheral *)peripheral
 {
+    EasyLog(@"\n蓝牙连接上一个设备：%@ %@",peripheral,peripheral.identifier);
     EasyPeripheral *existedP = nil ;
     for (NSUUID *tempIden in [self.connectedDeviceDict allKeys]) {
         if ([tempIden isEqual:peripheral.identifier]) {
@@ -261,6 +278,8 @@
 
 - (void)centralManager:(CBCentralManager *)central didFailToConnectPeripheral:(CBPeripheral *)peripheral error:(NSError *)error
 {
+    EasyLog(@"\n蓝牙连接一个设备失败：%@ %@ %@",peripheral,peripheral.identifier,error);
+
     EasyPeripheral *existedP = nil ;
     for (NSUUID *tempP in [self.connectedDeviceDict allKeys]) {
         if ([tempP isEqual:peripheral.identifier]) {
@@ -291,6 +310,8 @@
 
 - (void)centralManager:(CBCentralManager *)central didDisconnectPeripheral:(CBPeripheral *)peripheral error:(NSError *)error
 {
+    EasyLog(@"\n蓝牙一个设备失去连接：%@ %@ %@",peripheral,peripheral.identifier,error);
+
     EasyPeripheral *existedP = nil ;
     for (NSUUID *tempIden in [self.connectedDeviceDict allKeys]) {
         if ([tempIden isEqual:peripheral.identifier]) {
@@ -306,6 +327,7 @@
             tempS.isOn = NO;
             tempS.isEnabled = NO;
         }
+        [existedP.serviceArray removeAllObjects];
         
         [self.connectedDeviceDict removeObjectForKey:existedP.identifier];
     }
@@ -323,6 +345,8 @@
 
 - (NSArray *)retrieveConnectedPeripheralsWithServices:(NSArray *)serviceUUIDs
 {
+    EasyLog(@"\n蓝牙获取系统已连接上的设备：%@",serviceUUIDs);
+
     if (!serviceUUIDs.count) {
         return @[];
     }
@@ -339,7 +363,8 @@
 
 - (NSArray *)retrievePeripheralsWithIdentifiers:(NSArray *)identifiers
 {
-    
+    EasyLog(@"\n蓝牙获取系统已连接上的设备：%@",identifiers);
+
     NSArray *resultArray = [self.manager retrievePeripheralsWithIdentifiers:identifiers];
     
     NSMutableArray *tempArray = [NSMutableArray arrayWithCapacity:resultArray.count];

@@ -14,7 +14,7 @@ typedef void (^buttonClickCallback)(BOOL isShow);
 
 @property (nonatomic,strong)NSString *serviceName ;
 @property (nonatomic,assign)NSInteger sectionState ;//是否是第一行，用来隐藏按钮
-@property (nonatomic,strong)buttonClickCallback callback ;
+@property (nonatomic,copy)buttonClickCallback callback ;
 
 + (CGFloat)cellHeight ;
 

@@ -39,42 +39,95 @@
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([ToolCell class]) bundle:nil] forCellReuseIdentifier:NSStringFromClass([ToolCell class])];
     
     kWeakSelf(self)
-    self.centerManager.stateChangeCallback = ^(EasyCenterManager *manager, CBManagerState state) {
-        if (state == CBManagerStatePoweredOn) {
-            [weakself.centerManager startScanDevice];
-        }
-    };
-    //        NSDictionary *options  = @{CBCentralManagerOptionShowPowerAlertKey:@YES};
-    NSDictionary *options = @{ CBCentralManagerScanOptionAllowDuplicatesKey: @YES };
-    [self.centerManager scanDeviceWithTimeInterval:LONG_MAX services:@[] options:options callBack:^(EasyPeripheral *peripheral, BOOL isfinish) {
-        
-        NSInteger perpheralIndex = -1 ;
-        for (int i = 0;  i < self.dataArray.count; i++) {
-            EasyPeripheral *tempP = self.dataArray[i];
-            if ([tempP.identifier isEqual:peripheral.identifier]) {
-                perpheralIndex = i ;
-                break ;
-            }
-        }
-        if (perpheralIndex != -1) {
-            [self.dataArray replaceObjectAtIndex:perpheralIndex withObject:peripheral];
-        }
-        else{
-            [self.dataArray addObject:peripheral];
-        }
-        
-        queueMainStart
-        [weakself.tableView reloadData];
-        queueEnd
+    [self.centerManager scanDeviceWithTimeInterval:LONG_MAX
+                                          services:@[]
+                                           options:@{ CBCentralManagerScanOptionAllowDuplicatesKey: @YES }
+                                          callBack:^(EasyPeripheral *peripheral, BOOL isfinish) {
+        [weakself managerScanedDevice:peripheral];
     }];
     
+    self.centerManager.stateChangeCallback = ^(EasyCenterManager *manager, CBManagerState state) {
+        [weakself managerStateChanged:state];
+    };
+
+}
+
+#pragma mark - bluetooth callback
+- (void)managerScanedDevice:(EasyPeripheral *)peripheral
+{
+    NSInteger perpheralIndex = -1 ;
+    for (int i = 0;  i < self.dataArray.count; i++) {
+        EasyPeripheral *tempP = self.dataArray[i];
+        if ([tempP.identifier isEqual:peripheral.identifier]) {
+            perpheralIndex = i ;
+            break ;
+        }
+    }
+    if (perpheralIndex != -1) {
+        [self.dataArray replaceObjectAtIndex:perpheralIndex withObject:peripheral];
+    }
+    else{
+        [self.dataArray addObject:peripheral];
+    }
+    
+    queueMainStart
+    [self.tableView reloadData];
+    queueEnd
+}
+- (void)managerStateChanged:(CBManagerState)state
+{
+    queueMainStart
+    if (state == CBManagerStatePoweredOn) {
+        UIView *coverView = [[UIApplication sharedApplication].keyWindow viewWithTag:1011];
+        if (coverView) {
+            [coverView removeFromSuperview];
+            coverView = nil ;
+        }
+        [self.centerManager startScanDevice];
+    }
+    else if (state == CBManagerStatePoweredOff){
+        UILabel *coverLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
+        coverLabel.font = [UIFont systemFontOfSize:20];
+        coverLabel.tag = 1011 ;
+        coverLabel.textAlignment = NSTextAlignmentCenter ;
+        coverLabel.text = @"系统蓝牙已关闭，请打开系统蓝牙";
+        coverLabel.backgroundColor = [UIColor colorWithWhite:0 alpha:0.6];
+        [[UIApplication sharedApplication].keyWindow addSubview:coverLabel];
+    }
+    queueEnd
+}
+- (void)deviceDisconnect:(EasyPeripheral *)peripheral error:(NSError *)error
+{
+    kWeakSelf(self)
+    queueMainStart
+    [SVProgressHUD dismiss];
+    [EFShowView showAlertMessageWithTitle:@"设备失去连接" contentMessage:error.localizedDescription cancelTitle:@"重新连接" cancelCallBack:^{
+        //重新连接设备
+        [peripheral reconnectDevice];
+    } sureTitle:@"取消" sureCallBack:^{
+        [weakself.navigationController popToRootViewControllerAnimated:YES];
+    }];
+    queueEnd
+}
+- (void)deviceConnect:(EasyPeripheral *)peripheral error:(NSError *)error
+{
+    queueMainStart
+    [SVProgressHUD dismiss];
+    if (error) {
+        [EFShowView showErrorText:error.domain];
+    }
+    else{
+        ToolDetailViewController *tooD = [[ToolDetailViewController alloc]init];
+        tooD.peripheral = peripheral ;
+        [self.navigationController  pushViewController:tooD animated:YES];
+    }
+    queueEnd
 }
 
 #pragma mark - tableView delegate
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return [ToolCell cellHeight] ;
-    
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -102,28 +155,9 @@
     }else{
         [SVProgressHUD showInfoWithStatus:@"正在连接设备..."];
         [peripheral connectDeviceWithDisconnectCallback:^(EasyPeripheral *peripheral, NSError *error) {
-            queueMainStart
-            [SVProgressHUD dismiss];
-            [EFShowView showAlertMessageWithTitle:@"设备失去连接" contentMessage:error.localizedDescription cancelTitle:@"重新连接" cancelCallBack:^{
-                //重新连接设备
-                [peripheral reconnectDevice];
-            } sureTitle:@"取消" sureCallBack:^{
-                [weakself.navigationController popToRootViewControllerAnimated:YES];
-            }];
-            queueEnd
+            [weakself deviceDisconnect:peripheral error:error];
         } Callback:^(EasyPeripheral *perpheral, NSError *error) {
-            queueMainStart
-            [SVProgressHUD dismiss];
-            if (error) {
-                [EFShowView showErrorText:error.domain];
-            }
-            else{
-                ToolDetailViewController *tooD = [[ToolDetailViewController alloc]init];
-                tooD.peripheral = peripheral ;
-                [weakself.navigationController  pushViewController:tooD animated:YES];
-            }
-            
-            queueEnd
+            [weakself deviceConnect:peripheral error:error];
         }];
        
     }

@@ -22,7 +22,6 @@
     
     __block BOOL  _isReconnectDevice ;//用来处理发起连接时的参数问题。因为没调用连接一次，只能返回一次连接结果。
     
-    
     //读取rssi回调结果
     blueToothReadRSSICallback _blueToothReadRSSICallback ;
     
@@ -41,7 +40,7 @@
 //    if (_stateChangedCallback) {
 //        [self.peripheral removeObserver:self forKeyPath:@"state"];
 //    }
-    EasyLog(@"%@ %zd",self,self.deviceScanCount);
+    EasyLog(@"\n%@设备已销毁 %zd",self,self.deviceScanCount);
     _peripheral.delegate = nil ;
 }
 
@@ -142,7 +141,9 @@
     _connectCallback = [callback copy];
     _connectTimeOut = timeout ;
     _connectOpertion = options ;
-    
+
+    _isReconnectDevice = YES ;
+
     [self.centerManager.manager connectPeripheral:self.peripheral options:options];
     
     //如果设定的时间内系统没有回调连接的结果。直接返回错误信息
@@ -206,7 +207,7 @@
 //    if (_stateChangedCallback) {
 //        _stateChangedCallback( self , periheral.state) ;
 //    }
-    EasyLog(@"_stateChangedCallback = %ld",(long)periheral.state );
+    EasyLog(@"_stateChangedCallback = %zd",periheral.state );
     
 }
 
@@ -219,6 +220,7 @@
     if (self.state == CBPeripheralStateConnected) {
         [self.centerManager.manager cancelPeripheralConnection:self.peripheral];
     }
+//    [self.centerManager.connectedDeviceDict removeObjectForKey:self.identifier];
 }
 
 
@@ -266,9 +268,10 @@
 
 - (void)peripheralDidUpdateRSSI:(CBPeripheral *)peripheral error:(NSError *)error
 {
-    
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wdeprecated-declarations"
+    EasyLog(@"\n%@设备的rssi读取%@ %@",peripheral,peripheral.RSSI,error);
+
     self.RSSI = peripheral.RSSI ;
     if (_blueToothReadRSSICallback) {
         _blueToothReadRSSICallback(self ,peripheral.RSSI ,error );
@@ -279,6 +282,8 @@
 
 - (void)peripheral:(CBPeripheral *)peripheral didReadRSSI:(NSNumber *)RSSI error:(NSError *)error
 {
+    EasyLog(@"\n%@设备的rssi读取%@ %@",peripheral,RSSI,error);
+
     self.RSSI = RSSI ;
     if (_blueToothReadRSSICallback) {
         _blueToothReadRSSICallback(self , RSSI ,error );
@@ -288,7 +293,8 @@
 
 - (void)peripheral:(CBPeripheral *)peripheral didDiscoverServices:(NSError *)error
 {
-    
+    EasyLog(@"\n%@设备发现服务%@ %@",peripheral,peripheral.services,error);
+
     for (CBService *tempService in peripheral.services) {
         EasyService *tempS  = [self searchServiceWithService:tempService] ;
         if (nil == tempS) {
@@ -305,6 +311,8 @@
 
 - (void)peripheral:(CBPeripheral *)peripheral didDiscoverIncludedServicesForService:(nonnull CBService *)service error:(nullable NSError *)error
 {
+    EasyLog(@"\n%@已连接上行的设备发现了服务%@ %@",peripheral,peripheral.services,error);
+
 #warning  待处理
 }
 
@@ -312,7 +320,8 @@
 
 - (void)peripheral:(CBPeripheral *)peripheral didDiscoverCharacteristicsForService:(CBService *)service error:(NSError *)error
 {
-    
+    EasyLog(@"\n%@上的发现了特征%@ %@",service,service.characteristics,error);
+
     EasyService *tempService = [self searchServiceWithService:service];
     
     if (tempService) {
@@ -330,6 +339,7 @@
 //或者写入数据后，数据会在这个接口里回调
 - (void)peripheral:(CBPeripheral *)peripheral didUpdateValueForCharacteristic:(CBCharacteristic *)characteristic error:(NSError *)error
 {
+    EasyLog(@"\n%@上的发现了特征%@ %@",peripheral,characteristic,error);
     
     EasyService *tempService = [self searchServiceWithService:characteristic.service];
     EasyCharacteristic *character = [tempService searchCharacteristciWithCharacteristic:characteristic];
