@@ -2,12 +2,15 @@
 //  EasyUtils.h
 //  EasyBlueTooth
 //
-//  Created by nf on 2017/8/14.
+//  Created by nf on 2016/8/14.
 //  Copyright © 2017年 chenSir. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
+
+#import "SVProgressHUD.h"   
+
 //强弱引用
 #define kWeakSelf(type)__weak typeof(type)weak##type = type;
 #define kStrongSelf(type)__strong typeof(type)type = weak##type;
@@ -63,5 +66,16 @@
 
  //将16进制的字符串转换成NSData
 + (NSMutableData *)convertHexStrToData:(NSString *)str ;
+
+//十六进制转换为普通字符串的。
++ (NSString *)ConvertHexStringToString:(NSString *)hexString;
+//普通字符串转换为十六进制
++ (NSString *)ConvertStringToHexString:(NSString *)string;
+//int转data
++(NSData *)ConvertIntToData:(int)i;
+//data转int
++(int)ConvertDataToInt:(NSData *)data;
+//十六进制转换为普通字符串的。
++ (NSData *)ConvertHexStringToData:(NSString *)hexString;
 
 @end

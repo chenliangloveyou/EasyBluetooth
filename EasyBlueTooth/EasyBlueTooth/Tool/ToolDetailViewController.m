@@ -33,38 +33,40 @@
     self.advertisementArray = [self.peripheral.advertisementData allKeys];
 
     [self.view addSubview:self.tableView];
+
+    [SVProgressHUD showInfoWithStatus:@"获取服务..."];
     
     kWeakSelf(self)
     [self.peripheral discoverAllDeviceServiceWithCallback:^(EasyPeripheral *peripheral, NSArray<EasyService *> *serviceArray, NSError *error) {
         
+        NSLog(@"%@  == %@",serviceArray,error);
+
         for (EasyService *tempS in serviceArray) {
-//            NSLog(@" %@  = %@",tempS.UUID ,tempS.description);
-            
+            NSLog(@" %@  = %@",tempS.UUID ,tempS.description);
+
             [tempS discoverCharacteristicWithCallback:^(NSArray<EasyCharacteristic *> *characteristics, NSError *error) {
-//                NSLog(@" %@  = %@",characteristics , error );
-                
-                for (EasyCharacteristic *tempC in characteristics) {
+                NSLog(@" %@  = %@",characteristics , error );                for (EasyCharacteristic *tempC in characteristics) {
                     [tempC discoverDescriptorWithCallback:^(NSArray<EasyDescriptor *> *descriptorArray, NSError *error) {
-//                        NSLog(@"%@ ====", descriptorArray)  ;
+                        NSLog(@"%@ ====", descriptorArray)  ;
                         if (descriptorArray.count > 0) {
                             for (EasyDescriptor *d in descriptorArray) {
-//                                NSLog(@"%@ - %@ %@ ", d,d.UUID ,d.value);
+                                NSLog(@"%@ - %@ %@ ", d,d.UUID ,d.value);
                             }
                         }
                         for (EasyDescriptor *desc in descriptorArray) {
                             [desc readValueWithCallback:^(EasyDescriptor *descriptor, NSError *error) {
-//                                NSLog(@"%@ ,%@ ",descriptor.value,error);
+                                NSLog(@"%@ ,%@ ",descriptor.value,error);
                             }];
                         }
-//                        NSLog(@"%@ ==== ",error);
+                        NSLog(@"%@ ==== ",error);
                         queueMainStart
+                        [SVProgressHUD dismiss];
                         [weakself.tableView reloadData ];
                         queueEnd
                     }];
                 }
             }];
         }
-//        NSLog(@"%@  == %@",serviceArray,error);
     }];
     
 }

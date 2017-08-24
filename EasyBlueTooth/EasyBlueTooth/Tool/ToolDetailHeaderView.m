@@ -56,26 +56,14 @@
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
     CBPeripheral *periheral = (CBPeripheral *)object ;
-    NSLog(@"\n\n ,,, %ld",(long)periheral.state );
+    NSLog(@" peripheral state changed-----> %zd",periheral.state );
     if (periheral.state == CBPeripheralStateDisconnected) {
         self.stateLabel.textColor = [UIColor redColor];
-        self.stateLabel.text = @"设备已失去连接...";
-        
-        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:@"设备已失去连接..." preferredStyle:UIAlertControllerStyleAlert];
-        
-        UIAlertAction *action = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action){
-//            dispatch_after(0.2, dispatch_get_main_queue(), ^{
-//                [alertController dismissViewControllerAnimated:YES completion:nil];
-//            });
-        }];
-        [alertController addAction:action];
-        UIViewController *cv = [EasyUtils topViewController];
-        if (![cv isKindOfClass:[UIAlertController class]]) {
-//            [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:alertController animated:YES completion:nil];
-        }
-#warning 待处理
-//        UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"Remind" message:@"设备已失去连接..." delegate:self cancelButtonTitle:@"Ok" otherButtonTitles: nil];
-//        [alertView show];
+        self.stateLabel.text = @"设备失去连接...";
+    }
+    else{
+        self.stateLabel.textColor = [UIColor blackColor];
+        self.stateLabel.text = @"设备已连接";
     }
     
     

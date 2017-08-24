@@ -27,7 +27,7 @@
 }
 + (CGFloat)cellHieght
 {
-    return 80 ;
+    return 60 ;
 }
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];

@@ -2,7 +2,7 @@
 //  EasyBlueToothManager.h
 //  EasyBlueTooth
 //
-//  Created by nf on 2017/8/15.
+//  Created by nf on 2016/8/15.
 //  Copyright © 2017年 chenSir. All rights reserved.
 //
 
@@ -27,6 +27,8 @@ typedef void (^blueToothStateChangeCallback)(blueToothStateChangeType state , NS
 //读写操作回调
 typedef void (^blueToothOperationCallBack)(NSData *data , NSError *error);
 
+//模糊搜索设备规则
+typedef BOOL (^blueToothSearchDeviceRule)(NSString *peripheralName, NSDictionary *advertisementData, NSNumber *RSSI);
 
 @interface EasyBlueToothManager : NSObject
 
@@ -75,35 +77,35 @@ typedef void (^blueToothOperationCallBack)(NSData *data , NSError *error);
 /**
  * peripheral 连接一个设备（这个设备可以来自上面上面搜索到的设别）
  * collectDeviceCallback 设别连接状态的回调。（连接失败，断开连接，都会在这个block中回调）
- */
-- (void)connectDeviceWihtPeripheral:(EasyPeripheral *)peripheral
-                           callback:(blueToothCollectDeviceCallback)collectDeviceCallback;
-
-/**
- * peripheral 连接一个设备（这个设备可以来自上面上面搜索到的设别）
- * options  连接设备时需要过滤的一些参数
- * collectDeviceCallback 设别连接状态的回调。（连接失败，断开连接，都会在这个block中回调）
- */
-- (void)connectDeviceWihtPeripheral:(EasyPeripheral *)peripheral
-                            options:(NSDictionary *)options
-                           callback:(blueToothCollectDeviceCallback)collectDeviceCallback;
-
-/**
- * identifier 连接设备的唯一标识（如果是有绑定设备一说，可以在搜索到设别后把它保存到本地，然后需要连接的时候取出它来直接连接）
- * collectDeviceCallback 设别连接状态的回调。（连接失败，断开连接，都会在这个block中回调）
- */
-- (void)connectDeviceWihtIdentifier:(NSUUID *)identifier
-                           callback:(blueToothCollectDeviceCallback)collectDeviceCallback;
-
-/**
- * identifier 连接设备的唯一标识（如果是有绑定设备需求，可以在搜索到设别后把它保存到本地，然后需要连接的时候取出它来直接连接）
- * options  连接设备时需要过滤的一些参数
- * collectDeviceCallback 设别连接状态的回调。（连接失败，断开连接，都会在这个block中回调）
- */
-- (void)connectDeviceWihtIdentifier:(NSUUID *)identifier
-                            options:(NSDictionary *)options
-                           callback:(blueToothCollectDeviceCallback)collectDeviceCallback;
-
+// */
+//- (void)connectDeviceWihtPeripheral:(EasyPeripheral *)peripheral
+//                           callback:(blueToothDeviceStateChangedCallback)collectDeviceCallback;
+//
+///**
+// * peripheral 连接一个设备（这个设备可以来自上面上面搜索到的设别）
+// * options  连接设备时需要过滤的一些参数
+// * collectDeviceCallback 设别连接状态的回调。（连接失败，断开连接，都会在这个block中回调）
+// */
+//- (void)connectDeviceWihtPeripheral:(EasyPeripheral *)peripheral
+//                            options:(NSDictionary *)options
+//                           callback:(blueToothDeviceStateChangedCallback)collectDeviceCallback;
+//
+///**
+// * identifier 连接设备的唯一标识（如果是有绑定设备一说，可以在搜索到设别后把它保存到本地，然后需要连接的时候取出它来直接连接）
+// * collectDeviceCallback 设别连接状态的回调。（连接失败，断开连接，都会在这个block中回调）
+// */
+//- (void)connectDeviceWihtIdentifier:(NSUUID *)identifier
+//                           callback:(blueToothDeviceStateChangedCallback)collectDeviceCallback;
+//
+///**
+// * identifier 连接设备的唯一标识（如果是有绑定设备需求，可以在搜索到设别后把它保存到本地，然后需要连接的时候取出它来直接连接）
+// * options  连接设备时需要过滤的一些参数
+// * collectDeviceCallback 设别连接状态的回调。（连接失败，断开连接，都会在这个block中回调）
+// */
+//- (void)connectDeviceWihtIdentifier:(NSUUID *)identifier
+//                            options:(NSDictionary *)options
+//                           callback:(blueToothDeviceStateChangedCallback)collectDeviceCallback;
+//
 
 #pragma mark - 读写操作
 

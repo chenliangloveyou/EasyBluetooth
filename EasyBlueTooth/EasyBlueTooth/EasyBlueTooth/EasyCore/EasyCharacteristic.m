@@ -2,7 +2,7 @@
 //  EasyCharacteristic.m
 //  EasyBlueTooth
 //
-//  Created by nf on 2017/8/14.
+//  Created by nf on 2016/8/14.
 //  Copyright © 2017年 chenSir. All rights reserved.
 //
 
@@ -126,9 +126,13 @@
     CBCharacteristicWriteType writeType = callback ? CBCharacteristicWriteWithResponse : CBCharacteristicWriteWithoutResponse ;
     
     for (int i = 0; i < data.length; i=20) {
-        
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)((i/20)*0.2 * NSEC_PER_SEC)), dispatch_get_current_queue(), ^{
-            
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
+        dispatch_queue_t currentQueue = dispatch_get_current_queue() ;
+#pragma clang diagnostic pop
+
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)((i/20)*0.2 * NSEC_PER_SEC)), currentQueue, ^{
+
             NSUInteger subLength = data.length - i > 20 ? 20 : data.length-i ;
             NSData *subData = [data subdataWithRange:NSMakeRange(i, subLength)];
             

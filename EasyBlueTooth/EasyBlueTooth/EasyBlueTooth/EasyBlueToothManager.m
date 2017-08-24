@@ -2,7 +2,7 @@
 //  EasyBlueToothManager.m
 //  EasyBlueTooth
 //
-//  Created by nf on 2017/8/15.
+//  Created by nf on 2016/8/15.
 //  Copyright © 2017年 chenSir. All rights reserved.
 //
 
@@ -56,27 +56,27 @@
 
 
 
-- (void)connectDeviceWihtIdentifier:(NSUUID *)identifier callback:(blueToothCollectDeviceCallback)collectDeviceCallback
-{
-
-}
-- (void)connectDeviceWihtPeripheral:(EasyPeripheral *)peripheral
-                            options:(NSDictionary *)options
-                           callback:(blueToothCollectDeviceCallback)collectDeviceCallback
-{
-
-
-}
-
-- (void)connectDeviceWihtPeripheral:(EasyPeripheral *)peripheral callback:(blueToothCollectDeviceCallback)collectDeviceCallback
-{
-
-}
-
-- (void)connectDeviceWihtIdentifier:(NSUUID *)identifier options:(NSDictionary *)options callback:(blueToothCollectDeviceCallback)collectDeviceCallback
-{
-
-}
+//- (void)connectDeviceWihtIdentifier:(NSUUID *)identifier callback:(blueToothDeviceStateChangedCallback)collectDeviceCallback
+//{
+//
+//}
+//- (void)connectDeviceWihtPeripheral:(EasyPeripheral *)peripheral
+//                            options:(NSDictionary *)options
+//                           callback:(blueToothDeviceStateChangedCallback)collectDeviceCallback
+//{
+//
+//
+//}
+//
+//- (void)connectDeviceWihtPeripheral:(EasyPeripheral *)peripheral callback:(blueToothDeviceStateChangedCallback)collectDeviceCallback
+//{
+//
+//}
+//
+//- (void)connectDeviceWihtIdentifier:(NSUUID *)identifier options:(NSDictionary *)options callback:(blueToothDeviceStateChangedCallback)collectDeviceCallback
+//{
+//
+//}
 
 
 #pragma mark - 读写操作

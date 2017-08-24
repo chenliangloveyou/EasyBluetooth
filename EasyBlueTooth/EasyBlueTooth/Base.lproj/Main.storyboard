@@ -41,7 +41,7 @@
         <scene sceneID="9S7-Cn-96X">
             <objects>
                 <navigationController id="XUb-Jh-e1T" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="调试工具" id="Yi0-Pu-2Dj"/>
+                    <tabBarItem key="tabBarItem" title="调试工具" image="success.png" selectedImage="success.png" id="Yi0-Pu-2Dj"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="GSA-hd-TVw">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -87,7 +87,7 @@
         <scene sceneID="bNh-sz-NQS">
             <objects>
                 <navigationController id="5HW-je-o44" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="实例代码" id="FhH-Aj-S7s"/>
+                    <tabBarItem key="tabBarItem" title="实例代码" selectedImage="info.png" id="FhH-Aj-S7s"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="mQx-FO-q2g">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -119,4 +119,8 @@
             <point key="canvasLocation" x="-1364" y="-252"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="info.png" width="27" height="28"/>
+        <image name="success.png" width="28" height="28"/>
+    </resources>
 </document>

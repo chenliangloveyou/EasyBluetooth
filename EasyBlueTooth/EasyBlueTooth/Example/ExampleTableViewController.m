@@ -9,6 +9,8 @@
 #import "ExampleTableViewController.h"
 #import "ExampleCell.h"
 
+#import "EasyUtils.h"   
+
 @interface ExampleTableViewController ()
 
 @property (nonatomic,strong)NSArray *dataArray ;
@@ -24,10 +26,20 @@
      self.clearsSelectionOnViewWillAppear = NO;
     
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([ExampleCell class]) bundle:nil] forCellReuseIdentifier:NSStringFromClass([ExampleCell class])];
+    self.tableView.tableHeaderView = [self tableHeaderView];
+    
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
+- (UIView *)tableHeaderView
+{
+    UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH , 100)];
+    label.text = @"请选择一种连接方式";
+    label.textAlignment = NSTextAlignmentCenter ;
+    label.font = [UIFont boldSystemFontOfSize:20];
+    return label ;
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
