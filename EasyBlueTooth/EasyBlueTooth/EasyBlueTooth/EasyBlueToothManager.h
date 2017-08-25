@@ -14,6 +14,34 @@
 #import "EasyPeripheral.h"
 #import "EasyDescriptor.h"
 
+/**
+ * 连接一个设备所经历的状态
+ */
+typedef NS_ENUM(NSUInteger , bluetoothState) {
+    
+    bluetoothStateReadly = 0,     //蓝牙准备就绪
+    bluetoothStateScanDevice ,  //扫描设备
+    bluetoothStateConnect ,     //连接设备
+    bluetoothStateService ,     //获取服务
+    bluetoothStateCharacter ,   //获取特征
+    bluetoothStateWriteData ,   //写数据
+    bluetoothStateReceivedData ,//获取通知数据
+    bluetoothStateDestory ,     //断开设备
+    
+};
+
+typedef NS_ENUM(NSUInteger , bluetoothErrorState) {
+    
+    bluetoothErrorStateNoReadly = 0 ,//系统蓝牙没有打开
+    bluetoothErrorStateNoDevice ,    //没有找到设备
+    bluetoothErrorStateConnectError ,//连接失败
+    bluetoothErrorStateDisconnect ,  //设备失去连接
+    bluetoothErrorStateNoService ,   //没有找到相应的服务
+    bluetoothErrorStateNoCharcter,  //没有对应的特征
+    bluetoothErrorStatewriteError,  //写数据失败
+    bluetoothErrorStateNotifyError ,//监听通知失败
+};
+
 
 /**
  * 模糊搜索设备规则
@@ -31,7 +59,7 @@ typedef void (^blueToothScanCallback)(EasyPeripheral *peripheral , NSError *erro
 
 /**
  * 搜索到设备回调
- * peripheralDict 里面是所有符合规则的设备。key:peripheral value:error(如果error里面有值，说面连接出现错误，需要处理)
+ * deviceArray 里面是所有符合规则的设备。(需要处理peripheral里面的error信息)
  * error是扫描错误信息
  */
 typedef void (^blueToothScanAllCallback)(NSArray<EasyPeripheral *> *deviceArray , NSError *error );
@@ -45,52 +73,37 @@ typedef void (^blueToothScanAllCallback)(NSArray<EasyPeripheral *> *deviceArray 
  */
 + (instancetype)shareInstance ;
 
-#pragma mark - 扫描设备
 
-- (void)startScanDevice ;
-
-- (void)stopScanDevice ;
+#pragma mark - 扫描并连接设备
 
 - (void)connectDeviceWithName:(NSString *)name
                       timeout:(NSInteger)timeout
                      callback:(blueToothScanCallback)callback ;
 
-
 - (void)connectDeviceWithRule:(blueToothScanRule)rule
                       timeout:(NSInteger)timeout
                      callback:(blueToothScanCallback)callback ;
 
-- (void)connectAllDeviceWithName:(NSString *)name
+- (void)connectDeviceWithIdentifier:(NSString *)identifier
+                            timeout:(NSInteger)timeout
+                           callback:(blueToothScanCallback)callback ;
+
+- (void)connectDeviceWithName:(NSString *)name
                       timeout:(NSInteger)timeout
-                     callback:(blueToothScanAllCallback)callback ;
+                  serviceUUID:(NSString *)serviceUUID
+                   notifyUUID:(NSString *)notifyUUID
+                    wirteUUID:(NSString *)writeUUID
+                    writeData:(NSData *)data
+                     callback:(blueToothScanCallback)callback;
+
+- (void)connectAllDeviceWithName:(NSString *)name
+                         timeout:(NSInteger)timeout
+                        callback:(blueToothScanAllCallback)callback ;
 
 - (void)connectAllDeviceWithRule:(blueToothScanRule)rule
-                      timeout:(NSInteger)timeout
-                     callback:(blueToothScanAllCallback)callback ;
-/**
- * timeInterval 搜索设备所用的时间
- * searchDeviceCallBack 每搜索到一个设备 就会 回调这个block
- */
-- (void)searchDeviceWithTimeInterval:(NSTimeInterval)timeInterval
-                            callback:(blueToothSearchDeviceCallback)searchDeviceCallBack ;
+                         timeout:(NSInteger)timeout
+                        callback:(blueToothScanAllCallback)callback ;
 
-/**
- * deviceName 需要搜索设备的名称
- * timeInterval 搜索设备所用的时间
- * searchDeviceCallBack 每搜索到一个设备 就会 回调这个block
- */
-- (void)searchDeviceWithName:(NSString *)deviceName
-                timeInterval:(NSTimeInterval)timeInterval
-                    callBack:(blueToothSearchDeviceCallback)searchDeviceCallBack ;
-
-/**
- * blurryName 需要搜索设备的名称 -----> 此方法和上面方法不同之处是 启用了模糊搜索。（模糊搜索规则请到方法内部查看）
- * timeInterval 搜索设备所用的时间
- * searchDeviceCallBack 每搜索到一个设备 就会 回调这个block
- */
-- (void)searchDeviceWithBlurryName:(NSString *)blurryName
-                      timeInterval:(NSTimeInterval)timeInterval
-                          callBack:(blueToothSearchDeviceCallback)searchDeviceCallBack ;
 
 
 #pragma mark - 连接设备

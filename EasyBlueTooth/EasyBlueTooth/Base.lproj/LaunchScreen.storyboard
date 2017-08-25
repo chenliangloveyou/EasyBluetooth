@@ -21,7 +21,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="EasyBlueTooth" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zqI-JS-DjL">
-                                <rect key="frame" x="0.0" y="213" width="375" height="118"/>
+                                <rect key="frame" x="0.0" y="274.5" width="375" height="118"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="118" id="dfd-1Z-9pZ"/>
                                 </constraints>
@@ -29,9 +29,11 @@
                                 <color key="textColor" red="0.10980392160000001" green="0.4941176471" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="copyright(c)chenliangloveyou@163.com" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="51B-FJ-bhh">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="copyright(c)chenliangloveyou@163.com" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="51B-FJ-bhh">
                                 <rect key="frame" x="0.0" y="600" width="375" height="40"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="bV2-HB-vCd"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -40,8 +42,11 @@
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="zqI-JS-DjL" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="2oU-5I-1ZI"/>
-                            <constraint firstItem="zqI-JS-DjL" firstAttribute="top" secondItem="Llm-lL-Icb" secondAttribute="bottom" constant="193" id="HeR-Oa-WLj"/>
+                            <constraint firstItem="xb3-aO-Qok" firstAttribute="top" secondItem="51B-FJ-bhh" secondAttribute="bottom" constant="27" id="3os-n9-v9T"/>
+                            <constraint firstItem="zqI-JS-DjL" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="Br8-6T-3mc"/>
                             <constraint firstAttribute="trailing" secondItem="zqI-JS-DjL" secondAttribute="trailing" id="XN4-by-3MO"/>
+                            <constraint firstAttribute="trailing" secondItem="51B-FJ-bhh" secondAttribute="trailing" id="ZKc-wT-4mi"/>
+                            <constraint firstItem="51B-FJ-bhh" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="bic-wT-1bc"/>
                         </constraints>
                     </view>
                 </viewController>

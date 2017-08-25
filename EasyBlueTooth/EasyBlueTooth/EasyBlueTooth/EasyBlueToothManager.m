@@ -8,7 +8,7 @@
 
 #import "EasyBlueToothManager.h"
 
-@interface EasyBlueToothManager()<CBCentralManagerDelegate>
+@interface EasyBlueToothManager()
 
 @property (nonatomic,strong)EasyCenterManager *centerManager ;
 
@@ -35,7 +35,10 @@
     });
     return share;
 }
+- (void)connectDeviceWithName:(NSString *)name timeout:(NSInteger)timeout serviceUUID:(NSString *)serviceUUID notifyUUID:(NSString *)notifyUUID wirteUUID:(NSString *)writeUUID writeData:(NSData *)data callback:(blueToothScanCallback)callback
+{
 
+}
 - (void)connectDeviceWithName:(NSString *)name
                       timeout:(NSInteger)timeout
                      callback:(blueToothScanCallback)callback
@@ -96,7 +99,36 @@
         }
     }];
 }
-
+- (void)connectDeviceWithIdentifier:(NSString *)identifier timeout:(NSInteger)timeout callback:(blueToothScanCallback)callback
+{
+    kWeakSelf(self)
+    [self.centerManager scanDeviceWithTimeInterval:timeout services:nil  options:nil callBack:^(EasyPeripheral *peripheral, BOOL isfinish) {
+        EasyLog(@"%@",peripheral.name);
+        if ([peripheral.identifier isEqual:identifier]) {
+            
+            [weakself.centerManager stopScanDevice];
+            [peripheral resetDeviceScanCount];
+            
+            [peripheral connectDeviceWithTimeOut:timeout Options:nil disconnectCallback:^(EasyPeripheral *peripheral, NSError *error) {
+                queueMainStart
+                callback(peripheral,error);
+                queueEnd
+            } callback:^(EasyPeripheral *perpheral, NSError *error) {
+                
+                queueMainStart
+                callback(peripheral,error);
+                queueEnd
+            }];
+        }
+        
+        if (isfinish) {
+            NSError *tempError = [NSError errorWithDomain:@"search device timeout !" code:-1-1 userInfo:nil];
+            queueMainStart
+            callback(nil,tempError);
+            queueEnd
+        }
+    }];
+}
 - (void)connectAllDeviceWithName:(NSString *)name timeout:(NSInteger)timeout callback:(blueToothScanAllCallback)callback
 {
     NSMutableArray *tempArray = [NSMutableArray arrayWithCapacity:5];
@@ -109,19 +141,55 @@
             [tempArray addObject:peripheral];
             
             [peripheral connectDeviceWithTimeOut:timeout Options:nil disconnectCallback:^(EasyPeripheral *peripheral, NSError *error) {
+                if (error) {
+                    peripheral.connectErrorDescription = error ;
+                }
                 
             } callback:^(EasyPeripheral *perpheral, NSError *error) {
-                
+                if (error) {
+                    peripheral.connectErrorDescription = error ;
+                }
             }];
         }
         
         if (isfinish) {
             [weakself.centerManager stopScanDevice];
 
-            NSError *tempError = [NSError errorWithDomain:@"search device timeout !" code:-1-1 userInfo:nil];
+            NSError *tempError = [NSError errorWithDomain:@"search device timeout !" code:-101 userInfo:nil];
             callback(tempArray,tempError);
         }
     }];
+}
+- (void)connectAllDeviceWithRule:(blueToothScanRule)rule timeout:(NSInteger)timeout callback:(blueToothScanAllCallback)callback
+{
+    NSMutableArray *tempArray = [NSMutableArray arrayWithCapacity:5];
+    
+    kWeakSelf(self)
+    [self.centerManager scanDeviceWithTimeInterval:timeout services:nil  options:nil callBack:^(EasyPeripheral *peripheral, BOOL isfinish) {
+        EasyLog(@"%@",peripheral.name);
+        if (rule(peripheral)) {
+            
+            [tempArray addObject:peripheral];
+            
+            [peripheral connectDeviceWithTimeOut:timeout Options:nil disconnectCallback:^(EasyPeripheral *peripheral, NSError *error) {
+                if (error) {
+                    peripheral.connectErrorDescription = error ;
+                }
+            } callback:^(EasyPeripheral *perpheral, NSError *error) {
+                if (error) {
+                    peripheral.connectErrorDescription = error ;
+                }
+            }];
+        }
+        
+        if (isfinish) {
+            [weakself.centerManager stopScanDevice];
+            
+            NSError *tempError = [NSError errorWithDomain:@"search device timeout !" code:-101 userInfo:nil];
+            callback(tempArray,tempError);
+        }
+    }];
+
 }
 //
 //- (void)startScanDevice

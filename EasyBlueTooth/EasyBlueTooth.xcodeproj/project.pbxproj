@@ -9,9 +9,6 @@
 /* Begin PBXBuildFile section */
 		68815D011F48A44C00F99E2D /* UIView+Ext.m in Sources */ = {isa = PBXBuildFile; fileRef = 68815D001F48A44C00F99E2D /* UIView+Ext.m */; };
 		AD1552251F4C345000DBBBDC /* ExampleModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AD1552241F4C345000DBBBDC /* ExampleModel.m */; };
-		AD15522C1F4C39B800DBBBDC /* SVIndefiniteAnimatedView.m in Sources */ = {isa = PBXBuildFile; fileRef = AD1552281F4C39B800DBBBDC /* SVIndefiniteAnimatedView.m */; };
-		AD15522D1F4C39B800DBBBDC /* SVProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = AD1552291F4C39B800DBBBDC /* SVProgressHUD.bundle */; };
-		AD15522E1F4C39B800DBBBDC /* SVProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = AD15522B1F4C39B800DBBBDC /* SVProgressHUD.m */; };
 		AD1552311F4D7E1B00DBBBDC /* EFShowView.m in Sources */ = {isa = PBXBuildFile; fileRef = AD1552301F4D7E1B00DBBBDC /* EFShowView.m */; };
 		AD1552341F4EB6AC00DBBBDC /* ExampleDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD1552331F4EB6AC00DBBBDC /* ExampleDetailViewController.m */; };
 		AD32B2071F4A79D600A1746C /* ExampleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AD32B1EC1F4A79D600A1746C /* ExampleCell.m */; };
@@ -70,11 +67,6 @@
 		68815D001F48A44C00F99E2D /* UIView+Ext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Ext.m"; sourceTree = "<group>"; };
 		AD1552231F4C345000DBBBDC /* ExampleModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExampleModel.h; sourceTree = "<group>"; };
 		AD1552241F4C345000DBBBDC /* ExampleModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExampleModel.m; sourceTree = "<group>"; };
-		AD1552271F4C39B800DBBBDC /* SVIndefiniteAnimatedView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVIndefiniteAnimatedView.h; sourceTree = "<group>"; };
-		AD1552281F4C39B800DBBBDC /* SVIndefiniteAnimatedView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVIndefiniteAnimatedView.m; sourceTree = "<group>"; };
-		AD1552291F4C39B800DBBBDC /* SVProgressHUD.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = SVProgressHUD.bundle; sourceTree = "<group>"; };
-		AD15522A1F4C39B800DBBBDC /* SVProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVProgressHUD.h; sourceTree = "<group>"; };
-		AD15522B1F4C39B800DBBBDC /* SVProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVProgressHUD.m; sourceTree = "<group>"; };
 		AD15522F1F4D7E1B00DBBBDC /* EFShowView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EFShowView.h; sourceTree = "<group>"; };
 		AD1552301F4D7E1B00DBBBDC /* EFShowView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EFShowView.m; sourceTree = "<group>"; };
 		AD1552321F4EB6AC00DBBBDC /* ExampleDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExampleDetailViewController.h; sourceTree = "<group>"; };
@@ -174,18 +166,6 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
-		AD1552261F4C39B800DBBBDC /* SVProgressHUD */ = {
-			isa = PBXGroup;
-			children = (
-				AD1552271F4C39B800DBBBDC /* SVIndefiniteAnimatedView.h */,
-				AD1552281F4C39B800DBBBDC /* SVIndefiniteAnimatedView.m */,
-				AD1552291F4C39B800DBBBDC /* SVProgressHUD.bundle */,
-				AD15522A1F4C39B800DBBBDC /* SVProgressHUD.h */,
-				AD15522B1F4C39B800DBBBDC /* SVProgressHUD.m */,
-			);
-			path = SVProgressHUD;
-			sourceTree = "<group>";
-		};
 		AD32B1EA1F4A79D600A1746C /* Example */ = {
 			isa = PBXGroup;
 			children = (
@@ -258,7 +238,6 @@
 				AD7DCAB31E7A5E9F00589BBA /* AppDelegate.m */,
 				AD7DCAB51E7A5E9F00589BBA /* ViewController.h */,
 				AD7DCAB61E7A5E9F00589BBA /* ViewController.m */,
-				AD1552261F4C39B800DBBBDC /* SVProgressHUD */,
 				AD32B1F01F4A79D600A1746C /* Tool */,
 				AD32B1EA1F4A79D600A1746C /* Example */,
 				AD7DCAB81E7A5E9F00589BBA /* Main.storyboard */,
@@ -447,7 +426,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				AD32B20D1F4A79D600A1746C /* ToolDetailCell.xib in Resources */,
-				AD15522D1F4C39B800DBBBDC /* SVProgressHUD.bundle in Resources */,
 				AD32B20B1F4A79D600A1746C /* ToolCell.xib in Resources */,
 				AD32B2101F4A79D600A1746C /* ToolDetailHeaderView.xib in Resources */,
 				AD32B2081F4A79D600A1746C /* ExampleCell.xib in Resources */,
@@ -479,7 +457,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AD15522C1F4C39B800DBBBDC /* SVIndefiniteAnimatedView.m in Sources */,
 				AD32B2071F4A79D600A1746C /* ExampleCell.m in Sources */,
 				AD32B20C1F4A79D600A1746C /* ToolDetailCell.m in Sources */,
 				AD92FA121F42D8D100D8B811 /* EasyBlueToothManager.m in Sources */,
@@ -488,7 +465,6 @@
 				AD32B20A1F4A79D600A1746C /* ToolCell.m in Sources */,
 				AD92FA171F42D8D100D8B811 /* EasyPeripheral.m in Sources */,
 				AD32B2131F4A79D600A1746C /* ToolDetailOperationViewController.m in Sources */,
-				AD15522E1F4C39B800DBBBDC /* SVProgressHUD.m in Sources */,
 				AD92FA151F42D8D100D8B811 /* EasyCharacteristic.m in Sources */,
 				AD32B20F1F4A79D600A1746C /* ToolDetailHeaderView.m in Sources */,
 				AD32B2141F4A79D600A1746C /* ToolDetailViewController.m in Sources */,
@@ -657,7 +633,7 @@
 				INFOPLIST_FILE = EasyBlueTooth/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = chenSir.EasyBlueTooth;
+				PRODUCT_BUNDLE_IDENTIFIER = chenliangloveyou.EasyBlueTooth;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -670,7 +646,7 @@
 				INFOPLIST_FILE = EasyBlueTooth/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = chenSir.EasyBlueTooth;
+				PRODUCT_BUNDLE_IDENTIFIER = chenliangloveyou.EasyBlueTooth;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;

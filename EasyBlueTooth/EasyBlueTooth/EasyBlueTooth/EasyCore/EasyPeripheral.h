@@ -91,7 +91,7 @@ typedef void (^blueToothFindServiceCallback)(EasyPeripheral *peripheral , NSArra
 /**
  * 当前设备的错误信息
  */
-@property (nonatomic,strong)NSError *errorDescription ;
+@property (nonatomic,strong)NSError *connectErrorDescription ;
 
 /**
  * 设备中所有的服务

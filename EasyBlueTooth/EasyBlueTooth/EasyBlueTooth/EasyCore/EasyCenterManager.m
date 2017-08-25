@@ -298,7 +298,7 @@
     
     NSAssert(existedP, @"attention: you should deal with this error");
     
-    existedP.errorDescription = error ;
+//    existedP.errorDescription = error ;
     [existedP dealDeviceConnectWithError:error];
     
 }
@@ -330,7 +330,7 @@
         NSAssert(NO, @"attention: you should deal with this error");
     }
     
-    existedP.errorDescription = error ;
+//    existedP.errorDescription = error ;
 
     if (error) {
         [existedP dealDisconnectWithError:error];

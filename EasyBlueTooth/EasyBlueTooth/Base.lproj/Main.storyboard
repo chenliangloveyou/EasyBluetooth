@@ -35,13 +35,13 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vex-M9-DHX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="522" y="-899"/>
+            <point key="canvasLocation" x="390" y="-680"/>
         </scene>
         <!--调试工具-->
         <scene sceneID="9S7-Cn-96X">
             <objects>
                 <navigationController id="XUb-Jh-e1T" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="调试工具" image="success.png" selectedImage="success.png" id="Yi0-Pu-2Dj"/>
+                    <tabBarItem key="tabBarItem" title="调试工具" image="hud_info.png" selectedImage="hud_info.png" id="Yi0-Pu-2Dj"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="GSA-hd-TVw">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -52,7 +52,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SAY-pZ-S0x" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-522" y="-909"/>
+            <point key="canvasLocation" x="-324" y="-679"/>
         </scene>
         <!--实例代码-->
         <scene sceneID="t5J-39-aJY">
@@ -81,13 +81,13 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="via-jT-BLN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="818" y="99"/>
+            <point key="canvasLocation" x="375" y="-9"/>
         </scene>
         <!--实例代码-->
         <scene sceneID="bNh-sz-NQS">
             <objects>
                 <navigationController id="5HW-je-o44" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="实例代码" selectedImage="info.png" id="FhH-Aj-S7s"/>
+                    <tabBarItem key="tabBarItem" title="实例代码" image="hud_info.png" selectedImage="hud_info.png" id="FhH-Aj-S7s"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="mQx-FO-q2g">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -98,7 +98,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qH7-xY-Grk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-522" y="99"/>
+            <point key="canvasLocation" x="-324" y="-9"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="Baa-Dp-6Wb">
@@ -120,7 +120,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="info.png" width="27" height="28"/>
-        <image name="success.png" width="28" height="28"/>
+        <image name="hud_info.png" width="16" height="16"/>
     </resources>
 </document>

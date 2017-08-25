@@ -33,8 +33,15 @@
     CBUUID *uuid = [CBUUID UUIDWithString:self.seriveUUID];
     [p discoverDeviceServiceWithUUIDArray:@[uuid] callback:^(EasyPeripheral *peripheral, NSArray<EasyService *> *serviceArray, NSError *error) {
        
+        for (EasyService *tempS in serviceArray) {
+            CBUUID *uui  = [CBUUID UUIDWithString:self.writeUUID];
+            CBUUID *uuis = [CBUUID UUIDWithString:self.readUUID];
+            [tempS discoverCharacteristicWithCharacteristicUUIDs:@[uui,uuis] callback:^(NSArray<EasyCharacteristic *> *characteristics, NSError *error) {
+                
+            }];
+        }
         queueMainStart
-        NSLog(@"%@",serviceArray);
+        NSLog(@"==============%@",serviceArray);
         queueEnd
         
     }];
