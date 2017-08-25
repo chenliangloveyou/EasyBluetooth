@@ -12,6 +12,6 @@
 
 @interface ExampleDetailViewController : UIViewController
 
-@property (nonatomic,strong)EasyBlueToothManager *manager ;
+@property (nonatomic,strong)EasyPeripheral *peripheral ;
 @property (nonatomic,strong)NSArray <EasyPeripheral *>*deviceArray ;
 @end

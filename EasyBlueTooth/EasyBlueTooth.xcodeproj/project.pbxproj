@@ -16,6 +16,7 @@
 		AD1552491F4FFED900DBBBDC /* preview_2.gif in Resources */ = {isa = PBXBuildFile; fileRef = AD1552451F4FFED900DBBBDC /* preview_2.gif */; };
 		AD15524A1F4FFED900DBBBDC /* preview_3.png in Resources */ = {isa = PBXBuildFile; fileRef = AD1552461F4FFED900DBBBDC /* preview_3.png */; };
 		AD15524B1F4FFED900DBBBDC /* preview_4.png in Resources */ = {isa = PBXBuildFile; fileRef = AD1552471F4FFED900DBBBDC /* preview_4.png */; };
+		AD15524E1F501D2200DBBBDC /* EasyManagerOptions.m in Sources */ = {isa = PBXBuildFile; fileRef = AD15524D1F501D2200DBBBDC /* EasyManagerOptions.m */; };
 		AD32B2071F4A79D600A1746C /* ExampleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AD32B1EC1F4A79D600A1746C /* ExampleCell.m */; };
 		AD32B2081F4A79D600A1746C /* ExampleCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AD32B1ED1F4A79D600A1746C /* ExampleCell.xib */; };
 		AD32B2091F4A79D600A1746C /* ExampleTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD32B1EF1F4A79D600A1746C /* ExampleTableViewController.m */; };
@@ -82,6 +83,8 @@
 		AD1552451F4FFED900DBBBDC /* preview_2.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = preview_2.gif; sourceTree = "<group>"; };
 		AD1552461F4FFED900DBBBDC /* preview_3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = preview_3.png; sourceTree = "<group>"; };
 		AD1552471F4FFED900DBBBDC /* preview_4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = preview_4.png; sourceTree = "<group>"; };
+		AD15524C1F501D2200DBBBDC /* EasyManagerOptions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EasyManagerOptions.h; sourceTree = "<group>"; };
+		AD15524D1F501D2200DBBBDC /* EasyManagerOptions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EasyManagerOptions.m; sourceTree = "<group>"; };
 		AD32B1EB1F4A79D600A1746C /* ExampleCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExampleCell.h; sourceTree = "<group>"; };
 		AD32B1EC1F4A79D600A1746C /* ExampleCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExampleCell.m; sourceTree = "<group>"; };
 		AD32B1ED1F4A79D600A1746C /* ExampleCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ExampleCell.xib; sourceTree = "<group>"; };
@@ -305,6 +308,8 @@
 				AD92FA0F1F42D8D100D8B811 /* EasyUtils */,
 				AD92F9FE1F42D8D100D8B811 /* EasyBlueToothManager.h */,
 				AD92F9FF1F42D8D100D8B811 /* EasyBlueToothManager.m */,
+				AD15524C1F501D2200DBBBDC /* EasyManagerOptions.h */,
+				AD15524D1F501D2200DBBBDC /* EasyManagerOptions.m */,
 			);
 			path = EasyBlueTooth;
 			sourceTree = "<group>";
@@ -502,6 +507,7 @@
 				AD1552371F4FF3FD00DBBBDC /* MBProgressHUD.m in Sources */,
 				AD92FA1A1F42D8D100D8B811 /* EasyUtils.m in Sources */,
 				AD92FA161F42D8D100D8B811 /* EasyDescriptor.m in Sources */,
+				AD15524E1F501D2200DBBBDC /* EasyManagerOptions.m in Sources */,
 				AD1552251F4C345000DBBBDC /* ExampleModel.m in Sources */,
 				68815D011F48A44C00F99E2D /* UIView+Ext.m in Sources */,
 				AD1552311F4D7E1B00DBBBDC /* EFShowView.m in Sources */,

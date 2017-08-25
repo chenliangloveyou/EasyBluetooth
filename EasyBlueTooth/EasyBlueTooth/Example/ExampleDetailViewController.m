@@ -27,26 +27,34 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    
-    EasyPeripheral *p = self.deviceArray.firstObject ;
-    self.seriveUUID = @"6E400001-B5A3-F393-E0A9-E50E24DCCA9E";
-    CBUUID *uuid = [CBUUID UUIDWithString:self.seriveUUID];
-    [p discoverDeviceServiceWithUUIDArray:@[uuid] callback:^(EasyPeripheral *peripheral, NSArray<EasyService *> *serviceArray, NSError *error) {
+    [[EasyBlueToothManager shareInstance] connectDeviceWithName:@"NFHY" timeout:10 callback:^(EasyPeripheral *peripheral, NSError *error) {
        
-        for (EasyService *tempS in serviceArray) {
-            CBUUID *uui  = [CBUUID UUIDWithString:self.writeUUID];
-            CBUUID *uuis = [CBUUID UUIDWithString:self.readUUID];
-            [tempS discoverCharacteristicWithCharacteristicUUIDs:@[uui,uuis] callback:^(NSArray<EasyCharacteristic *> *characteristics, NSError *error) {
+        if (!error) {
+            NSArray *tempArray = @[[CBUUID UUIDWithString:self.seriveUUID]];
+            [peripheral discoverDeviceServiceWithUUIDArray:tempArray callback:^(EasyPeripheral *peripheral, NSArray<EasyService *> *serviceArray, NSError *error) {
+               
+                if (!error) {
+                    for (EasyService *tempService in serviceArray) {
+                        
+                        CBUUID *writeUUID = [CBUUID UUIDWithString:self.writeUUID];
+                        CBUUID *notifyUUID= [CBUUID UUIDWithString:self.readUUID];
+                        NSArray *tempArr = @[writeUUID,notifyUUID];
+                        [tempService discoverCharacteristicWithCharacteristicUUIDs:tempArr callback:^(NSArray<EasyCharacteristic *> *characteristics, NSError *error) {
+                            
+                        }];
+                    }
+                }
                 
             }];
         }
-        queueMainStart
-        NSLog(@"==============%@",serviceArray);
-        queueEnd
-        
     }];
+   
     // Do any additional setup after loading the view.
 }
+
+
+
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

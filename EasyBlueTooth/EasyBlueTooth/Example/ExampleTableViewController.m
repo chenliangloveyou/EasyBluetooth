@@ -51,60 +51,88 @@
     cell.titleString = self.dataArray[indexPath.row];
     return cell;
 }
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    [[EasyBlueToothManager shareInstance] connectAllDeviceWithName:@"NFHY" timeout:10 callback:^(NSArray<EasyPeripheral *> *deviceArray, NSError *error) {
-        
-        if (deviceArray.count > 0) {
-            ExampleDetailViewController *vc = [[ExampleDetailViewController alloc]init];
-            vc.deviceArray = deviceArray ;
-            [self.navigationController pushViewController:vc animated:YES];
-            
-            NSLog(@"%@", deviceArray);
-        }
-        else{
-            [EFShowView showText:error.description];
-        }
-    }];
-    
-    
-//    [[EasyBlueToothManager shareInstance] connectDeviceWithRule:^BOOL(EasyPeripheral *peripheral) {
-//        if ([peripheral.name isEqualToString:@"EFHY"]) {
-//            return YES ;
-//        }
-//        else{
-//            return NO ;
-//        }
-//    } timeout:10 callback:^(EasyPeripheral *peripheral, NSError *error) {
-//        if (!error) {
-//            ToolDetailViewController  *vc = [[ToolDetailViewController alloc]init];
-//            vc.peripheral = peripheral ;
-//            [self.navigationController pushViewController:vc animated:YES];
-//        }
-//        else{
-//            [EFShowView showText:error.description];
-//        }
-//        NSLog(@"%@ == %@",peripheral,error);
-//    }];
-//    [[EasyBlueToothManager shareInstance] connectDeviceWithName:@"NFHY" timeout:10 callback:^(EasyPeripheral *peripheral, NSError *error) {
-//        
-//        if (!error) {
-//            ToolDetailViewController  *vc = [[ToolDetailViewController alloc]init];
-//            vc.peripheral = peripheral ;
-//            [self.navigationController pushViewController:vc animated:YES];
-//        }
-//        else{
-//            [EFShowView showText:error.description];
-//        }
-//        NSLog(@"%@ == %@",peripheral,error);
-//        
-//    }];
-    
+    ExampleDetailViewController  *vc = [[ExampleDetailViewController alloc]init];
+    [self.navigationController pushViewController:vc animated:YES];
+//    [self tableViewDidSelectIndex:indexPath.row];
 }
 
+
+#pragma mark - ble manager
+- (void)tableViewDidSelectIndex:(long)index
+{
+    switch (index) {
+        case 0:
+        {
+            [[EasyBlueToothManager shareInstance] connectDeviceWithName:@"NFHY" timeout:10 callback:^(EasyPeripheral *peripheral, NSError *error) {
+                
+                if (!error) {
+                    ExampleDetailViewController  *vc = [[ExampleDetailViewController alloc]init];
+                    vc.peripheral = peripheral ;
+                    [self.navigationController pushViewController:vc animated:YES];
+                }
+                else{
+                    [EFShowView showText:error.description];
+                }
+                NSLog(@"%@ == %@",peripheral,error);
+                
+            }];
+        }
+            break;
+        case 1:
+        {
+            [[EasyBlueToothManager shareInstance] connectDeviceWithRule:^BOOL(EasyPeripheral *peripheral) {
+                if (![peripheral.name isEqualToString:@"NFHY"]) {
+                    return NO ;
+                }
+                if (peripheral.RSSI.intValue > 100) {
+                    return NO ;
+                }
+                return YES ;
+                
+            } timeout:10 callback:^(EasyPeripheral *peripheral, NSError *error) {
+                if (!error) {
+                    ExampleDetailViewController  *vc = [[ExampleDetailViewController alloc]init];
+                    vc.peripheral = peripheral ;
+                    [self.navigationController pushViewController:vc animated:YES];
+                }
+                else{
+                    [EFShowView showText:error.description];
+                }
+                NSLog(@"%@ == %@",peripheral,error);
+            }];
+        }
+            break;
+        case 3:
+            break ;
+        case 4:
+        {
+            [[EasyBlueToothManager shareInstance] connectAllDeviceWithName:@"NFHY" timeout:10 callback:^(NSArray<EasyPeripheral *> *deviceArray, NSError *error) {
+                
+                if (deviceArray.count > 0) {
+                    ExampleDetailViewController *vc = [[ExampleDetailViewController alloc]init];
+                    vc.deviceArray = deviceArray ;
+                    [self.navigationController pushViewController:vc animated:YES];
+                    
+                    NSLog(@"%@", deviceArray);
+                }
+                else{
+                    [EFShowView showText:error.description];
+                }
+            }];
+        }
+            break ;
+        case 5:
+            break ;
+        default:
+            break;
+    }
+    
+}
 #pragma mark - getter
 
 - (UIView *)tableHeaderView
