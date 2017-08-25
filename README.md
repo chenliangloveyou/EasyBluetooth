@@ -91,3 +91,6 @@
                          timeout:(NSInteger)timeout
                         callback:(blueToothScanAllCallback)callback ;
 
+# 联系作者
+
+email: chenliangloveyou@163.com
