@@ -178,7 +178,6 @@
         animationGroup.animations = @[forwardAnimation,backwardAnimation];
         animationGroup.duration = forwardAnimation.duration + backwardAnimation.duration + 2.0;
         animationGroup.removedOnCompletion = NO;
-        animationGroup.delegate = self;
         animationGroup.fillMode = kCAFillModeForwards;
         
         [showView.layer addAnimation:animationGroup forKey:nil];
@@ -247,6 +246,39 @@
         NSAssert(NO, @"UIAlertController can't support !") ;
     }
     
+}
+
+#pragma mark - hud
+
+MBProgressHUD *hud ;
++ (void)showHUDMsg:(NSString *)msg
+{
+    [EFShowView showHUDInView:[UIApplication sharedApplication].keyWindow msg:msg];
+}
++ (void)showHUDInView:(UIView *)view
+{
+    [EFShowView showHUDInView:view msg:@""];
+}
+
++ (void)showHUDInView:(UIView *)view msg:(NSString *)msg
+{
+    [self HideHud];
+    
+    hud = [MBProgressHUD showHUDAddedTo:view animated:YES];
+   
+    hud.labelText = msg;
+    hud.cornerRadius = 5 ;
+    [hud show:YES];
+    hud.animationType = MBProgressHUDAnimationZoom ;
+    
+}
+
++ (void)HideHud
+{
+    if (hud) {
+        [hud hide:YES afterDelay:0];
+        hud = nil;
+    }
 }
 
 @end

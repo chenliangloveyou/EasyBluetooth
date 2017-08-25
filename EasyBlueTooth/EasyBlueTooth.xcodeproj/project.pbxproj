@@ -11,6 +11,11 @@
 		AD1552251F4C345000DBBBDC /* ExampleModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AD1552241F4C345000DBBBDC /* ExampleModel.m */; };
 		AD1552311F4D7E1B00DBBBDC /* EFShowView.m in Sources */ = {isa = PBXBuildFile; fileRef = AD1552301F4D7E1B00DBBBDC /* EFShowView.m */; };
 		AD1552341F4EB6AC00DBBBDC /* ExampleDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD1552331F4EB6AC00DBBBDC /* ExampleDetailViewController.m */; };
+		AD1552371F4FF3FD00DBBBDC /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = AD1552361F4FF3FD00DBBBDC /* MBProgressHUD.m */; };
+		AD1552481F4FFED900DBBBDC /* preview_1.gif in Resources */ = {isa = PBXBuildFile; fileRef = AD1552441F4FFED900DBBBDC /* preview_1.gif */; };
+		AD1552491F4FFED900DBBBDC /* preview_2.gif in Resources */ = {isa = PBXBuildFile; fileRef = AD1552451F4FFED900DBBBDC /* preview_2.gif */; };
+		AD15524A1F4FFED900DBBBDC /* preview_3.png in Resources */ = {isa = PBXBuildFile; fileRef = AD1552461F4FFED900DBBBDC /* preview_3.png */; };
+		AD15524B1F4FFED900DBBBDC /* preview_4.png in Resources */ = {isa = PBXBuildFile; fileRef = AD1552471F4FFED900DBBBDC /* preview_4.png */; };
 		AD32B2071F4A79D600A1746C /* ExampleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AD32B1EC1F4A79D600A1746C /* ExampleCell.m */; };
 		AD32B2081F4A79D600A1746C /* ExampleCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AD32B1ED1F4A79D600A1746C /* ExampleCell.xib */; };
 		AD32B2091F4A79D600A1746C /* ExampleTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD32B1EF1F4A79D600A1746C /* ExampleTableViewController.m */; };
@@ -71,6 +76,12 @@
 		AD1552301F4D7E1B00DBBBDC /* EFShowView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EFShowView.m; sourceTree = "<group>"; };
 		AD1552321F4EB6AC00DBBBDC /* ExampleDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExampleDetailViewController.h; sourceTree = "<group>"; };
 		AD1552331F4EB6AC00DBBBDC /* ExampleDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExampleDetailViewController.m; sourceTree = "<group>"; };
+		AD1552351F4FF3FD00DBBBDC /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
+		AD1552361F4FF3FD00DBBBDC /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
+		AD1552441F4FFED900DBBBDC /* preview_1.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = preview_1.gif; sourceTree = "<group>"; };
+		AD1552451F4FFED900DBBBDC /* preview_2.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = preview_2.gif; sourceTree = "<group>"; };
+		AD1552461F4FFED900DBBBDC /* preview_3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = preview_3.png; sourceTree = "<group>"; };
+		AD1552471F4FFED900DBBBDC /* preview_4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = preview_4.png; sourceTree = "<group>"; };
 		AD32B1EB1F4A79D600A1746C /* ExampleCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExampleCell.h; sourceTree = "<group>"; };
 		AD32B1EC1F4A79D600A1746C /* ExampleCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExampleCell.m; sourceTree = "<group>"; };
 		AD32B1ED1F4A79D600A1746C /* ExampleCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ExampleCell.xib; sourceTree = "<group>"; };
@@ -166,6 +177,17 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		AD15523B1F4FFE7A00DBBBDC /* preview */ = {
+			isa = PBXGroup;
+			children = (
+				AD1552441F4FFED900DBBBDC /* preview_1.gif */,
+				AD1552451F4FFED900DBBBDC /* preview_2.gif */,
+				AD1552461F4FFED900DBBBDC /* preview_3.png */,
+				AD1552471F4FFED900DBBBDC /* preview_4.png */,
+			);
+			path = preview;
+			sourceTree = "<group>";
+		};
 		AD32B1EA1F4A79D600A1746C /* Example */ = {
 			isa = PBXGroup;
 			children = (
@@ -244,6 +266,7 @@
 				AD7DCABB1E7A5E9F00589BBA /* Assets.xcassets */,
 				AD7DCABD1E7A5E9F00589BBA /* LaunchScreen.storyboard */,
 				AD7DCAC01E7A5E9F00589BBA /* Info.plist */,
+				AD15523B1F4FFE7A00DBBBDC /* preview */,
 				AD7DCAAF1E7A5E9F00589BBA /* Supporting Files */,
 			);
 			path = EasyBlueTooth;
@@ -310,6 +333,8 @@
 			children = (
 				68815CFF1F48A44C00F99E2D /* UIView+Ext.h */,
 				68815D001F48A44C00F99E2D /* UIView+Ext.m */,
+				AD1552351F4FF3FD00DBBBDC /* MBProgressHUD.h */,
+				AD1552361F4FF3FD00DBBBDC /* MBProgressHUD.m */,
 				AD92FA101F42D8D100D8B811 /* EasyUtils.h */,
 				AD92FA111F42D8D100D8B811 /* EasyUtils.m */,
 				AD15522F1F4D7E1B00DBBBDC /* EFShowView.h */,
@@ -425,12 +450,16 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AD1552481F4FFED900DBBBDC /* preview_1.gif in Resources */,
 				AD32B20D1F4A79D600A1746C /* ToolDetailCell.xib in Resources */,
 				AD32B20B1F4A79D600A1746C /* ToolCell.xib in Resources */,
 				AD32B2101F4A79D600A1746C /* ToolDetailHeaderView.xib in Resources */,
+				AD1552491F4FFED900DBBBDC /* preview_2.gif in Resources */,
 				AD32B2081F4A79D600A1746C /* ExampleCell.xib in Resources */,
+				AD15524A1F4FFED900DBBBDC /* preview_3.png in Resources */,
 				AD7DCABF1E7A5E9F00589BBA /* LaunchScreen.storyboard in Resources */,
 				AD7DCABC1E7A5E9F00589BBA /* Assets.xcassets in Resources */,
+				AD15524B1F4FFED900DBBBDC /* preview_4.png in Resources */,
 				AD32B2121F4A79D600A1746C /* ToolDetailOperationCell.xib in Resources */,
 				AD7DCABA1E7A5E9F00589BBA /* Main.storyboard in Resources */,
 			);
@@ -470,6 +499,7 @@
 				AD32B2141F4A79D600A1746C /* ToolDetailViewController.m in Sources */,
 				AD32B20E1F4A79D600A1746C /* ToolDetailHeaderCell.m in Sources */,
 				AD1552341F4EB6AC00DBBBDC /* ExampleDetailViewController.m in Sources */,
+				AD1552371F4FF3FD00DBBBDC /* MBProgressHUD.m in Sources */,
 				AD92FA1A1F42D8D100D8B811 /* EasyUtils.m in Sources */,
 				AD92FA161F42D8D100D8B811 /* EasyDescriptor.m in Sources */,
 				AD1552251F4C345000DBBBDC /* ExampleModel.m in Sources */,

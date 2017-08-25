@@ -9,7 +9,6 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
-#import "SVProgressHUD.h"   
 
 //强弱引用
 #define kWeakSelf(type)__weak typeof(type)weak##type = type;

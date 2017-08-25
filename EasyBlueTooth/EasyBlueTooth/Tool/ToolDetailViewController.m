@@ -14,6 +14,7 @@
 #import "EasyService.h"
 #import "EasyUtils.h"
 #import "EasyDescriptor.h"
+#import "EFShowView.h"
 
 #import "ToolDetailOperationViewController.h"
 
@@ -60,7 +61,8 @@
 
     [self.view addSubview:self.tableView];
 
-    [SVProgressHUD showInfoWithStatus:@"获取服务..."];
+    [EFShowView showHUDMsg:@"获取服务..." ];
+
     kWeakSelf(self)
 
     [self.peripheral discoverAllDeviceServiceWithCallback:^(EasyPeripheral *peripheral, NSArray<EasyService *> *serviceArray, NSError *error) {
@@ -88,7 +90,7 @@
                         }
                         NSLog(@"%@ ==== ",error);
                         queueMainStart
-                        [SVProgressHUD dismiss];
+                        [EFShowView HideHud];
                         [weakself.tableView reloadData ];
                         queueEnd
                     }];

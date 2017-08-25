@@ -105,7 +105,7 @@
 {
     kWeakSelf(self)
     queueMainStart
-    [SVProgressHUD dismiss];
+    [EFShowView HideHud];
     [EFShowView showAlertMessageWithTitle:@"设备失去连接" contentMessage:error.localizedDescription cancelTitle:@"重新连接" cancelCallBack:^{
         //重新连接设备
         [peripheral reconnectDevice];
@@ -117,7 +117,7 @@
 - (void)deviceConnect:(EasyPeripheral *)peripheral error:(NSError *)error
 {
     queueMainStart
-    [SVProgressHUD dismiss];
+    [EFShowView HideHud];
     if (error) {
         [EFShowView showErrorText:error.domain];
     }
@@ -126,6 +126,7 @@
         tooD.peripheral = peripheral ;
         [self.navigationController  pushViewController:tooD animated:YES];
     }
+    
     queueEnd
 }
 
@@ -159,13 +160,12 @@
         [weakself.navigationController  pushViewController:tooD animated:YES];
     }
     else{
-        [SVProgressHUD showInfoWithStatus:@"正在连接设备..."];
+        [EFShowView showHUDMsg:@"正在连接设备..."];
         [peripheral connectDeviceWithDisconnectCallback:^(EasyPeripheral *peripheral, NSError *error) {
             [weakself deviceDisconnect:peripheral error:error];
         } Callback:^(EasyPeripheral *perpheral, NSError *error) {
             [weakself deviceConnect:peripheral error:error];
         }];
-       
     }
 }
 

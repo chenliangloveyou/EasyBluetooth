@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
+#import "MBProgressHUD.h"
+
 typedef NS_ENUM(NSInteger, ShowStatus) {
     
     ShowSuccess, /** 成功 */
@@ -40,6 +42,17 @@ typedef void(^alertMessageCallback)(void);
 + (instancetype)showScoreText:(NSString *)text ;
 
 + (void)showAlertMessageWithTitle:(NSString *)title contentMessage:(NSString *)contentMessage cancelTitle:(NSString *)cancelTitle cancelCallBack:(alertMessageCallback)cancel sureTitle:(NSString *)sureTitle sureCallBack:(alertMessageCallback)sure ;
+
+
+#pragma mark - hud
++ (void)showHUDMsg:(NSString *)msg ;
+
+
++ (void)showHUDInView:(UIView *)view;
+
++ (void)showHUDInView:(UIView *)view msg:(NSString *)msg;
+
++ (void)HideHud;
 
 @end
 
