@@ -17,7 +17,7 @@
 #import "EasyManagerOptions.h"
 
 /**
- * 连接一个设备所经历的状态
+ * 一个设备所经历的状态
  */
 typedef NS_ENUM(NSUInteger , bluetoothState) {
     
@@ -32,9 +32,13 @@ typedef NS_ENUM(NSUInteger , bluetoothState) {
     
 };
 
+/**
+ * 错误的报错类型
+ */
 typedef NS_ENUM(NSUInteger , bluetoothErrorState) {
     
-    bluetoothErrorStateNoReadly = 0 ,//系统蓝牙没有打开
+    bluetoothErrorStateNoReadlyTring = 0 ,//系统蓝牙没有打开。但是在扫描时间内，会等待蓝牙打开后继续扫描
+    bluetoothErrorStateNoReadly = 1 ,//系统蓝牙没有打开。此时不会再自动扫描，只能重新扫描
     bluetoothErrorStateNoDevice ,    //没有找到设备
     bluetoothErrorStateConnectError ,//连接失败
     bluetoothErrorStateDisconnect ,  //设备失去连接
@@ -44,6 +48,11 @@ typedef NS_ENUM(NSUInteger , bluetoothErrorState) {
     bluetoothErrorStateNotifyError ,//监听通知失败
 };
 
+
+/**
+ * 连接设备的时候蓝牙状态发生改变
+ */
+typedef void (^blueToothStateChanged)(EasyPeripheral *peripheral , bluetoothState state) ;
 
 /**
  * 模糊搜索设备规则
@@ -58,7 +67,6 @@ typedef BOOL (^blueToothScanRule)(EasyPeripheral *peripheral);
  */
 typedef void (^blueToothScanCallback)(EasyPeripheral *peripheral , NSError *error );
 
-
 /**
  * 搜索到设备回调
  * deviceArray 里面是所有符合规则的设备。(需要处理peripheral里面的error信息)
@@ -66,19 +74,27 @@ typedef void (^blueToothScanCallback)(EasyPeripheral *peripheral , NSError *erro
  */
 typedef void (^blueToothScanAllCallback)(NSArray<EasyPeripheral *> *deviceArray , NSError *error );
 
-
 /**
  * 读写操作回调
  */
 typedef void (^blueToothOperationCallback)(NSData *data , NSError *error);
 
-@interface EasyBlueToothManager : NSObject
 
+
+@interface EasyBlueToothManager : NSObject
 
 /**
  * 这个参数里面全都是放置的初始条件
  */
 @property (nonatomic,strong)EasyManagerOptions *managerOptions ;
+
+/**
+ * 蓝牙状态改变处理。<只需处理一种>
+ * 方法一：外部可以KVO监听bluetoothState值的改变。
+ * 方法二：bluetoothStateChanged 实现这个block回到
+ */
+@property (nonatomic,assign)bluetoothState bluetoothState ;
+@property (nonatomic,strong)blueToothStateChanged bluetoothStateChanged ;
 
 /**
  * 单例
@@ -91,75 +107,47 @@ typedef void (^blueToothOperationCallback)(NSData *data , NSError *error);
 /**
  * 连接一个已知名字的设备
  * name 设备名称
- * timeout 扫描设备 连接设备所使用的最长时间。
  * callback 连接设备的回调信息
  */
 - (void)connectDeviceWithName:(NSString *)name
-                      timeout:(NSInteger)timeout
                      callback:(blueToothScanCallback)callback ;
 
 /**
  * 连接一个一定规则的设备，依据peripheral里面的名称，广播数据，RSSI来赛选需要的连接的设备
  * name 设备名称
- * timeout 扫描设备 连接设备所使用的最长时间。
  * callback 连接设备的回调信息
  */
 - (void)connectDeviceWithRule:(blueToothScanRule)rule
-                      timeout:(NSInteger)timeout
                      callback:(blueToothScanCallback)callback ;
 
 
 /**
  * 连接一个确定ID的设备，一般此ID可以保存在本地。然后直接连接
  * name 设备名称
- * timeout 扫描设备 连接设备所使用的最长时间。
  * callback 连接设备的回调信息
  */
 - (void)connectDeviceWithIdentifier:(NSString *)identifier
-                            timeout:(NSInteger)timeout
                            callback:(blueToothScanCallback)callback ;
 
 
 - (void)connectDeviceWithIdentifier:(NSString *)identifier
-                            timeout:(NSInteger)timeout
-                        connectOptions:(NSDictionary *)options
+                     connectOptions:(NSDictionary *)options
                            callback:(blueToothScanCallback)callback ;
-/**
- * 一行代码连接所有的设备
- * name         一直设别的名称
- * timeout      连接超时时间
- * serviceuuid  服务id
- * notifyuuid   监听端口的id
- * writeuuid    写数据的id
- * data         需要发送给设备的数据
- * callback     回调信息
- */
-- (void)connectDeviceWithName:(NSString *)name
-                      timeout:(NSInteger)timeout
-                  serviceUUID:(NSString *)serviceUUID
-                   notifyUUID:(NSString *)notifyUUID
-                    wirteUUID:(NSString *)writeUUID
-                    writeData:(NSData *)data
-                     callback:(blueToothScanCallback)callback;
 
 /**
  * 连接已知名称的所有设备（返回的是一组此名称的设备全部连接成功）
  * name 设备名称
- * timeout 扫描设备 连接设备所使用的最长时间。
  * callback 连接设备的回调信息
  */
 - (void)connectAllDeviceWithName:(NSString *)name
-                         timeout:(NSInteger)timeout
                         callback:(blueToothScanAllCallback)callback ;
 
 /**
  * 连接已知规则的全部设备（返回的是一组此名称的设备全部连接成功）
  * name 设备名称
- * timeout 扫描设备 连接设备所使用的最长时间。
  * callback 连接设备的回调信息
  */
 - (void)connectAllDeviceWithRule:(blueToothScanRule)rule
-                         timeout:(NSInteger)timeout
                         callback:(blueToothScanAllCallback)callback ;
 
 
@@ -183,7 +171,7 @@ typedef void (^blueToothOperationCallback)(NSData *data , NSError *error);
  * writeCallback 读取数据后的回调
  */
 - (void)readValueWithPeripheral:(EasyPeripheral *)peripheral
-                        readUUID:(NSString *)uuid
+                       readUUID:(NSString *)uuid
                        callback:(blueToothOperationCallback)callback ;
 
 /**
@@ -223,7 +211,7 @@ typedef void (^blueToothOperationCallback)(NSData *data , NSError *error);
 
 /*
  * peripheral 需要断开的设备
-// */
+ // */
 //- (void)disconnectWithPeripheral:(EasyPeripheral *)peripheral ;
 //
 ///*
@@ -253,6 +241,22 @@ typedef void (^blueToothOperationCallback)(NSData *data , NSError *error);
 //                    writeData:(NSData *)data
 //          stateChangeCallback:(blueToothStateChangeCallback *)stateChangeCallback
 //         receivedDataCallback:(blueToothOperationCallBack *)receivedDataCallback ;
+
+/**
+ * 一行代码连接所有的设备
+ * name         一直设别的名称
+ * serviceuuid  服务id
+ * notifyuuid   监听端口的id
+ * writeuuid    写数据的id
+ * data         需要发送给设备的数据
+ * callback     回调信息
+ */
+- (void)connectDeviceWithName:(NSString *)name
+                  serviceUUID:(NSString *)serviceUUID
+                   notifyUUID:(NSString *)notifyUUID
+                    wirteUUID:(NSString *)writeUUID
+                    writeData:(NSData *)data
+                     callback:(blueToothScanCallback)callback;
 @end
 
 
