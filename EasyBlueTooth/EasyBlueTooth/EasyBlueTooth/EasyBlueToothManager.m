@@ -415,6 +415,7 @@
 {
 
 }
+
 #pragma mark - rssi
 
 - (void)readRSSIWithPeripheral:(EasyPeripheral *)peripheral
@@ -424,35 +425,8 @@
         callback(peripheral,RSSI,error);
     }];
 }
-#pragma mark - 断开连接
 
 
-///**
-// * peripheral 写数据的设备
-// * data  需要写入的数据
-// * descroptor 需要往描述下写入数据
-// * writeCallback 读取数据后的回调
-// */
-//- (void)writeDescroptorWithPeripheral:(EasyPeripheral *)peripheral
-//                                 data:(NSData *)data
-//                           descroptor:(EasyDescriptor *)descroptor
-//                             callback:(blueToothOperationCallBack)writeCallback
-//{
-//
-//}
-//
-///**
-// * peripheral 需要读取描述的设备
-// * descroptor 需要往描述下写入数据
-// * writeCallback 读取数据后的回调
-// */
-//- (void)readDescroptorWithPeripheral:(EasyPeripheral *)peripheral
-//                          descroptor:(EasyDescriptor *)descroptor
-//                            callback:(blueToothOperationCallBack)writeCallback
-//{
-//
-//}
-//
 #pragma mark - 扫描 断开操作
 
 
@@ -494,23 +468,30 @@
     [self.centerManager disConnectAllDevice];
 }
 
+#pragma mark - 简便方法
 
+- (void)connectDeviceWithName:(NSString *)name
+                  serviceUUID:(NSString *)serviceUUID
+                   notifyUUID:(NSString *)notifyUUID
+                    wirteUUID:(NSString *)writeUUID
+                    writeData:(NSData *)data
+                     callback:(blueToothOperationCallback)callback
+{
+    kWeakSelf(self)
+    [self scanAndConnectDeviceWithName:name callback:^(EasyPeripheral *peripheral, NSError *error) {
+       
+        [weakself notifyDataWithPeripheral:peripheral serviceUUID:serviceUUID notifyUUID:notifyUUID notifyValue:YES withCallback:^(NSData *data, NSError *error) {
+            callback(data , error);
+        }];
+        
+        QueueStartAfterTime(0.5)
+        [weakself writeDataWithPeripheral:peripheral serviceUUID:serviceUUID writeUUID:writeUUID data:data callback:^(NSData *data, NSError *error) {
+            callback(data , error);
+        }] ;
+        queueEnd
+    }];
+}
 
-//- (void)connectWithDeviceName:(NSString *)deviceName
-//                 scanInterval:(NSTimeInterval)timeInterval
-//                  serviceUUID:(NSString *)serviceUUID
-//                    writeUUID:(NSString *)writeUUID
-//                   notifyUUID:(NSString *)notifyUUID writeData:(NSData *)data
-//          stateChangeCallback:(__autoreleasing blueToothStateChangeCallback *)stateChangeCallback
-//         receivedDataCallback:(__autoreleasing blueToothOperationCallBack *)receivedDataCallback
-//{
-//    
-//}
-//
-//- (void)centralManagerDidUpdateState:(CBCentralManager *)central
-//{
-//
-//}
 
 @end
 

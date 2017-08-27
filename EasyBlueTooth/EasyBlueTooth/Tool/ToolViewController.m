@@ -45,7 +45,7 @@
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([ToolCell class]) bundle:nil] forCellReuseIdentifier:NSStringFromClass([ToolCell class])];
     
     kWeakSelf(self)
-    [self.centerManager scanDeviceWithTimeInterval:LONG_MAX services:@[]  options:@{ CBCentralManagerScanOptionAllowDuplicatesKey: @YES }  callBack:^(EasyPeripheral *peripheral, BOOL isfinish) {
+    [self.centerManager scanDeviceWithTimeInterval:NSIntegerMax services:@[]  options:@{ CBCentralManagerScanOptionAllowDuplicatesKey: @YES }  callBack:^(EasyPeripheral *peripheral, BOOL isfinish) {
         if (peripheral) {
             [weakself managerScanedDevice:peripheral];
         }

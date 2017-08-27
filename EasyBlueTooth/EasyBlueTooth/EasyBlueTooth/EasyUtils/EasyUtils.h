@@ -44,29 +44,6 @@
 
 @interface EasyUtils : NSObject
 
-+ (UIViewController *)topViewController ;
-
-/**
- * Convert data to byte
- * @param data data to convert
- * @return 8-bit integer
- */
-+ (int8_t)dataToByte:(NSData *)data;
-
-/**
- * Convert data to 16-bit integer
- * @param data data to convert
- * @return 16-bit integer
- 
- */
-+ (int16_t)dataToInt16:(NSData *)data;
-
-/**
- * Convert data to 32-bit integer
- * @param data data to convert
- * @return 32-bit integer
- */
-+ (int32_t)dataToInt32:(NSData *)data;
 
  //将16进制的字符串转换成NSData
 + (NSMutableData *)convertHexStrToData:(NSString *)str ;
@@ -81,5 +58,8 @@
 +(int)ConvertDataToInt:(NSData *)data;
 //十六进制转换为普通字符串的。
 + (NSData *)ConvertHexStringToData:(NSString *)hexString;
+
+//最上方的控制器
++ (UIViewController *)topViewController ;
 
 @end

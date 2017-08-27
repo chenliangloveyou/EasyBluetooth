@@ -48,10 +48,12 @@
  * 扫描所需时间。默认为永久
  */
 @property (nonatomic,assign)NSUInteger scanTimeOut ;
+
 /*
  * 连接设备最大时长 默认为5秒
  */
 @property (nonatomic,assign)NSUInteger connectTimeOut ;
+
 
 - (instancetype)initWithManagerQueue:(dispatch_queue_t)queue managerDictionary:(NSDictionary *)managerDictionary ;
 

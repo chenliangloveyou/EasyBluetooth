@@ -283,22 +283,6 @@ typedef void (^blueToothOperationCallback)(NSData *data , NSError *error);
 
 
 #pragma mark - 简便方法
-/*
- *
- *
- *
- *
- *
- */
-//- (void)connectWithDeviceName:(NSString *)deviceName
-//                 scanInterval:(NSTimeInterval)timeInterval
-//                  serviceUUID:(NSString *)serviceUUID
-//                    writeUUID:(NSString *)writeUUID
-//                   notifyUUID:(NSString *)notifyUUID
-//                    writeData:(NSData *)data
-//          stateChangeCallback:(blueToothStateChangeCallback *)stateChangeCallback
-//         receivedDataCallback:(blueToothOperationCallBack *)receivedDataCallback ;
-
 /**
  * 一行代码连接所有的设备
  * name         一直设别的名称
@@ -313,7 +297,7 @@ typedef void (^blueToothOperationCallback)(NSData *data , NSError *error);
                    notifyUUID:(NSString *)notifyUUID
                     wirteUUID:(NSString *)writeUUID
                     writeData:(NSData *)data
-                     callback:(blueToothScanCallback)callback;
+                     callback:(blueToothOperationCallback)callback;
 @end
 
 

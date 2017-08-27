@@ -10,48 +10,6 @@
 
 @implementation EasyUtils
 
-+ (UIViewController*)topViewController {
-    return (UIViewController*)[EasyUtils topViewControllerWithRootViewController:[UIApplication sharedApplication].keyWindow.rootViewController];
-}
-+ (UIViewController*)topViewControllerWithRootViewController:(UIViewController*)rootViewController {
-    if ([rootViewController isKindOfClass:[UITabBarController class]]) {
-        UITabBarController* tabBarController = (UITabBarController*)rootViewController;
-        return [self topViewControllerWithRootViewController:tabBarController.selectedViewController];
-    } else if ([rootViewController isKindOfClass:[UINavigationController class]]) {
-        UINavigationController* nav = (UINavigationController*)rootViewController;
-        return [self topViewControllerWithRootViewController:nav.visibleViewController];
-    } else if (rootViewController.presentedViewController) {
-        UIViewController* presentedViewController = rootViewController.presentedViewController;
-        return [self topViewControllerWithRootViewController:presentedViewController];
-    } else {
-        return rootViewController;
-    }
-}
-
-+ (int8_t)dataToByte:(NSData *)data {
-    char val[data.length];
-    [data getBytes:&val length:data.length];
-    int8_t result = val[0];
-    return result;
-}
-
-+ (int16_t)dataToInt16:(NSData *)data {
-    char val[data.length];
-    [data getBytes:&val length:data.length];
-    int16_t result = (val[0] & 0x00FF) | (val[1] << 8 & 0xFF00);
-    return result;
-}
-
-+ (int32_t)dataToInt32:(NSData *)data {
-    char val[data.length];
-    [data getBytes:&val length:data.length];
-    int32_t result = ((val[0] & 0x00FF) |
-                      (val[1] << 8 & 0xFF00) |
-                      (val[2] << 16 & 0xFF0000) |
-                      (val[3] << 24 & 0xFF000000));
-    
-    return result;
-}
 
 //将16进制的字符串转换成NSData
 + (NSData *)convertHexStrToData:(NSString *)str
@@ -257,5 +215,23 @@
     return data;
 }
 
+
++ (UIViewController*)topViewController {
+    return (UIViewController*)[EasyUtils topViewControllerWithRootViewController:[UIApplication sharedApplication].keyWindow.rootViewController];
+}
++ (UIViewController*)topViewControllerWithRootViewController:(UIViewController*)rootViewController {
+    if ([rootViewController isKindOfClass:[UITabBarController class]]) {
+        UITabBarController* tabBarController = (UITabBarController*)rootViewController;
+        return [self topViewControllerWithRootViewController:tabBarController.selectedViewController];
+    } else if ([rootViewController isKindOfClass:[UINavigationController class]]) {
+        UINavigationController* nav = (UINavigationController*)rootViewController;
+        return [self topViewControllerWithRootViewController:nav.visibleViewController];
+    } else if (rootViewController.presentedViewController) {
+        UIViewController* presentedViewController = rootViewController.presentedViewController;
+        return [self topViewControllerWithRootViewController:presentedViewController];
+    } else {
+        return rootViewController;
+    }
+}
 
 @end
