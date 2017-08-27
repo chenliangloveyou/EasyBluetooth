@@ -241,8 +241,34 @@
     NSAssert(callback, @"you should deal the callback");
     
     _blueToothFindServiceCallback = [callback copy];
-    EasyLog(@"discoverDeviceServiceWithUUIDArray");
-    [self.peripheral discoverServices:uuidArray];
+
+    BOOL isAllUUIDExited = YES ;//需要查找的UUID是否都存在
+    for (CBUUID *tempUUID in uuidArray) {
+        
+        BOOL isExitedUUID = NO ;//数组里单个需要查找到UUID是否存在
+        for (EasyService *tempSerevice in self.serviceArray) {
+            if ([tempSerevice.UUID isEqual:tempUUID]) {
+                isExitedUUID = YES ;
+                break ;
+            }
+        }
+        if (!isExitedUUID) {
+            isAllUUIDExited = NO ;
+            break ;
+        }
+    }
+   
+    if (isAllUUIDExited) {
+        if (_blueToothFindServiceCallback) {
+            _blueToothFindServiceCallback(self , self.serviceArray , nil );
+            _blueToothFindServiceCallback = nil ;
+        }
+    }
+    else{
+        
+        EasyLog(@"discoverDeviceServiceWithUUIDArray");
+        [self.peripheral discoverServices:uuidArray];
+    }
 }
 
 - (EasyService *)searchServiceWithService:(CBService *)service
@@ -309,6 +335,7 @@
     
     if (_blueToothFindServiceCallback) {
         _blueToothFindServiceCallback(self , self.serviceArray , error );
+        _blueToothFindServiceCallback = nil ;
     }
     
 }

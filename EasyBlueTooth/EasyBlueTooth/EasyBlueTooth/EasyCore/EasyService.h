@@ -80,7 +80,7 @@ typedef void (^blueToothFindCharacteristicCallback)(NSArray<EasyCharacteristic *
    */
 - (void)discoverCharacteristicWithCallback:(blueToothFindCharacteristicCallback)callback ;
 
-- (void)discoverCharacteristicWithCharacteristicUUIDs:(NSArray<CBUUID *> *)uuids
+- (void)discoverCharacteristicWithCharacteristicUUIDs:(NSArray<CBUUID *> *)uuidArray
                                              callback:(blueToothFindCharacteristicCallback)callback ;
 
 /**

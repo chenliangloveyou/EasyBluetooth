@@ -21,7 +21,8 @@
  */
 typedef NS_ENUM(NSUInteger , bluetoothState) {
     
-    bluetoothStateReadly = 0,     //蓝牙准备就绪
+    bluetoothStateOpenTring = 0 ,//系统蓝牙正在打开
+    bluetoothStateReadly = 1,    //蓝牙准备就绪
     bluetoothStateScanDevice ,  //扫描设备
     bluetoothStateConnect ,     //连接设备
     bluetoothStateService ,     //获取服务
@@ -102,54 +103,88 @@ typedef void (^blueToothOperationCallback)(NSData *data , NSError *error);
 + (instancetype)shareInstance ;
 
 
-#pragma mark - 扫描并连接设备
+#pragma mark - 扫描设备
+
+/**
+ * 根据给定名称扫描单个设备
+ */
+- (void)scanDeviceWithName:(NSString *)name
+                  callback:(blueToothScanCallback)callback ;
+
+/**
+ * 根据给定规则扫描单个设备
+ */
+- (void)scanDeviceWithRule:(blueToothScanRule)rule
+                  callback:(blueToothScanCallback)callback ;
+
+/**
+ * 根据给定名称扫描符合名称的所有设备
+ */
+- (void)scanAllDeviceWithName:(NSString *)name
+                     callback:(blueToothScanAllCallback)callback ;
+
+/**
+ * 根据规则扫描符合名称的所有设备
+ */
+- (void)scanAllDeviceWithRule:(blueToothScanRule)rule
+                     callback:(blueToothScanAllCallback)callback ;
+
+
+#pragma mark - 连接设备
+
+/**
+ * 根据设备的唯一ID 连接设备 <此种方法适合把设备的ID保存到本地的情况>
+ */
+- (void)connectDeviceWithIdentifier:(NSString *)identifier
+                           callback:(blueToothScanCallback)callback ;
+
+/**
+ * 根据给定的设备直接连接
+ */
+- (void)connectDeviceWithPeripheral:(EasyPeripheral *)peripheral
+                           callback:(blueToothScanCallback)callback ;
+
+#pragma mark - 扫描设备 后 直接连接 设备 （上面两步操作同时完成）
 
 /**
  * 连接一个已知名字的设备
  * name 设备名称
  * callback 连接设备的回调信息
  */
-- (void)connectDeviceWithName:(NSString *)name
-                     callback:(blueToothScanCallback)callback ;
+- (void)scanAndConnectDeviceWithName:(NSString *)name
+                            callback:(blueToothScanCallback)callback ;
 
 /**
  * 连接一个一定规则的设备，依据peripheral里面的名称，广播数据，RSSI来赛选需要的连接的设备
  * name 设备名称
  * callback 连接设备的回调信息
  */
-- (void)connectDeviceWithRule:(blueToothScanRule)rule
-                     callback:(blueToothScanCallback)callback ;
-
+- (void)scanAndConnectDeviceWithRule:(blueToothScanRule)rule
+                            callback:(blueToothScanCallback)callback ;
 
 /**
  * 连接一个确定ID的设备，一般此ID可以保存在本地。然后直接连接
  * name 设备名称
  * callback 连接设备的回调信息
  */
-- (void)connectDeviceWithIdentifier:(NSString *)identifier
-                           callback:(blueToothScanCallback)callback ;
-
-
-- (void)connectDeviceWithIdentifier:(NSString *)identifier
-                     connectOptions:(NSDictionary *)options
-                           callback:(blueToothScanCallback)callback ;
+- (void)scanAndConnectDeviceWithIdentifier:(NSString *)identifier
+                                  callback:(blueToothScanCallback)callback ;
 
 /**
  * 连接已知名称的所有设备（返回的是一组此名称的设备全部连接成功）
  * name 设备名称
  * callback 连接设备的回调信息
  */
-- (void)connectAllDeviceWithName:(NSString *)name
-                        callback:(blueToothScanAllCallback)callback ;
+- (void)scanAndConnectAllDeviceWithName:(NSString *)name
+                               callback:(blueToothScanAllCallback)callback ;
 
 /**
  * 连接已知规则的全部设备（返回的是一组此名称的设备全部连接成功）
  * name 设备名称
  * callback 连接设备的回调信息
  */
-- (void)connectAllDeviceWithRule:(blueToothScanRule)rule
-                        callback:(blueToothScanAllCallback)callback ;
-
+- (void)scanAndConnectAllDeviceWithRule:(blueToothScanRule)rule
+                               callback:(blueToothScanAllCallback)callback ;
 
 
 #pragma mark - 读写操作
@@ -161,8 +196,9 @@ typedef void (^blueToothOperationCallback)(NSData *data , NSError *error);
  * writeCallback 写入数据后的回调
  */
 - (void)writeDataWithPeripheral:(EasyPeripheral *)peripheral
+                    serviceUUID:(NSString *)serviceUUID
+                      writeUUID:(NSString *)writeUUID
                            data:(NSData *)data
-                      writeUUID:(NSString *)uuid
                        callback:(blueToothOperationCallback)callback ;
 
 /**
@@ -171,6 +207,7 @@ typedef void (^blueToothOperationCallback)(NSData *data , NSError *error);
  * writeCallback 读取数据后的回调
  */
 - (void)readValueWithPeripheral:(EasyPeripheral *)peripheral
+                    serviceUUID:(NSString *)serviceUUID
                        readUUID:(NSString *)uuid
                        callback:(blueToothOperationCallback)callback ;
 
@@ -184,8 +221,12 @@ typedef void (^blueToothOperationCallback)(NSData *data , NSError *error);
  * writeCallback 读取数据后的回调
  */
 - (void)notifyDataWithPeripheral:(EasyPeripheral *)peripheral
-                      notifyUUID:(NSString *)uuid
+                     serviceUUID:(NSString *)serviceUUID
+                      notifyUUID:(NSString *)notifyUUID
+                     notifyValue:(BOOL)notifyValue
                     withCallback:(blueToothOperationCallback )callback ;
+
+
 
 /**
  * peripheral 写数据的设备

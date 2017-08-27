@@ -64,14 +64,39 @@
                                                callback:callback];
 }
 
-- (void)discoverCharacteristicWithCharacteristicUUIDs:(NSArray<CBUUID *> *)uuids
+- (void)discoverCharacteristicWithCharacteristicUUIDs:(NSArray<CBUUID *> *)uuidArray
                                              callback:(blueToothFindCharacteristicCallback)callback
 {
     NSAssert(callback, @"you should deal the callback");
     
     _blueToothFindCharacteristicCallback = [callback copy];
     
-    [self.peripheral.peripheral discoverCharacteristics:uuids forService:self.service];
+    
+    BOOL isAllUUIDExited = YES ;//需要查找的UUID是否都存在
+    for (CBUUID *tempUUID in uuidArray) {
+        
+        BOOL isExitedUUID = NO ;//数组里单个需要查找到UUID是否存在
+        for (EasyCharacteristic *tempCharacter in self.characteristicArray) {
+            if ([tempCharacter.UUID isEqual:tempUUID]) {
+                isExitedUUID = YES ;
+                break ;
+            }
+        }
+        if (!isExitedUUID) {
+            isAllUUIDExited = NO ;
+            break ;
+        }
+    }
+    
+    if (isAllUUIDExited) {
+        if (_blueToothFindCharacteristicCallback) {
+            _blueToothFindCharacteristicCallback(self.characteristicArray , nil );
+            _blueToothFindCharacteristicCallback = nil ;
+        }
+    }
+    else{
+        [self.peripheral.peripheral discoverCharacteristics:uuidArray forService:self.service];
+    }
 }
 
 - (void)dealDiscoverCharacteristic:(NSArray *)characteristics error:(NSError *)error

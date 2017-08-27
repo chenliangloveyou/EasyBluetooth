@@ -31,6 +31,11 @@
 #define EasyLog(...)
 #endif
 
+
+// 是否为空
+#define ISEMPTY(_v) (_v == nil || _v.length == 0)
+
+
 //屏幕宽度
 #define  SCREEN_WIDTH [[UIScreen mainScreen] bounds].size.width
 //屏幕高度
