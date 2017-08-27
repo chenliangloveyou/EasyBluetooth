@@ -235,8 +235,9 @@ typedef void (^blueToothOperationCallback)(NSData *data , NSError *error);
  * writeCallback 读取数据后的回调
  */
 - (void)writeDescroptorWithPeripheral:(EasyPeripheral *)peripheral
+                          serviceUUID:(NSString *)serviceUUID
+                            writeUUID:(NSString *)writeUUID
                                  data:(NSData *)data
-                           descroptor:(EasyDescriptor *)descroptor
                              callback:(blueToothOperationCallback)writeCallback ;
 
 /**
@@ -245,25 +246,40 @@ typedef void (^blueToothOperationCallback)(NSData *data , NSError *error);
  * writeCallback 读取数据后的回调
  */
 - (void)readDescroptorWithPeripheral:(EasyPeripheral *)peripheral
-                          descroptor:(EasyDescriptor *)descroptor
+                         serviceUUID:(NSString *)serviceUUID
+                            readUUID:(NSString *)readUUID
                             callback:(blueToothOperationCallback)writeCallback ;
 
-#pragma mark - 断开操作
 
+#pragma mark - rssi 
+
+- (void)readRSSIWithPeripheral:(EasyPeripheral *)peripheral
+                      callback:(blueToothReadRSSICallback)callback ;
+
+#pragma mark - 扫描 断开操作
+
+/**
+ * 开始扫描
+ */
+- (void)startScanDevice ;
+/**
+ * 停止扫描
+ */
+- (void)stopScanDevice ;
 /*
  * peripheral 需要断开的设备
- // */
-//- (void)disconnectWithPeripheral:(EasyPeripheral *)peripheral ;
-//
-///*
-// * identifier 需要断开的设备UUID
-// */
-//- (void)disconnectWithIdentifier:(NSUUID *)identifier ;
-//
-///*
-// * 断开所有连接的设备
-// */
-//- (void)disconnectAllPeripheral ;
+  */
+- (void)disconnectWithPeripheral:(EasyPeripheral *)peripheral ;
+
+/*
+ * identifier 需要断开的设备UUID
+ */
+- (void)disconnectWithIdentifier:(NSUUID *)identifier ;
+
+/*
+ * 断开所有连接的设备
+ */
+- (void)disconnectAllPeripheral ;
 
 
 #pragma mark - 简便方法

@@ -388,18 +388,43 @@
     return [searchCharacteristic copy] ;
 }
 
+/**
+ * peripheral 写数据的设备
+ * data  需要写入的数据
+ * descroptor 需要往描述下写入数据
+ * writeCallback 读取数据后的回调
+ */
+- (void)writeDescroptorWithPeripheral:(EasyPeripheral *)peripheral
+                          serviceUUID:(NSString *)serviceUUID
+                            writeUUID:(NSString *)writeUUID
+                                 data:(NSData *)data
+                             callback:(blueToothOperationCallback)writeCallback
+{
+    EasyCharacteristic *tempCharacter = [self searchCharacteristicWithPeripheral:peripheral serviceUUID:serviceUUID operationUUID:nil];
+}
 
+/**
+ * peripheral 需要读取描述的设备
+ * descroptor 需要往描述下写入数据
+ * writeCallback 读取数据后的回调
+ */
+- (void)readDescroptorWithPeripheral:(EasyPeripheral *)peripheral
+                         serviceUUID:(NSString *)serviceUUID
+                            readUUID:(NSString *)readUUID
+                            callback:(blueToothOperationCallback)writeCallback
+{
+
+}
+#pragma mark - rssi
+
+- (void)readRSSIWithPeripheral:(EasyPeripheral *)peripheral
+                      callback:(blueToothReadRSSICallback)callback
+{
+    [peripheral readDeviceRSSIWithCallback:^(EasyPeripheral *peripheral, NSNumber *RSSI, NSError *error) {
+        callback(peripheral,RSSI,error);
+    }];
+}
 #pragma mark - 断开连接
-
-- (void)startScanDevice
-{
-    [self.centerManager startScanDevice];
-}
-
-- (void)stopScanDevice
-{
-    [self.centerManager stopScanDevice];
-}
 
 
 ///**
@@ -428,34 +453,49 @@
 //
 //}
 //
-//#pragma mark - 断开操作
-//
-///*
-// * peripheral 需要断开的设备
-// */
-//- (void)disconnectWithPeripheral:(EasyPeripheral *)peripheral
-//{
-//
-//}
-//
-///*
-// * identifier 需要断开的设备UUID
-// */
-//- (void)disconnectWithIdentifier:(NSUUID *)identifier
-//{
-//
-//}
-//
-///*
-// * 断开所有连接的设备
-// */
-//- (void)disconnectAllPeripheral
-//{
-//
-//}
-//
-//
-//
+#pragma mark - 扫描 断开操作
+
+
+- (void)startScanDevice
+{
+    [self.centerManager startScanDevice];
+}
+
+- (void)stopScanDevice
+{
+    [self.centerManager stopScanDevice];
+}
+
+/*
+ * peripheral 需要断开的设备
+ */
+- (void)disconnectWithPeripheral:(EasyPeripheral *)peripheral
+{
+    [peripheral disconnectDevice];
+}
+
+/*
+ * identifier 需要断开的设备UUID
+ */
+- (void)disconnectWithIdentifier:(NSUUID *)identifier
+{
+    EasyPeripheral *tempPeripheral = self.centerManager.connectedDeviceDict[identifier];
+    
+    if (tempPeripheral) {
+        [tempPeripheral disconnectDevice];
+    }
+}
+
+/*
+ * 断开所有连接的设备
+ */
+- (void)disconnectAllPeripheral
+{
+    [self.centerManager disConnectAllDevice];
+}
+
+
+
 //- (void)connectWithDeviceName:(NSString *)deviceName
 //                 scanInterval:(NSTimeInterval)timeInterval
 //                  serviceUUID:(NSString *)serviceUUID
