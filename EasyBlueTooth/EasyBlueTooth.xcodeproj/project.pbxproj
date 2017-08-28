@@ -20,6 +20,7 @@
 		AD1552541F5410F600DBBBDC /* ExampleOneLineCodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD1552531F5410F600DBBBDC /* ExampleOneLineCodeViewController.m */; };
 		AD1552571F5411FA00DBBBDC /* ExampleScanNameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD1552561F5411FA00DBBBDC /* ExampleScanNameViewController.m */; };
 		AD15525A1F5413A800DBBBDC /* ExampleScanRuleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD1552591F5413A800DBBBDC /* ExampleScanRuleViewController.m */; };
+		AD15525D1F541E2500DBBBDC /* BindingDeviceView.m in Sources */ = {isa = PBXBuildFile; fileRef = AD15525C1F541E2500DBBBDC /* BindingDeviceView.m */; };
 		AD32B2071F4A79D600A1746C /* ExampleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AD32B1EC1F4A79D600A1746C /* ExampleCell.m */; };
 		AD32B2081F4A79D600A1746C /* ExampleCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AD32B1ED1F4A79D600A1746C /* ExampleCell.xib */; };
 		AD32B2091F4A79D600A1746C /* ExampleTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD32B1EF1F4A79D600A1746C /* ExampleTableViewController.m */; };
@@ -94,6 +95,8 @@
 		AD1552561F5411FA00DBBBDC /* ExampleScanNameViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExampleScanNameViewController.m; sourceTree = "<group>"; };
 		AD1552581F5413A800DBBBDC /* ExampleScanRuleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExampleScanRuleViewController.h; sourceTree = "<group>"; };
 		AD1552591F5413A800DBBBDC /* ExampleScanRuleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExampleScanRuleViewController.m; sourceTree = "<group>"; };
+		AD15525B1F541E2500DBBBDC /* BindingDeviceView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BindingDeviceView.h; sourceTree = "<group>"; };
+		AD15525C1F541E2500DBBBDC /* BindingDeviceView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BindingDeviceView.m; sourceTree = "<group>"; };
 		AD32B1EB1F4A79D600A1746C /* ExampleCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExampleCell.h; sourceTree = "<group>"; };
 		AD32B1EC1F4A79D600A1746C /* ExampleCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExampleCell.m; sourceTree = "<group>"; };
 		AD32B1ED1F4A79D600A1746C /* ExampleCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ExampleCell.xib; sourceTree = "<group>"; };
@@ -209,14 +212,16 @@
 				AD32B1EB1F4A79D600A1746C /* ExampleCell.h */,
 				AD32B1EC1F4A79D600A1746C /* ExampleCell.m */,
 				AD32B1ED1F4A79D600A1746C /* ExampleCell.xib */,
-				AD15524F1F5410DF00DBBBDC /* ExampleSavedViewController.h */,
-				AD1552501F5410DF00DBBBDC /* ExampleSavedViewController.m */,
-				AD1552521F5410F600DBBBDC /* ExampleOneLineCodeViewController.h */,
-				AD1552531F5410F600DBBBDC /* ExampleOneLineCodeViewController.m */,
 				AD1552551F5411FA00DBBBDC /* ExampleScanNameViewController.h */,
 				AD1552561F5411FA00DBBBDC /* ExampleScanNameViewController.m */,
 				AD1552581F5413A800DBBBDC /* ExampleScanRuleViewController.h */,
 				AD1552591F5413A800DBBBDC /* ExampleScanRuleViewController.m */,
+				AD15524F1F5410DF00DBBBDC /* ExampleSavedViewController.h */,
+				AD1552501F5410DF00DBBBDC /* ExampleSavedViewController.m */,
+				AD15525B1F541E2500DBBBDC /* BindingDeviceView.h */,
+				AD15525C1F541E2500DBBBDC /* BindingDeviceView.m */,
+				AD1552521F5410F600DBBBDC /* ExampleOneLineCodeViewController.h */,
+				AD1552531F5410F600DBBBDC /* ExampleOneLineCodeViewController.m */,
 			);
 			path = Example;
 			sourceTree = "<group>";
@@ -526,6 +531,7 @@
 				AD92FA161F42D8D100D8B811 /* EasyDescriptor.m in Sources */,
 				AD15524E1F501D2200DBBBDC /* EasyManagerOptions.m in Sources */,
 				AD1552251F4C345000DBBBDC /* ExampleModel.m in Sources */,
+				AD15525D1F541E2500DBBBDC /* BindingDeviceView.m in Sources */,
 				68815D011F48A44C00F99E2D /* UIView+Ext.m in Sources */,
 				AD1552311F4D7E1B00DBBBDC /* EFShowView.m in Sources */,
 				AD7DCAB71E7A5E9F00589BBA /* ViewController.m in Sources */,

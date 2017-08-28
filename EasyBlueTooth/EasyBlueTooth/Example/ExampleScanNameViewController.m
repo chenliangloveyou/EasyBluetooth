@@ -10,7 +10,7 @@
 
 @interface ExampleScanNameViewController ()
 
-@property (nonatomic,strong) EasyPeripheral *perpheral ;
+@property (nonatomic,strong) EasyPeripheral *peripheral ;
 
 @end
 
@@ -24,18 +24,24 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    
+    self.title = @"扫描设备名称";
+    self.view.backgroundColor = [UIColor whiteColor];
     
     kWeakSelf(self)
     [self.bleManager scanAndConnectDeviceWithName:@"BLT_M70C" callback:^(EasyPeripheral *peripheral, NSError *error) {
         if (!error) {
-            [weakself.bleManager notifyDataWithPeripheral:peripheral serviceUUID:@"0xFFE0" notifyUUID:@"0xFFE1" notifyValue:YES withCallback:^(NSData *data, NSError *error) {
-                NSLog(@"%@ -- %@",data ,error );
-            }];
+            
+            weakself.peripheral = peripheral ;
+            
         }
     }];
 }
-
+- (void)test
+{
+    [self.bleManager notifyDataWithPeripheral:self.peripheral serviceUUID:@"0xFFE0" notifyUUID:@"0xFFE1" notifyValue:YES withCallback:^(NSData *data, NSError *error) {
+        NSLog(@"%@ -- %@",data ,error );
+    }];
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

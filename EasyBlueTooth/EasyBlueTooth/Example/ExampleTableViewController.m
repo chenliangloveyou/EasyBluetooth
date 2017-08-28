@@ -116,7 +116,7 @@
         NSDictionary *connectDict = @{CBConnectPeripheralOptionNotifyOnConnectionKey:@YES,CBConnectPeripheralOptionNotifyOnDisconnectionKey:@YES,CBConnectPeripheralOptionNotifyOnNotificationKey:@YES};
         
         EasyManagerOptions *options = [[EasyManagerOptions alloc]initWithManagerQueue:queue managerDictionary:managerDict scanOptions:scanDict scanServiceArray:nil connectOptions:connectDict];
-        options.scanTimeOut = 10 ;
+        options.scanTimeOut = 6 ;
         options.connectTimeOut = 5 ;
         
         _bleManager.managerOptions = options ;

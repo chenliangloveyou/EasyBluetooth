@@ -23,6 +23,10 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    
+    self.title = @"一行代码连接设备";
+    self.view.backgroundColor = [UIColor whiteColor];
+    
     self.bleManager.bluetoothStateChanged = ^(EasyPeripheral *peripheral, bluetoothState state) {
         NSLog(@" ====== %ld ", state);
     } ;

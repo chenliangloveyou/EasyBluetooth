@@ -129,20 +129,36 @@ typedef void (^blueToothFindCharacteristic)(EasyCharacteristic *character ,NSErr
     NSAssert(callback, @"callbck should handle");
     
     kWeakSelf(self)
+    __block NSMutableArray *tempArray = [NSMutableArray arrayWithCapacity:5];
     [self.centerManager scanDeviceWithTimeInterval:self.managerOptions.scanTimeOut services:self.managerOptions.scanServiceArray  options:self.managerOptions.scanOptions callBack:^(EasyPeripheral *peripheral, BOOL isfinish) {
-        
-        NSMutableArray *tempArray = [NSMutableArray arrayWithCapacity:5];
         
         if ([condition isKindOfClass:[NSString class]]) {
             NSString *name = (NSString *)condition ;
             if ([peripheral.name isEqualToString:name]) {
-                [tempArray addObject:peripheral];
+                
+                BOOL isExited = NO ;
+                for (EasyPeripheral *temp in tempArray) {
+                    if ([temp.identifier isEqual:peripheral.identifier]) {
+                        isExited = YES ;
+                    }
+                }
+                if (!isExited) {
+                    [tempArray addObject:peripheral];
+                }
             }
         }
         else{
             blueToothScanRule rule = (blueToothScanRule) condition ;
             if (rule(peripheral)) {
-                [tempArray addObject:peripheral];
+                BOOL isExited = NO ;
+                for (EasyPeripheral *temp in tempArray) {
+                    if ([temp.identifier isEqual:peripheral.identifier]) {
+                        isExited = YES ;
+                    }
+                }
+                if (!isExited) {
+                    [tempArray addObject:peripheral];
+                }
             }
         }
         

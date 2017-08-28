@@ -21,7 +21,20 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.title = @"条件扫描设备名称";
+    self.view.backgroundColor = [UIColor whiteColor];
     // Do any additional setup after loading the view.
+    
+    [self.bleManager scanDeviceWithRule:^BOOL(EasyPeripheral *peripheral) {
+        
+        return peripheral.name.length > 4 ;
+        
+    } callback:^(EasyPeripheral *peripheral, NSError *error) {
+        
+        //把peripheral 保存起来。 用来操作数据
+    }];
+    
 }
 
 - (void)didReceiveMemoryWarning {

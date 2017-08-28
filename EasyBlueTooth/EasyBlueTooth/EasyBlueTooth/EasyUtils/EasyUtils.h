@@ -36,6 +36,17 @@
 #define ISEMPTY(_v) (_v == nil || _v.length == 0)
 
 
+
+/********存储数据*********/
+#define EFUserDefaults [NSUserDefaults standardUserDefaults]
+
+#define EFUserDefaultsSetObj(obj, key) \
+[EFUserDefaults setObject:obj forKey:key]; \
+[EFUserDefaults synchronize];
+
+#define EFUserDefaultsObjForKey(key) [EFUserDefaults objectForKey:key]
+
+
 //屏幕宽度
 #define  SCREEN_WIDTH [[UIScreen mainScreen] bounds].size.width
 //屏幕高度
