@@ -14,10 +14,10 @@
 #import "EasyUtils.h"
 
 @interface EasyService()
-{
-    blueToothFindCharacteristicCallback _blueToothFindCharacteristicCallback ;
-}
+
 @property(nonatomic, strong) NSMutableArray<EasyCharacteristic *> *characteristicArray;
+
+@property(nonatomic,strong) NSMutableArray<blueToothFindCharacteristicCallback> *findCharacterCallbackArray ;
 
 @end
 
@@ -69,7 +69,9 @@
 {
     NSAssert(callback, @"you should deal the callback");
     
-    _blueToothFindCharacteristicCallback = [callback copy];
+    if (callback) {
+        [self.findCharacterCallbackArray addObject:callback];
+    }
     
     BOOL isAllUUIDExited = uuidArray.count > 0 ;//需要查找的UUID是否都存在
     for (CBUUID *tempUUID in uuidArray) {
@@ -88,10 +90,15 @@
     }
     
     if (isAllUUIDExited) {
-        if (_blueToothFindCharacteristicCallback) {
-            _blueToothFindCharacteristicCallback(self.characteristicArray , nil );
-            _blueToothFindCharacteristicCallback = nil ;
+        
+        if (self.findCharacterCallbackArray.count > 0) {
+            blueToothFindCharacteristicCallback callback = self.findCharacterCallbackArray.firstObject ;
+            callback(self.characteristicArray,nil);
+            callback = nil ;
+            
+            [self.findCharacterCallbackArray removeObjectAtIndex:0];
         }
+       
     }
     else{
         [self.peripheral.peripheral discoverCharacteristics:uuidArray forService:self.service];
@@ -109,10 +116,14 @@
         }
     }
     
-    if (_blueToothFindCharacteristicCallback) {
-        _blueToothFindCharacteristicCallback(self.characteristicArray  , error );
-        _blueToothFindCharacteristicCallback = nil ;
+    if (self.findCharacterCallbackArray.count > 0) {
+        blueToothFindCharacteristicCallback callback = self.findCharacterCallbackArray.firstObject ;
+        callback(self.characteristicArray,nil);
+        callback = nil ;
+        
+        [self.findCharacterCallbackArray removeObjectAtIndex:0];
     }
+    
 }
 
 
@@ -139,8 +150,16 @@
         _characteristicArray = [NSMutableArray arrayWithCapacity:10];
     }
     return _characteristicArray ;
-    
 }
+
+- (NSMutableArray<blueToothFindCharacteristicCallback> *)findCharacterCallbackArray
+{
+    if (nil == _findCharacterCallbackArray) {
+        _findCharacterCallbackArray = [NSMutableArray arrayWithCapacity:5];
+    }
+    return _findCharacterCallbackArray ;
+}
+
 @end
 
 

@@ -10,13 +10,16 @@
 		68815D011F48A44C00F99E2D /* UIView+Ext.m in Sources */ = {isa = PBXBuildFile; fileRef = 68815D001F48A44C00F99E2D /* UIView+Ext.m */; };
 		AD1552251F4C345000DBBBDC /* ExampleModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AD1552241F4C345000DBBBDC /* ExampleModel.m */; };
 		AD1552311F4D7E1B00DBBBDC /* EFShowView.m in Sources */ = {isa = PBXBuildFile; fileRef = AD1552301F4D7E1B00DBBBDC /* EFShowView.m */; };
-		AD1552341F4EB6AC00DBBBDC /* ExampleDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD1552331F4EB6AC00DBBBDC /* ExampleDetailViewController.m */; };
 		AD1552371F4FF3FD00DBBBDC /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = AD1552361F4FF3FD00DBBBDC /* MBProgressHUD.m */; };
 		AD1552481F4FFED900DBBBDC /* preview_1.gif in Resources */ = {isa = PBXBuildFile; fileRef = AD1552441F4FFED900DBBBDC /* preview_1.gif */; };
 		AD1552491F4FFED900DBBBDC /* preview_2.gif in Resources */ = {isa = PBXBuildFile; fileRef = AD1552451F4FFED900DBBBDC /* preview_2.gif */; };
 		AD15524A1F4FFED900DBBBDC /* preview_3.png in Resources */ = {isa = PBXBuildFile; fileRef = AD1552461F4FFED900DBBBDC /* preview_3.png */; };
 		AD15524B1F4FFED900DBBBDC /* preview_4.png in Resources */ = {isa = PBXBuildFile; fileRef = AD1552471F4FFED900DBBBDC /* preview_4.png */; };
 		AD15524E1F501D2200DBBBDC /* EasyManagerOptions.m in Sources */ = {isa = PBXBuildFile; fileRef = AD15524D1F501D2200DBBBDC /* EasyManagerOptions.m */; };
+		AD1552511F5410DF00DBBBDC /* ExampleSavedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD1552501F5410DF00DBBBDC /* ExampleSavedViewController.m */; };
+		AD1552541F5410F600DBBBDC /* ExampleOneLineCodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD1552531F5410F600DBBBDC /* ExampleOneLineCodeViewController.m */; };
+		AD1552571F5411FA00DBBBDC /* ExampleScanNameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD1552561F5411FA00DBBBDC /* ExampleScanNameViewController.m */; };
+		AD15525A1F5413A800DBBBDC /* ExampleScanRuleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD1552591F5413A800DBBBDC /* ExampleScanRuleViewController.m */; };
 		AD32B2071F4A79D600A1746C /* ExampleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AD32B1EC1F4A79D600A1746C /* ExampleCell.m */; };
 		AD32B2081F4A79D600A1746C /* ExampleCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AD32B1ED1F4A79D600A1746C /* ExampleCell.xib */; };
 		AD32B2091F4A79D600A1746C /* ExampleTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD32B1EF1F4A79D600A1746C /* ExampleTableViewController.m */; };
@@ -75,8 +78,6 @@
 		AD1552241F4C345000DBBBDC /* ExampleModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExampleModel.m; sourceTree = "<group>"; };
 		AD15522F1F4D7E1B00DBBBDC /* EFShowView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EFShowView.h; sourceTree = "<group>"; };
 		AD1552301F4D7E1B00DBBBDC /* EFShowView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EFShowView.m; sourceTree = "<group>"; };
-		AD1552321F4EB6AC00DBBBDC /* ExampleDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExampleDetailViewController.h; sourceTree = "<group>"; };
-		AD1552331F4EB6AC00DBBBDC /* ExampleDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExampleDetailViewController.m; sourceTree = "<group>"; };
 		AD1552351F4FF3FD00DBBBDC /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
 		AD1552361F4FF3FD00DBBBDC /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
 		AD1552441F4FFED900DBBBDC /* preview_1.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = preview_1.gif; sourceTree = "<group>"; };
@@ -85,6 +86,14 @@
 		AD1552471F4FFED900DBBBDC /* preview_4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = preview_4.png; sourceTree = "<group>"; };
 		AD15524C1F501D2200DBBBDC /* EasyManagerOptions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EasyManagerOptions.h; sourceTree = "<group>"; };
 		AD15524D1F501D2200DBBBDC /* EasyManagerOptions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EasyManagerOptions.m; sourceTree = "<group>"; };
+		AD15524F1F5410DF00DBBBDC /* ExampleSavedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExampleSavedViewController.h; sourceTree = "<group>"; };
+		AD1552501F5410DF00DBBBDC /* ExampleSavedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExampleSavedViewController.m; sourceTree = "<group>"; };
+		AD1552521F5410F600DBBBDC /* ExampleOneLineCodeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExampleOneLineCodeViewController.h; sourceTree = "<group>"; };
+		AD1552531F5410F600DBBBDC /* ExampleOneLineCodeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExampleOneLineCodeViewController.m; sourceTree = "<group>"; };
+		AD1552551F5411FA00DBBBDC /* ExampleScanNameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExampleScanNameViewController.h; sourceTree = "<group>"; };
+		AD1552561F5411FA00DBBBDC /* ExampleScanNameViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExampleScanNameViewController.m; sourceTree = "<group>"; };
+		AD1552581F5413A800DBBBDC /* ExampleScanRuleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExampleScanRuleViewController.h; sourceTree = "<group>"; };
+		AD1552591F5413A800DBBBDC /* ExampleScanRuleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExampleScanRuleViewController.m; sourceTree = "<group>"; };
 		AD32B1EB1F4A79D600A1746C /* ExampleCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExampleCell.h; sourceTree = "<group>"; };
 		AD32B1EC1F4A79D600A1746C /* ExampleCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExampleCell.m; sourceTree = "<group>"; };
 		AD32B1ED1F4A79D600A1746C /* ExampleCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ExampleCell.xib; sourceTree = "<group>"; };
@@ -200,8 +209,14 @@
 				AD32B1EB1F4A79D600A1746C /* ExampleCell.h */,
 				AD32B1EC1F4A79D600A1746C /* ExampleCell.m */,
 				AD32B1ED1F4A79D600A1746C /* ExampleCell.xib */,
-				AD1552321F4EB6AC00DBBBDC /* ExampleDetailViewController.h */,
-				AD1552331F4EB6AC00DBBBDC /* ExampleDetailViewController.m */,
+				AD15524F1F5410DF00DBBBDC /* ExampleSavedViewController.h */,
+				AD1552501F5410DF00DBBBDC /* ExampleSavedViewController.m */,
+				AD1552521F5410F600DBBBDC /* ExampleOneLineCodeViewController.h */,
+				AD1552531F5410F600DBBBDC /* ExampleOneLineCodeViewController.m */,
+				AD1552551F5411FA00DBBBDC /* ExampleScanNameViewController.h */,
+				AD1552561F5411FA00DBBBDC /* ExampleScanNameViewController.m */,
+				AD1552581F5413A800DBBBDC /* ExampleScanRuleViewController.h */,
+				AD1552591F5413A800DBBBDC /* ExampleScanRuleViewController.m */,
 			);
 			path = Example;
 			sourceTree = "<group>";
@@ -493,6 +508,7 @@
 			files = (
 				AD32B2071F4A79D600A1746C /* ExampleCell.m in Sources */,
 				AD32B20C1F4A79D600A1746C /* ToolDetailCell.m in Sources */,
+				AD15525A1F5413A800DBBBDC /* ExampleScanRuleViewController.m in Sources */,
 				AD92FA121F42D8D100D8B811 /* EasyBlueToothManager.m in Sources */,
 				AD92FA141F42D8D100D8B811 /* EasyCenterManager.m in Sources */,
 				AD32B2161F4A79D600A1746C /* ToolViewController.m in Sources */,
@@ -503,8 +519,9 @@
 				AD32B20F1F4A79D600A1746C /* ToolDetailHeaderView.m in Sources */,
 				AD32B2141F4A79D600A1746C /* ToolDetailViewController.m in Sources */,
 				AD32B20E1F4A79D600A1746C /* ToolDetailHeaderCell.m in Sources */,
-				AD1552341F4EB6AC00DBBBDC /* ExampleDetailViewController.m in Sources */,
+				AD1552541F5410F600DBBBDC /* ExampleOneLineCodeViewController.m in Sources */,
 				AD1552371F4FF3FD00DBBBDC /* MBProgressHUD.m in Sources */,
+				AD1552571F5411FA00DBBBDC /* ExampleScanNameViewController.m in Sources */,
 				AD92FA1A1F42D8D100D8B811 /* EasyUtils.m in Sources */,
 				AD92FA161F42D8D100D8B811 /* EasyDescriptor.m in Sources */,
 				AD15524E1F501D2200DBBBDC /* EasyManagerOptions.m in Sources */,
@@ -516,6 +533,7 @@
 				AD7DCAB41E7A5E9F00589BBA /* AppDelegate.m in Sources */,
 				AD32B2091F4A79D600A1746C /* ExampleTableViewController.m in Sources */,
 				AD92FA191F42D8D100D8B811 /* EasyService.m in Sources */,
+				AD1552511F5410DF00DBBBDC /* ExampleSavedViewController.m in Sources */,
 				AD32B2111F4A79D600A1746C /* ToolDetailOperationCell.m in Sources */,
 				AD32B2151F4A79D600A1746C /* ToolInputView.m in Sources */,
 				AD7DCAB11E7A5E9F00589BBA /* main.m in Sources */,

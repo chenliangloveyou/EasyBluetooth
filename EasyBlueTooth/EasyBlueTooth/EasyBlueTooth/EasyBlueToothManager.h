@@ -27,8 +27,9 @@ typedef NS_ENUM(NSUInteger , bluetoothState) {
     bluetoothStateDeviceConnected ,     //连接设备
     bluetoothStateServiceFounded ,     //获取服务
     bluetoothStateCharacterFounded ,   //获取特征
-    bluetoothStateWriteDataSuccess ,   //写数据
-    bluetoothStateReceivedData ,       //获取通知数据
+    bluetoothStateNotifySuccess ,       //监听通知成功
+    bluetoothStateReadSuccess  ,       //读取数据成功
+    bluetoothStateWriteDataSuccess ,   //写数据成功
     bluetoothStateDestory ,            //断开设备
     
 };
@@ -83,6 +84,7 @@ typedef void (^blueToothScanAllCallback)(NSArray<EasyPeripheral *> *deviceArray 
  * 读/写/监听特征 操作回调
  */
 typedef void (^blueToothOperationCallback)(NSData *data , NSError *error);
+
 
 
 @interface EasyBlueToothManager : NSObject

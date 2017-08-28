@@ -191,7 +191,6 @@
     
 }
 
-#warning 处理
 - (void)centralManager:(CBCentralManager *)central willRestoreState:(NSDictionary<NSString *, id> *)dict
 {
     EasyLog(@"\n蓝牙状态即将重置：%@ - %zd",central , dict);
@@ -325,6 +324,7 @@
         
         [self.connectedDeviceDict removeObjectForKey:existedP.identifier];
         
+        [self.foundDeviceDict removeObjectForKey:existedP.identifier];
     }
     else{
         NSAssert(NO, @"attention: you should deal with this error");

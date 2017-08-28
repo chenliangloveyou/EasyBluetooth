@@ -88,7 +88,12 @@
             [coverView removeFromSuperview];
             coverView = nil ;
         }
-        [self.centerManager startScanDevice];
+        
+        UIViewController *vc = [EasyUtils topViewController];
+        if ([vc isKindOfClass:[self class]]) {
+            [self.centerManager startScanDevice];
+        }
+        
     }
     else if (state == CBManagerStatePoweredOff){
         UILabel *coverLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];

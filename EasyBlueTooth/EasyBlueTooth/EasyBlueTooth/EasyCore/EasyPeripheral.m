@@ -25,10 +25,9 @@
     //读取rssi回调结果
     blueToothReadRSSICallback _blueToothReadRSSICallback ;
     
-    //设备发现服务回调
-    blueToothFindServiceCallback _blueToothFindServiceCallback ;
 }
-
+//设备发现服务回调
+@property (nonatomic,strong)NSMutableArray<blueToothFindServiceCallback> *findServiceCallbackArray ;
 //@property (nonatomic,copy)blueToothDeviceStateChangedCallback stateChangedCallback ;
 
 @end
@@ -240,7 +239,9 @@
 {
     NSAssert(callback, @"you should deal the callback");
     
-    _blueToothFindServiceCallback = [callback copy];
+    if (callback) {
+        [self.findServiceCallbackArray addObject:callback];
+    }
 
     BOOL isAllUUIDExited = uuidArray.count > 0 ;//需要查找的UUID是否都存在
     
@@ -260,10 +261,15 @@
     }
    
     if (isAllUUIDExited) {
-        if (_blueToothFindServiceCallback) {
-            _blueToothFindServiceCallback(self , self.serviceArray , nil );
-            _blueToothFindServiceCallback = nil ;
+        
+        if (self.findServiceCallbackArray.count > 0) {
+            blueToothFindServiceCallback callback = self.findServiceCallbackArray.firstObject ;
+            callback(self,self.serviceArray,nil);
+            callback = nil ;
+            
+            [self.findServiceCallbackArray removeObjectAtIndex:0];
         }
+        
     }
     else{
         
@@ -334,9 +340,12 @@
         }
     }
     
-    if (_blueToothFindServiceCallback) {
-        _blueToothFindServiceCallback(self , self.serviceArray , error );
-        _blueToothFindServiceCallback = nil ;
+    if (self.findServiceCallbackArray.count > 0) {
+        blueToothFindServiceCallback callback = self.findServiceCallbackArray.firstObject ;
+        callback(self,self.serviceArray,nil);
+        callback = nil ;
+        
+        [self.findServiceCallbackArray removeObjectAtIndex:0];
     }
     
 }
@@ -536,7 +545,13 @@
         _serviceArray = [NSMutableArray array];
     }
     return _serviceArray ;
-    
+}
+- (NSMutableArray<blueToothFindServiceCallback> *)findServiceCallbackArray
+{
+    if (nil == _findServiceCallbackArray) {
+        _findServiceCallbackArray = [NSMutableArray arrayWithCapacity:5];
+    }
+    return _findServiceCallbackArray ;
 }
 @end
 
