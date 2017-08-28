@@ -242,7 +242,8 @@
     
     _blueToothFindServiceCallback = [callback copy];
 
-    BOOL isAllUUIDExited = YES ;//需要查找的UUID是否都存在
+    BOOL isAllUUIDExited = uuidArray.count > 0 ;//需要查找的UUID是否都存在
+    
     for (CBUUID *tempUUID in uuidArray) {
         
         BOOL isExitedUUID = NO ;//数组里单个需要查找到UUID是否存在
@@ -421,7 +422,7 @@
 }
 
 
-#pragma mark descriptor
+#pragma mark - descriptor
 
 - (void)peripheral:(CBPeripheral *)peripheral didDiscoverDescriptorsForCharacteristic:(CBCharacteristic *)characteristic error:(NSError *)error
 {
@@ -444,9 +445,9 @@
     for (EasyService *tempS in self.serviceArray) {
         for (EasyCharacteristic *tempC in tempS.characteristicArray) {
             for (EasyDescriptor *tempD in tempC.descriptorArray) {
-                if ([tempD.UUID isEqual:descriptor.UUID]) {
+                if ([tempD.descroptor isEqual:descriptor]) {
                     [tempD dealOperationDescriptorWithType:OperationTypeRead error:error];
-                    EasyLog(@" %@ -- %@ == %@",tempD,tempD.UUID ,tempD.value);
+                    NSLog(@"%@== %@",tempD,tempD.UUID );
                     return;
                 }
             }
@@ -460,7 +461,7 @@
     for (EasyService *tempS in self.serviceArray) {
         for (EasyCharacteristic *tempC in tempS.characteristicArray) {
             for (EasyDescriptor *tempD in tempC.descriptorArray) {
-                if ([tempD.UUID isEqual:descriptor.UUID]) {
+                if ([tempD.descroptor isEqual:descriptor]) {
                     [tempD dealOperationDescriptorWithType:OperationTypeWrite error:error];
                     return;
                 }

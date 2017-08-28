@@ -236,9 +236,9 @@
 
 - (void)dealDiscoverDescriptorWithError:(NSError *)error
 {
-    
+    NSLog(@"%@",self.characteristic.descriptors);
+
     for (CBDescriptor *tempD in self.characteristic.descriptors) {
-        
         EasyDescriptor *tDescroptor = [self searchDescriptoriWithDescriptor:tempD];
         if (nil == tDescroptor) {
             EasyDescriptor *character = [[EasyDescriptor alloc]initWithDescriptor:tempD peripheral:self.peripheral];

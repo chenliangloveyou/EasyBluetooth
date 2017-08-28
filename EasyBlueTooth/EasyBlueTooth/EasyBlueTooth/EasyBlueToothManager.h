@@ -21,15 +21,15 @@
  */
 typedef NS_ENUM(NSUInteger , bluetoothState) {
     
-    bluetoothStateOpenTring = 0 ,//系统蓝牙正在打开
-    bluetoothStateReadly = 1,    //蓝牙准备就绪
-    bluetoothStateScanDevice ,  //扫描设备
-    bluetoothStateConnect ,     //连接设备
-    bluetoothStateService ,     //获取服务
-    bluetoothStateCharacter ,   //获取特征
-    bluetoothStateWriteData ,   //写数据
-    bluetoothStateReceivedData ,//获取通知数据
-    bluetoothStateDestory ,     //断开设备
+//    bluetoothStateOpenTring = 0 ,//系统蓝牙正在打开
+    bluetoothStateSystemReadly = 1,    //蓝牙准备就绪
+    bluetoothStateDeviceFounded ,       //扫描设备
+    bluetoothStateDeviceConnected ,     //连接设备
+    bluetoothStateServiceFounded ,     //获取服务
+    bluetoothStateCharacterFounded ,   //获取特征
+    bluetoothStateWriteDataSuccess ,   //写数据
+    bluetoothStateReceivedData ,       //获取通知数据
+    bluetoothStateDestory ,            //断开设备
     
 };
 
@@ -42,11 +42,15 @@ typedef NS_ENUM(NSUInteger , bluetoothErrorState) {
     bluetoothErrorStateNoReadly = 1 ,//系统蓝牙没有打开。此时不会再自动扫描，只能重新扫描
     bluetoothErrorStateNoDevice ,    //没有找到设备
     bluetoothErrorStateConnectError ,//连接失败
+    bluetoothErrorStateNoConnect,   //设别没有连接
     bluetoothErrorStateDisconnect ,  //设备失去连接
     bluetoothErrorStateNoService ,   //没有找到相应的服务
     bluetoothErrorStateNoCharcter,  //没有对应的特征
-    bluetoothErrorStatewriteError,  //写数据失败
+    bluetoothErrorStateWriteError,  //写数据失败
+    bluetoothErrorStateReadError ,  //读书节失败
     bluetoothErrorStateNotifyError ,//监听通知失败
+    bluetoothErrorStateNoDescriptor,  //没有对应的特征
+
 };
 
 
@@ -64,7 +68,7 @@ typedef BOOL (^blueToothScanRule)(EasyPeripheral *peripheral);
 /**
  * 搜索到设备回调
  * peripheral 已经连接上的设备
- * error是扫描错误信息
+ * error是扫描错误信息 
  */
 typedef void (^blueToothScanCallback)(EasyPeripheral *peripheral , NSError *error );
 
@@ -76,7 +80,7 @@ typedef void (^blueToothScanCallback)(EasyPeripheral *peripheral , NSError *erro
 typedef void (^blueToothScanAllCallback)(NSArray<EasyPeripheral *> *deviceArray , NSError *error );
 
 /**
- * 读写操作回调
+ * 读/写/监听特征 操作回调
  */
 typedef void (^blueToothOperationCallback)(NSData *data , NSError *error);
 
@@ -95,10 +99,11 @@ typedef void (^blueToothOperationCallback)(NSData *data , NSError *error);
  * 方法二：bluetoothStateChanged 实现这个block回到
  */
 @property (nonatomic,assign)bluetoothState bluetoothState ;
-@property (nonatomic,strong)blueToothStateChanged bluetoothStateChanged ;
+@property (nonatomic,strong,)__block blueToothStateChanged bluetoothStateChanged ;
 
 /**
  * 单例
+ * alloc init 同样可以用。（建议用单例形式）
  */
 + (instancetype)shareInstance ;
 
@@ -234,21 +239,21 @@ typedef void (^blueToothOperationCallback)(NSData *data , NSError *error);
  * descroptor 需要往描述下写入数据
  * writeCallback 读取数据后的回调
  */
-- (void)writeDescroptorWithPeripheral:(EasyPeripheral *)peripheral
+- (void)writeDescriptorWithPeripheral:(EasyPeripheral *)peripheral
                           serviceUUID:(NSString *)serviceUUID
-                            writeUUID:(NSString *)writeUUID
+                        characterUUID:(NSString *)characterUUID
                                  data:(NSData *)data
-                             callback:(blueToothOperationCallback)writeCallback ;
+                             callback:(blueToothOperationCallback)callback ;
 
 /**
  * peripheral 需要读取描述的设备
  * descroptor 需要往描述下写入数据
  * writeCallback 读取数据后的回调
  */
-- (void)readDescroptorWithPeripheral:(EasyPeripheral *)peripheral
+- (void)readDescriptorWithPeripheral:(EasyPeripheral *)peripheral
                          serviceUUID:(NSString *)serviceUUID
-                            readUUID:(NSString *)readUUID
-                            callback:(blueToothOperationCallback)writeCallback ;
+                       characterUUID:(NSString *)characterUUID
+                            callback:(blueToothOperationCallback)callback ;
 
 
 #pragma mark - rssi 

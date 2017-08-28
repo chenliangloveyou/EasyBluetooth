@@ -26,28 +26,6 @@
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    [[EasyBlueToothManager shareInstance] connectDeviceWithName:@"NFHY" timeout:10 callback:^(EasyPeripheral *peripheral, NSError *error) {
-       
-        if (!error) {
-            NSArray *tempArray = @[[CBUUID UUIDWithString:self.seriveUUID]];
-            [peripheral discoverDeviceServiceWithUUIDArray:tempArray callback:^(EasyPeripheral *peripheral, NSArray<EasyService *> *serviceArray, NSError *error) {
-               
-                if (!error) {
-                    for (EasyService *tempService in serviceArray) {
-                        
-                        CBUUID *writeUUID = [CBUUID UUIDWithString:self.writeUUID];
-                        CBUUID *notifyUUID= [CBUUID UUIDWithString:self.readUUID];
-                        NSArray *tempArr = @[writeUUID,notifyUUID];
-                        [tempService discoverCharacteristicWithCharacteristicUUIDs:tempArr callback:^(NSArray<EasyCharacteristic *> *characteristics, NSError *error) {
-                            
-                        }];
-                    }
-                }
-                
-            }];
-        }
-    }];
    
     // Do any additional setup after loading the view.
 }

@@ -16,6 +16,9 @@
     blueToothDescriptorOperateCallback _readCallback ;
     blueToothDescriptorOperateCallback _writeCallback ;
 }
+
+@property (nonatomic,strong)NSMutableArray *readCallbackArray ;
+
 @end
 @implementation EasyDescriptor
 
@@ -65,6 +68,7 @@
 }
 - (void)readValueWithCallback:(blueToothDescriptorOperateCallback)callback
 {
+//    NSLog(@"%@ ----- %@",self.UUID,callback);
     if (callback) {
         _readCallback = [callback copy];
     }
@@ -75,6 +79,7 @@
 
 - (void)dealOperationDescriptorWithType:(OperationType)type error:(NSError *)error
 {
+//    NSLog(@"%@ ----- %@",self.UUID,error);
     switch (type) {
         case OperationTypeRead:
             if (_readCallback) {
@@ -107,6 +112,14 @@
         _writeDataArray = [NSMutableArray arrayWithCapacity:10];
     }
     return _writeDataArray ;
+}
+
+- (NSMutableArray *)readCallbackArray
+{
+    if (nil == _readCallbackArray) {
+        _readCallbackArray = [NSMutableArray arrayWithCapacity:5];
+    }
+    return _readCallbackArray ;
 }
 @end
 

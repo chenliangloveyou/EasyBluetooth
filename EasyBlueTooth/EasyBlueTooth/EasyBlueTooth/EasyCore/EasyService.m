@@ -71,8 +71,7 @@
     
     _blueToothFindCharacteristicCallback = [callback copy];
     
-    
-    BOOL isAllUUIDExited = YES ;//需要查找的UUID是否都存在
+    BOOL isAllUUIDExited = uuidArray.count > 0 ;//需要查找的UUID是否都存在
     for (CBUUID *tempUUID in uuidArray) {
         
         BOOL isExitedUUID = NO ;//数组里单个需要查找到UUID是否存在

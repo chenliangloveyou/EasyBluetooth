@@ -45,5 +45,69 @@
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "EasyBlueTooth/EasyBlueTooth/EasyCore/EasyPeripheral.m"
+            timestampString = "525575756.208945"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "263"
+            endingLineNumber = "263"
+            landmarkName = "-discoverDeviceServiceWithUUIDArray:callback:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "EasyBlueTooth/EasyBlueTooth/EasyCore/EasyCharacteristic.m"
+            timestampString = "525579336.157185"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "240"
+            endingLineNumber = "240"
+            landmarkName = "-dealDiscoverDescriptorWithError:"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[EasyCharacteristic dealDiscoverDescriptorWithError:]"
+                  moduleName = "EasyBlueTooth"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/nf/Documents/GitHub/easyBluetooth/EasyBlueTooth/EasyBlueTooth/EasyBlueTooth/EasyCore/EasyCharacteristic.m"
+                  timestampString = "525585556.64514"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "241"
+                  endingLineNumber = "241"
+                  offsetFromSymbolStart = "216">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[EasyCharacteristic dealDiscoverDescriptorWithError:]"
+                  moduleName = "EasyBlueTooth"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/nf/Documents/GitHub/easyBluetooth/EasyBlueTooth/EasyBlueTooth/EasyBlueTooth/EasyCore/EasyCharacteristic.m"
+                  timestampString = "525585556.646514"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "241"
+                  endingLineNumber = "241"
+                  offsetFromSymbolStart = "232">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
    </Breakpoints>
 </Bucket>

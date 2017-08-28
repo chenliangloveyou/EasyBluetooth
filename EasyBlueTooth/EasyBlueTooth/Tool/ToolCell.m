@@ -29,7 +29,7 @@
     
     self.nameLabel.text = peripheral.name ;
     self.RSSILabel.text = [NSString stringWithFormat:@"%@",peripheral.RSSI ];
-    NSArray *serviceArray = [peripheral.advertisementData objectForKey:@"kCBAdvDataServiceUUIDs"];
+    NSArray *serviceArray = [peripheral.advertisementData objectForKey:CBAdvertisementDataServiceUUIDsKey];
     self.servicesLabel.text = [NSString stringWithFormat:@"%zd Services",serviceArray.count];
     
     if (peripheral.state == CBPeripheralStateConnected) {

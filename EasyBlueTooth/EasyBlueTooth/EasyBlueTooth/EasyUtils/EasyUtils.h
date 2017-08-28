@@ -25,7 +25,7 @@
 #define queueEnd  });
 
 /**打印****/
-#if DEBUG == 1
+#if DEBUG == 0
 #define EasyLog NSLog
 #else
 #define EasyLog(...)
