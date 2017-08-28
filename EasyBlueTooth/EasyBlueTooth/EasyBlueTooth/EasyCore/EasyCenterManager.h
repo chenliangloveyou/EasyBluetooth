@@ -63,7 +63,6 @@ typedef void (^blueToothStateChangedCallback)(EasyCenterManager *manager , CBMan
  * queue 为manager运行的线程，传空就是在主线程上
  * options 扫描条件
  */
-#warning  cuowo
 - (instancetype)initWithQueue:(dispatch_queue_t)queue ;
 - (instancetype)initWithQueue:(dispatch_queue_t)queue options:(NSDictionary *)options ;
 
