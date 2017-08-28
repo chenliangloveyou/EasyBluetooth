@@ -142,7 +142,6 @@
     for (EasyPeripheral *tempPeripheral in [self.connectedDeviceDict allValues]) {
         [tempPeripheral disconnectDevice];
     }
-    [self.connectedDeviceDict removeAllObjects];
 }
 
 - (EasyPeripheral *)searchDeviceWithPeripheral:(CBPeripheral *)peripheral
@@ -325,6 +324,7 @@
         [existedP.serviceArray removeAllObjects];
         
         [self.connectedDeviceDict removeObjectForKey:existedP.identifier];
+        
     }
     else{
         NSAssert(NO, @"attention: you should deal with this error");

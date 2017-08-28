@@ -85,7 +85,6 @@ typedef void (^blueToothScanAllCallback)(NSArray<EasyPeripheral *> *deviceArray 
 typedef void (^blueToothOperationCallback)(NSData *data , NSError *error);
 
 
-
 @interface EasyBlueToothManager : NSObject
 
 /**

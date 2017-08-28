@@ -20,11 +20,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "EasyBlueTooth/EasyBlueTooth/EasyCore/EasyCenterManager.m"
-            timestampString = "525258165.860135"
+            timestampString = "525592897.964683"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "198"
-            endingLineNumber = "198"
+            startingLineNumber = "197"
+            endingLineNumber = "197"
             landmarkName = "-centralManager:willRestoreState:"
             landmarkType = "7">
          </BreakpointContent>
@@ -51,13 +51,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "EasyBlueTooth/EasyBlueTooth/EasyCore/EasyPeripheral.m"
-            timestampString = "525575756.208945"
+            filePath = "EasyBlueTooth/EasyBlueTooth/EasyBlueToothManager.m"
+            timestampString = "525595331.695968"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "263"
-            endingLineNumber = "263"
-            landmarkName = "-discoverDeviceServiceWithUUIDArray:callback:"
+            startingLineNumber = "236"
+            endingLineNumber = "236"
+            landmarkName = "-connectDeviceWithPeripheral:callback:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -67,46 +67,14 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "EasyBlueTooth/EasyBlueTooth/EasyCore/EasyCharacteristic.m"
-            timestampString = "525579336.157185"
+            filePath = "EasyBlueTooth/EasyBlueTooth/EasyBlueToothManager.m"
+            timestampString = "525595417.667484"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "240"
-            endingLineNumber = "240"
-            landmarkName = "-dealDiscoverDescriptorWithError:"
+            startingLineNumber = "729"
+            endingLineNumber = "729"
+            landmarkName = "-connectDeviceWithName:serviceUUID:notifyUUID:wirteUUID:writeData:callback:"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "-[EasyCharacteristic dealDiscoverDescriptorWithError:]"
-                  moduleName = "EasyBlueTooth"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/nf/Documents/GitHub/easyBluetooth/EasyBlueTooth/EasyBlueTooth/EasyBlueTooth/EasyCore/EasyCharacteristic.m"
-                  timestampString = "525585556.64514"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "241"
-                  endingLineNumber = "241"
-                  offsetFromSymbolStart = "216">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "-[EasyCharacteristic dealDiscoverDescriptorWithError:]"
-                  moduleName = "EasyBlueTooth"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/nf/Documents/GitHub/easyBluetooth/EasyBlueTooth/EasyBlueTooth/EasyBlueTooth/EasyCore/EasyCharacteristic.m"
-                  timestampString = "525585556.646514"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "241"
-                  endingLineNumber = "241"
-                  offsetFromSymbolStart = "232">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

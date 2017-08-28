@@ -19,7 +19,6 @@ typedef NS_ENUM(NSUInteger ,OperationType) {
     OperationTypeWrite = 0 ,
     OperationTypeRead = 1 ,
     OperationTypeNotify ,
-    OperationTypeNotifyData ,
 };
 
 /**

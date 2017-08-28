@@ -23,7 +23,6 @@
     blueToothCharactersticOperateCallback _writeOperateCallback ;
     blueToothCharactersticOperateCallback _readOperateCallback ;
     blueToothCharactersticOperateCallback _notifyOperateCallback ;
-    blueToothCharactersticOperateCallback _notifyDataOperateCallback ;
     
 }
 
@@ -48,7 +47,10 @@
 {
     return _characteristic.properties;
 }
-
+- (NSData *)value
+{
+    return _characteristic.value ;
+}
 - (BOOL)isNotifying
 {
     return _characteristic.isNotifying ;
@@ -188,18 +190,15 @@
             }
             break ;
         case OperationTypeNotify:
+        {
+            if (self.characteristic.value) {
+                [self addDataToArrayWithType:OperationTypeNotify data:self.value];
+            }
             if (_notifyOperateCallback) {
                 _notifyOperateCallback(self,self.value,error);
-                _notifyOperateCallback = nil ;
-            }break ;
-        case OperationTypeNotifyData:
-            
-            if (self.characteristic.value) {
-                if (_notifyDataOperateCallback) {
-                    _notifyDataOperateCallback(self,self.value,error);
-                }
-                [self addDataToArrayWithType:OperationTypeNotify data:self.characteristic.value];
             }
+        }break ;
+            
         default:
             break;
     }

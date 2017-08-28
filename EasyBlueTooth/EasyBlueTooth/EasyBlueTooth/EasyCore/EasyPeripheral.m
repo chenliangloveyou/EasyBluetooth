@@ -379,7 +379,7 @@
     NSAssert(character, @"attention ! this character is empty .");
     
     if (character.isNotifying) {
-        [character dealOperationCharacterWithType:OperationTypeNotifyData error:error];
+        [character dealOperationCharacterWithType:OperationTypeNotify error:error];
     }
     else{
         [character dealOperationCharacterWithType:OperationTypeRead error:error];
