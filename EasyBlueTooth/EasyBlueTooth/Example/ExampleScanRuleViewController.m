@@ -33,13 +33,18 @@
         
     } callback:^(EasyPeripheral *peripheral, NSError *error) {
         
-        
-        //把peripheral 保存起来。 用来操作数据
-        
         queueMainStart
-        [EFShowView showSueecssText:@"设备连接成功!"];
         [EFShowView HideHud];
+
+        if (!error) {
+            //把peripheral 保存起来。 用来操作数据
+            [EFShowView showSueecssText:@"设备连接成功!"];
+        }
+        else{
+            [EFShowView showErrorText:error.domain];
+        }
         queueEnd
+
     }];
     
 }

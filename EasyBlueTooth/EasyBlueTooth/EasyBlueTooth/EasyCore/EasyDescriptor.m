@@ -10,6 +10,7 @@
 
 #import "EasyPeripheral.h"
 #import "EasyCharacteristic.h"
+#import "EasyUtils.h"
 
 @interface EasyDescriptor()
 {
@@ -60,6 +61,7 @@
     }
     if (data) {
         [self.writeDataArray addObject:data];
+        EasyLog_S(@"往描述上写数据 %@ %@",self.descroptor.UUID,data);
         [self.peripheral.peripheral writeValue:data forDescriptor:self.descroptor];
     }
     else{
@@ -68,18 +70,16 @@
 }
 - (void)readValueWithCallback:(blueToothDescriptorOperateCallback)callback
 {
-//    NSLog(@"%@ ----- %@",self.UUID,callback);
     if (callback) {
         _readCallback = [callback copy];
     }
-    
+    EasyLog_S(@"读取描述上数据 %@",self.descroptor.UUID);
     [self.peripheral.peripheral readValueForDescriptor:self.descroptor];
 }
 
 
 - (void)dealOperationDescriptorWithType:(OperationType)type error:(NSError *)error
 {
-//    NSLog(@"%@ ----- %@",self.UUID,error);
     switch (type) {
         case OperationTypeRead:
             if (_readCallback) {

@@ -27,14 +27,17 @@
 /**打印****/
 #define ISSHOWLOG 1
 
-#define ISSHOWSYSTEMLOG 1
+//接受系统消息
+#define ISSHOWRECEIVELOG 1
 
-#define ISSHOWSendLOG 1
+//调用API
+#define ISSHOWSENDLOG 1
 
 #define EasyLog(fmt, ...) if(ISSHOWLOG) { NSLog(fmt,##__VA_ARGS__); }
 
-#define EasyLog_S(fmt, ...) if(ISSHOWSYSTEMLOG) { NSLog(fmt,##__VA_ARGS__); }
+#define EasyLog_R(fmt, ...) if(ISSHOWRECEIVELOG&&ISSHOWLOG) { NSLog(fmt,##__VA_ARGS__); }
 
+#define EasyLog_S(fmt, ...) if(ISSHOWSENDLOG&&ISSHOWLOG) { NSLog(fmt,##__VA_ARGS__); }
 
 // 是否为空
 #define ISEMPTY(_v) (_v == nil || _v.length == 0)

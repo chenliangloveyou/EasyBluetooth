@@ -101,6 +101,9 @@
        
     }
     else{
+        
+        EasyLog_S(@"寻找设备服务上的特征 %@  %@",self.peripheral.identifier.UUIDString,self.service.UUID);
+
         [self.peripheral.peripheral discoverCharacteristics:uuidArray forService:self.service];
     }
 }

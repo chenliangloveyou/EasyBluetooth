@@ -96,7 +96,6 @@
             i++;
         }
     }
-    NSLog(@"bytes 的16进制数为:%@",hexStr);
     return hexStr;
 }
 
@@ -112,10 +111,8 @@
         NSScanner * scanner = [[NSScanner alloc] initWithString:hexCharStr] ;
         [scanner scanHexInt:&anInt];
         myBuffer[i / 2] = (char)anInt;
-        NSLog(@"myBuffer is %c",myBuffer[i /2] );
     }
     NSString *unicodeString = [NSString stringWithCString:myBuffer encoding:4];
-    NSLog(@"———字符串=======%@",unicodeString);
     return unicodeString;
 }
 

@@ -141,19 +141,21 @@
             NSUInteger subLength = data.length - i > 20 ? 20 : data.length-i ;
             NSData *subData = [data subdataWithRange:NSMakeRange(i, subLength)];
             
+            EasyLog_S(@"往特征上写数据 %@ %@",self.characteristic.UUID,subData);
             [self.peripheral.peripheral writeValue:subData
                                  forCharacteristic:self.characteristic
                                               type:writeType];
         });
     }
 }
-#warning ====需要一个写入队列
+//#warning ====需要一个写入队列
 - (void)readValueWithCallback:(blueToothCharactersticOperateCallback)callback
 {
     if (callback) {
         
         _readOperateCallback = [callback copy];
     }
+    EasyLog_S(@"读取特征上的数据 %@",self.characteristic.UUID);
     [self.peripheral.peripheral readValueForCharacteristic:self.characteristic];
     
 }
@@ -165,6 +167,8 @@
     }
     
     if (self.peripheral) {
+        
+        EasyLog_S(@"监听特征上的通知 %@ %d",self.characteristic.UUID,value);
         [self.peripheral.peripheral setNotifyValue:value forCharacteristic:self.characteristic];
     }
     else{
@@ -227,19 +231,17 @@
         if (callback) {
             _blueToothFindDescriptorCallback = [callback copy];
         }
-        
+        EasyLog_S(@"发现特征上的描述 %@",self.characteristic.UUID);
         [self.peripheral.peripheral discoverDescriptorsForCharacteristic:self.characteristic];
     }
     else{
-        EasyLog(@" \n\n you try find descroptor on a null characteristic \n\n\n");
+        EasyLog(@" attention：you try find descroptor on a null characteristic ！");
     }
     
 }
 
 - (void)dealDiscoverDescriptorWithError:(NSError *)error
 {
-    NSLog(@"%@",self.characteristic.descriptors);
-
     for (CBDescriptor *tempD in self.characteristic.descriptors) {
         EasyDescriptor *tDescroptor = [self searchDescriptoriWithDescriptor:tempD];
         if (nil == tDescroptor) {

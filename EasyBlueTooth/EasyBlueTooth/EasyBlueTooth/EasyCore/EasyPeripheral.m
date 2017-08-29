@@ -39,7 +39,7 @@
 //    if (_stateChangedCallback) {
 //        [self.peripheral removeObserver:self forKeyPath:@"state"];
 //    }
-    EasyLog(@"\n%@设备已销毁 %zd",self.name,self.deviceScanCount);
+    EasyLog(@"\n%@设备已销毁 %@",self.name,self.identifier);
     _peripheral.delegate = nil ;
 }
 
@@ -137,12 +137,15 @@
     
     NSAssert(callback, @"you should handle connect device callback !");
     
-    _connectCallback = [callback copy];
+    if (callback) {
+        _connectCallback = [callback copy];
+    }
     _connectTimeOut = timeout ;
     _connectOpertion = options ;
 
     _isReconnectDevice = YES ;
 
+    EasyLog_S(@"开始连接设备 - 超时时间:%zd",timeout);
     [self.centerManager.manager connectPeripheral:self.peripheral options:options];
     
     //如果设定的时间内系统没有回调连接的结果。直接返回错误信息
@@ -217,6 +220,7 @@
 - (void)disconnectDevice
 {
     if (self.state == CBPeripheralStateConnected) {
+        EasyLog_S(@"断开设备连接 %@",self.peripheral.identifier.UUIDString);
         [self.centerManager.manager cancelPeripheralConnection:self.peripheral];
     }
 //    [self.centerManager.connectedDeviceDict removeObjectForKey:self.identifier];
@@ -273,7 +277,7 @@
     }
     else{
         
-        EasyLog(@"discoverDeviceServiceWithUUIDArray");
+        EasyLog_S(@"寻找设备上的服务 %@",self.peripheral.identifier.UUIDString);
         [self.peripheral discoverServices:uuidArray];
     }
 }
@@ -297,6 +301,7 @@
     
     _blueToothReadRSSICallback = [callback copy];
     
+    EasyLog_S(@"读取设备的rssi %@",self.peripheral.identifier.UUIDString);
     [self.peripheral readRSSI];
 }
 
@@ -307,7 +312,7 @@
 {
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wdeprecated-declarations"
-    EasyLog_S(@"\n设备的rssi读取 %@ rssi:%@ error:%@",peripheral.identifier,peripheral.RSSI,error);
+    EasyLog_R(@"\n设备的rssi读取 %@ rssi:%@ error:%@",peripheral.identifier,peripheral.RSSI,error);
 
     self.RSSI = peripheral.RSSI ;
     if (_blueToothReadRSSICallback) {
@@ -319,7 +324,7 @@
 
 - (void)peripheral:(CBPeripheral *)peripheral didReadRSSI:(NSNumber *)RSSI error:(NSError *)error
 {
-    EasyLog_S(@"\n设备的rssi读取 %@ rssi:%@ error:%@",peripheral.identifier,RSSI,error);
+    EasyLog_R(@"\n设备的rssi读取 %@ rssi:%@ error:%@",peripheral.identifier,RSSI,error);
 
     self.RSSI = RSSI ;
     if (_blueToothReadRSSICallback) {
@@ -330,7 +335,7 @@
 
 - (void)peripheral:(CBPeripheral *)peripheral didDiscoverServices:(NSError *)error
 {
-    EasyLog_S(@"设备发现服务%@ serviceArray:%@ error:%@",peripheral.identifier,peripheral.services,error);
+    EasyLog_R(@"设备发现服务%@ serviceArray:%@ error:%@",peripheral.identifier,peripheral.services,error);
 
     for (CBService *tempService in peripheral.services) {
         EasyService *tempS  = [self searchServiceWithService:tempService] ;
@@ -352,7 +357,7 @@
 
 - (void)peripheral:(CBPeripheral *)peripheral didDiscoverIncludedServicesForService:(nonnull CBService *)service error:(nullable NSError *)error
 {
-    EasyLog_S(@"已连接上行的设备发现了服务%@ serviceArray:%@ error:%@",peripheral.identifier,peripheral.services,error);
+    EasyLog_R(@"已连接上行的设备发现了服务%@ serviceArray:%@ error:%@",peripheral.identifier,peripheral.services,error);
 
     NSAssert(NO, @"");
 #warning  待处理
@@ -362,7 +367,7 @@
 
 - (void)peripheral:(CBPeripheral *)peripheral didDiscoverCharacteristicsForService:(CBService *)service error:(NSError *)error
 {
-    EasyLog_S(@"发现了服务上的特征 %@ characterArray:%@ error:%@",service.UUID,service.characteristics,error);
+    EasyLog_R(@"发现了服务上的特征 %@ characterArray:%@ error:%@",service.UUID,service.characteristics,error);
 
     EasyService *tempService = [self searchServiceWithService:service];
     
@@ -389,12 +394,12 @@
     
     if (character.isNotifying) {
         
-        EasyLog_S(@"特征上的数据更新: %@ data:%@ error:%@",characteristic.UUID,characteristic.value ,error);
+        EasyLog_R(@"特征上的数据更新: %@ data:%@ error:%@",characteristic.UUID,characteristic.value ,error);
 
         [character dealOperationCharacterWithType:OperationTypeNotify error:error];
     }
     else{
-        EasyLog_S(@"读 特征的回调: %@ data:%@ error:%@",characteristic.UUID,characteristic.value ,error);
+        EasyLog_R(@"读 特征的回调: %@ data:%@ error:%@",characteristic.UUID,characteristic.value ,error);
 
         [character dealOperationCharacterWithType:OperationTypeRead error:error];
     }
@@ -404,13 +409,13 @@
 - (void)peripheral:(CBPeripheral *)peripheral didUpdateNotificationStateForCharacteristic:(CBCharacteristic *)characteristic error:(NSError *)error
 {
     
-    EasyLog_S(@"监听 特征的回调: %@ error:%@",characteristic.UUID ,error);
+    EasyLog_R(@"监听 特征的回调: %@ error:%@",characteristic.UUID ,error);
 
     if (characteristic.isNotifying) {
         //        [peripheral readValueForCharacteristic:characteristic];
         
     } else { // Notification has stopped
-        NSLog(@"Notification stopped on %@.  Disconnecting", characteristic);
+        EasyLog(@"Notification stopped on %@.  Disconnecting", characteristic);
         //        [self disconnectDevice];
     }
     
@@ -428,7 +433,7 @@
 // 当写入某个特征值后 外设代理执行的回调
 - (void)peripheral:(CBPeripheral *)peripheral didWriteValueForCharacteristic:(CBCharacteristic *)characteristic error:(NSError *)error
 {
-    EasyLog_S(@"写 特征的回调: %@ error:%@",characteristic.UUID ,error);
+    EasyLog_R(@"写 特征的回调: %@ error:%@",characteristic.UUID ,error);
 
     EasyService *tempService = [self searchServiceWithService:characteristic.service];
     EasyCharacteristic *character = [tempService searchCharacteristciWithCharacteristic:characteristic];
@@ -444,7 +449,7 @@
 
 - (void)peripheral:(CBPeripheral *)peripheral didDiscoverDescriptorsForCharacteristic:(CBCharacteristic *)characteristic error:(NSError *)error
 {
-    EasyLog_S(@"发现特征上的描述: %@ descripterArray %@ error:%@",characteristic.UUID ,characteristic.descriptors ,error);
+    EasyLog_R(@"发现特征上的描述: %@ descripterArray %@ error:%@",characteristic.UUID ,characteristic.descriptors ,error);
 
     
     EasyService *easyService = [self searchServiceWithService:characteristic.service];
@@ -460,7 +465,7 @@
 -(void)peripheral:(CBPeripheral *)peripheral didUpdateValueForDescriptor:(CBDescriptor *)descriptor error:(NSError *)error
 {
     
-    EasyLog_S(@"获取到Descriptors的值 uuid:%@  value:%@",[NSString stringWithFormat:@"%@",descriptor.UUID],descriptor.value);
+    EasyLog_R(@"获取到Descriptors的值 uuid:%@  value:%@",[NSString stringWithFormat:@"%@",descriptor.UUID],descriptor.value);
     
     //这个descriptor都是对于characteristic的描述，一般都是字符串，所以这里我们转换成字符串去解析
     for (EasyService *tempS in self.serviceArray) {
@@ -476,7 +481,7 @@
 }
 - (void)peripheral:(CBPeripheral *)peripheral didWriteValueForDescriptor:(CBDescriptor *)descriptor error:(nullable NSError *)error
 {
-    EasyLog_S(@"写 特征上的描述的回调: %@ error:%@",descriptor.UUID ,error);
+    EasyLog_R(@"写 特征上的描述的回调: %@ error:%@",descriptor.UUID ,error);
     
     for (EasyService *tempS in self.serviceArray) {
         for (EasyCharacteristic *tempC in tempS.characteristicArray) {
@@ -514,11 +519,11 @@
 - (void)centralManager:(CBCentralManager *)central didRetrievePeripherals:(NSArray *)peripherals
 {
     
-    EasyLog_S(@"didRetrievePeripherals%@\n%@\n",central,peripherals);
+    EasyLog_R(@"didRetrievePeripherals%@\n%@\n",central,peripherals);
     
     int i = 0;
     for(CBPeripheral *peripheral in peripherals) {
-        NSLog(@"%@",[NSString stringWithFormat:@"[%d] - peripheral : %@ with UUID : %@",i,peripheral,peripheral.identifier]);
+        EasyLog(@"%@",[NSString stringWithFormat:@"[%d] - peripheral : %@ with UUID : %@",i,peripheral,peripheral.identifier]);
         i++;
         //Do something on each known peripheral.
     }
@@ -526,7 +531,7 @@
 }
 - (void)centralManager:(CBCentralManager *)central didRetrieveConnectedPeripherals:(NSArray *)peripherals
 {
-    EasyLog_S(@"didRetrieveConnectedPeripherals:%@\n%@",peripherals,central);
+    EasyLog_R(@"didRetrieveConnectedPeripherals:%@\n%@",peripherals,central);
     
     
     int i = 0;
@@ -540,11 +545,11 @@
 
 - (void)peripheralDidInvalidateServices:(CBPeripheral *)peripheral
 {
-    EasyLog_S(@"peripheralDidInvalidateServices  %@",peripheral);
+    EasyLog_R(@"peripheralDidInvalidateServices  %@",peripheral);
 }
 - (void)peripheral:(CBPeripheral *)peripheral didModifyServices:(NSArray *)invalidatedServices
 {
-    EasyLog_S(@"didModifyServices%@ \n%@",invalidatedServices,peripheral);
+    EasyLog_R(@"didModifyServices%@ \n%@",invalidatedServices,peripheral);
 }
 
 
