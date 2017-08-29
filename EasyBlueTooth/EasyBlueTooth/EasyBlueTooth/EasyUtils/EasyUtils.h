@@ -25,11 +25,9 @@
 #define queueEnd  });
 
 /**打印****/
-#if DEBUG == 1
-#define EasyLog NSLog
-#else
-#define EasyLog(...)
-#endif
+#define ISSHOWLOG 1
+
+#define EasyLog(fmt, ...) if(ISSHOWLOG) { NSLog(fmt,##__VA_ARGS__); }
 
 
 // 是否为空

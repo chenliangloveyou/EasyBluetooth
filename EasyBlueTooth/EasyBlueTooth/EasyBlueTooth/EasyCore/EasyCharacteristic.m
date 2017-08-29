@@ -30,6 +30,10 @@
 @property (nonatomic, strong) NSMutableArray *writeDataArray ;
 @property (nonatomic, strong) NSMutableArray *notifyDataArray ;
 
+@property (nonatomic,strong)NSMutableArray<blueToothCharactersticOperateCallback> *readCallbackArray ;
+@property (nonatomic,strong)NSMutableArray<blueToothCharactersticOperateCallback> *writeCallbackArray ;
+@property (nonatomic,strong)NSMutableArray<blueToothCharactersticOperateCallback> *notifyCallbackArray ;
+
 @end
 
 @implementation EasyCharacteristic
@@ -137,7 +141,6 @@
             NSUInteger subLength = data.length - i > 20 ? 20 : data.length-i ;
             NSData *subData = [data subdataWithRange:NSMakeRange(i, subLength)];
             
-            EasyLog(@"发送数据-- %@",subData);
             [self.peripheral.peripheral writeValue:subData
                                  forCharacteristic:self.characteristic
                                               type:writeType];
@@ -179,7 +182,7 @@
             }
             
             if (self.characteristic.value) {
-                [self addDataToArrayWithType:OperationTypeNotify data:self.characteristic.value];
+                [self addDataToArrayWithType:OperationTypeNotify data:self.value];
             }
             
             break;
@@ -273,7 +276,6 @@
                 [self.notifyDataArray removeLastObject];
             }
             [[self mutableArrayValueForKey:@"notifyDataArray"] insertObject:data atIndex:0];
-
 //            [self.notifyDataArray insertObject:data atIndex:0];
             break;
         default:

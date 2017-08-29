@@ -195,6 +195,7 @@
 		AD15523B1F4FFE7A00DBBBDC /* preview */ = {
 			isa = PBXGroup;
 			children = (
+				AD7DCAAF1E7A5E9F00589BBA /* Supporting Files */,
 				AD1552441F4FFED900DBBBDC /* preview_1.gif */,
 				AD1552451F4FFED900DBBBDC /* preview_2.gif */,
 				AD1552461F4FFED900DBBBDC /* preview_3.png */,
@@ -290,7 +291,6 @@
 				AD7DCABD1E7A5E9F00589BBA /* LaunchScreen.storyboard */,
 				AD7DCAC01E7A5E9F00589BBA /* Info.plist */,
 				AD15523B1F4FFE7A00DBBBDC /* preview */,
-				AD7DCAAF1E7A5E9F00589BBA /* Supporting Files */,
 			);
 			path = EasyBlueTooth;
 			sourceTree = "<group>";
@@ -301,6 +301,7 @@
 				AD7DCAB01E7A5E9F00589BBA /* main.m */,
 			);
 			name = "Supporting Files";
+			path = ..;
 			sourceTree = "<group>";
 		};
 		AD7DCAC81E7A5EA000589BBA /* EasyBlueToothTests */ = {

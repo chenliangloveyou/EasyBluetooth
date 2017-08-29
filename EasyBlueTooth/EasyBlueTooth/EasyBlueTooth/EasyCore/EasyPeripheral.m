@@ -354,6 +354,7 @@
 {
     EasyLog(@"\n%@已连接上行的设备发现了服务%@ %@",peripheral,peripheral.services,error);
 
+    NSAssert(NO, @"");
 #warning  待处理
 }
 

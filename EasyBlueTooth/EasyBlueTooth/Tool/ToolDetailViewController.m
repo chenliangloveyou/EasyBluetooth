@@ -77,10 +77,10 @@
                 
                 for (EasyCharacteristic *tempC in characteristics) {
                     [tempC discoverDescriptorWithCallback:^(NSArray<EasyDescriptor *> *descriptorArray, NSError *error) {
-//                        NSLog(@"%@ ====", descriptorArray)  ;
+                        NSLog(@"%@ ====", descriptorArray)  ;
                         if (descriptorArray.count > 0) {
                             for (EasyDescriptor *d in descriptorArray) {
-//                                NSLog(@"%@ - %@ %@ ", d,d.UUID ,d.value);
+                                NSLog(@"%@ - %@ %@ ", d,d.UUID ,d.value);
                             }
                         }
                         for (EasyDescriptor *desc in descriptorArray) {
