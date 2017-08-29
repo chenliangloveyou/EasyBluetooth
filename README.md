@@ -83,10 +83,12 @@
 
 ```
 /**
- * 根据给定名称扫描符合名称的所有设备
+ * 连接一个已知名字的设备
+ * name 设备名称
+ * callback 连接设备的回调信息
  */
-- (void)scanAllDeviceWithName:(NSString *)name
-                     callback:(blueToothScanAllCallback)callback ;
+- (void)scanAndConnectDeviceWithName:(NSString *)name
+                            callback:(blueToothScanCallback)callback ;
    ```
    
 #### 场景2，扫描设备后选择一些符合规则的设备后连接
