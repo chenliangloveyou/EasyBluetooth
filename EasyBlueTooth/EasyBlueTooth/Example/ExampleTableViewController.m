@@ -120,7 +120,7 @@
         options.connectTimeOut = 5 ;
         options.autoConnectAfterDisconnect = YES ;
         
-        _bleManager.managerOptions = options ;
+        [EasyBlueToothManager shareInstance].managerOptions = options ;
         
     }
     

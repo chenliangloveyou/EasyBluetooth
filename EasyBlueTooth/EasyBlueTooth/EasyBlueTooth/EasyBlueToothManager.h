@@ -45,6 +45,7 @@ typedef NS_ENUM(NSUInteger , bluetoothErrorState) {
     bluetoothErrorStateConnectError ,//连接失败
     bluetoothErrorStateNoConnect,   //设别没有连接
     bluetoothErrorStateDisconnect ,  //设备失去连接
+    bluetoothErrorStateDisconnectTring ,//设备失去连接 ,但是设置了自从重连，正在重连
     bluetoothErrorStateNoService ,   //没有找到相应的服务
     bluetoothErrorStateNoCharcter,  //没有对应的特征
     bluetoothErrorStateWriteError,  //写数据失败
@@ -101,6 +102,11 @@ typedef void (^blueToothOperationCallback)(NSData *data , NSError *error);
  */
 @property (nonatomic,assign)bluetoothState bluetoothState ;
 @property (nonatomic,strong,)__block blueToothStateChanged bluetoothStateChanged ;
+
+
+
+
+
 
 /**
  * 单例
@@ -232,8 +238,6 @@ typedef void (^blueToothOperationCallback)(NSData *data , NSError *error);
                      notifyValue:(BOOL)notifyValue
                     withCallback:(blueToothOperationCallback )callback ;
 
-
-
 /**
  * peripheral 写数据的设备
  * data  需要写入的数据
@@ -259,6 +263,9 @@ typedef void (^blueToothOperationCallback)(NSData *data , NSError *error);
 
 #pragma mark - rssi 
 
+/**
+ * 读取设备的rssi
+ */
 - (void)readRSSIWithPeripheral:(EasyPeripheral *)peripheral
                       callback:(blueToothReadRSSICallback)callback ;
 
@@ -272,17 +279,17 @@ typedef void (^blueToothOperationCallback)(NSData *data , NSError *error);
  * 停止扫描
  */
 - (void)stopScanDevice ;
-/*
+/**
  * peripheral 需要断开的设备
   */
 - (void)disconnectWithPeripheral:(EasyPeripheral *)peripheral ;
 
-/*
+/**
  * identifier 需要断开的设备UUID
  */
 - (void)disconnectWithIdentifier:(NSUUID *)identifier ;
 
-/*
+/**
  * 断开所有连接的设备
  */
 - (void)disconnectAllPeripheral ;

@@ -75,7 +75,6 @@ typedef void (^blueToothFindDescriptorCallback)(NSArray<EasyDescriptor *> *descr
  */
 @property (nonatomic,assign,readonly)BOOL isNotifying ;
 
-
 /**
  * 特征中所有的描述
  */

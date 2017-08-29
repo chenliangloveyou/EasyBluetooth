@@ -50,6 +50,12 @@ typedef void (^blueToothFindCharacteristic)(EasyCharacteristic *character ,NSErr
     NSAssert(condition, @"condition can't nil !");
     NSAssert(callback, @"callbck should handle");
     
+    if (!condition) {
+        NSError *tempError = [NSError errorWithDomain:@"the condition is nil" code:bluetoothErrorStateNoDevice userInfo:nil];
+        callback(nil,tempError);
+        return ;
+    }
+    
     kWeakSelf(self)
     if (self.centerManager.manager.state == CBManagerStatePoweredOn) {
         weakself.bluetoothState = bluetoothStateSystemReadly ;
@@ -60,7 +66,6 @@ typedef void (^blueToothFindCharacteristic)(EasyCharacteristic *character ,NSErr
         
         NSError *tempError = [NSError errorWithDomain:@"center manager state powered off and wraiting to turn on !" code:bluetoothErrorStateNoReadlyTring userInfo:nil];
         callback(nil,tempError);
-        
     }
     
     [self.centerManager scanDeviceWithTimeInterval:self.managerOptions.scanTimeOut services:self.managerOptions.scanServiceArray  options:self.managerOptions.scanOptions callBack:^(EasyPeripheral *peripheral, BOOL isfinish) {
@@ -81,8 +86,9 @@ typedef void (^blueToothFindCharacteristic)(EasyCharacteristic *character ,NSErr
             }
         }
         else{
-            blueToothScanRule rule = (blueToothScanRule) condition ;
+            blueToothScanRule rule = (blueToothScanRule)condition ;
             if (rule(peripheral)) {
+               
                 [weakself.centerManager stopScanDevice];
                 
                 weakself.bluetoothState = bluetoothStateDeviceFounded ;
@@ -90,21 +96,19 @@ typedef void (^blueToothFindCharacteristic)(EasyCharacteristic *character ,NSErr
                     weakself.bluetoothStateChanged(peripheral,bluetoothStateDeviceFounded);
                 }
                 callback(peripheral,nil);
-                
             }
         }
         
         if (isfinish) {
             [weakself.centerManager stopScanDevice];
             
-            
             if (weakself.centerManager.manager.state == CBCentralManagerStatePoweredOff ) {
                 NSError *tempError = [NSError errorWithDomain:@"center manager state powered off" code:bluetoothErrorStateNoReadly userInfo:nil];
-                callback(nil,tempError);
+                callback(nil , tempError);
             }
             else{
                 NSError *tempError = [NSError errorWithDomain:@"device not found !" code:bluetoothErrorStateNoDevice userInfo:nil];
-                callback(nil , tempError );
+                callback(nil , tempError);
             }
             
         }
@@ -180,7 +184,6 @@ typedef void (^blueToothFindCharacteristic)(EasyCharacteristic *character ,NSErr
                     callback(tempArray , nil );
                 }
             }
-            
         }
     }];
 }
@@ -235,9 +238,16 @@ typedef void (^blueToothFindCharacteristic)(EasyCharacteristic *character ,NSErr
     kWeakSelf(self)
     [peripheral connectDeviceWithTimeOut:self.managerOptions.connectTimeOut Options:self.managerOptions.connectOptions disconnectCallback:^(EasyPeripheral *peripheral, NSError *error) {
         
+        NSInteger errorCode = bluetoothErrorStateDisconnect ;
+        if (weakself.managerOptions.autoConnectAfterDisconnect) {
+            //设备失去连接。正在重连...
+            [peripheral reconnectDevice];
+            errorCode = bluetoothErrorStateDisconnectTring ;
+        }
+        
         NSError *tempError = nil ;
         if (error) {
-            tempError = [NSError errorWithDomain:error.domain code:bluetoothErrorStateDisconnect userInfo:nil];
+            tempError = [NSError errorWithDomain:error.domain code:errorCode userInfo:nil];
         }
         
         callback(peripheral,tempError);
@@ -274,7 +284,6 @@ typedef void (^blueToothFindCharacteristic)(EasyCharacteristic *character ,NSErr
         if (error) {
             
             callback(peripheral,error);
-            
             return ;
         }
         
@@ -291,7 +300,6 @@ typedef void (^blueToothFindCharacteristic)(EasyCharacteristic *character ,NSErr
         if (error) {
             
             callback(peripheral,error);
-            
             return ;
         }
         
@@ -304,13 +312,13 @@ typedef void (^blueToothFindCharacteristic)(EasyCharacteristic *character ,NSErr
 {
     kWeakSelf(self)
     [self scanDeviceWithRule:^BOOL(EasyPeripheral *peripheral) {
+      
         return [peripheral.identifier isEqual:identifier] ;
+   
     } callback:^(EasyPeripheral *peripheral, NSError *error) {
         
         if (error) {
-            
             callback(peripheral,error);
-            
             return ;
         }
         
@@ -331,7 +339,6 @@ typedef void (^blueToothFindCharacteristic)(EasyCharacteristic *character ,NSErr
         else{
             
             callback(nil,error);
-            
         }
     }];
 }
@@ -348,9 +355,7 @@ typedef void (^blueToothFindCharacteristic)(EasyCharacteristic *character ,NSErr
         else{
             
             callback(nil,error);
-            
         }
-        
     }];
 }
 
@@ -368,12 +373,10 @@ typedef void (^blueToothFindCharacteristic)(EasyCharacteristic *character ,NSErr
             if (i == deviceArray.count-1) {
                 
                 callback(deviceArray,nil);
-                
             }
         }];
         queueEnd
     }
-    
 }
 
 #pragma mark - 读写操作
@@ -397,7 +400,6 @@ typedef void (^blueToothFindCharacteristic)(EasyCharacteristic *character ,NSErr
         if (error) {
             
             callback(nil ,error );
-            
         }
         else{
             NSAssert(character, @"attention : the characteristic is null ");
@@ -438,7 +440,6 @@ typedef void (^blueToothFindCharacteristic)(EasyCharacteristic *character ,NSErr
         if (error) {
             
             callback(nil ,error );
-            
         }
         else{
             NSAssert(character, @"attention : the characteristic is null ");
@@ -480,7 +481,6 @@ typedef void (^blueToothFindCharacteristic)(EasyCharacteristic *character ,NSErr
         if (error) {
             
             callback(nil ,error );
-            
         }
         else{
             NSAssert(character, @"attention : the characteristic is null ");
@@ -705,7 +705,7 @@ typedef void (^blueToothFindCharacteristic)(EasyCharacteristic *character ,NSErr
     }
 }
 
-/*
+/**
  * 断开所有连接的设备
  */
 - (void)disconnectAllPeripheral
