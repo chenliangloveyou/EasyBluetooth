@@ -20,7 +20,7 @@
 
 @interface BindingDeviceView : UIView
 
-+ (instancetype)BindingDeviceViewDelegate:(id<BindingDeviceViewProtocol>)Delegate name:(NSString *)name dataArray:(NSArray *)dataArray ;
++ (instancetype)BindingDeviceViewDelegate:(id<BindingDeviceViewProtocol>)Delegate dataArray:(NSArray *)dataArray ;
 
 
 @end

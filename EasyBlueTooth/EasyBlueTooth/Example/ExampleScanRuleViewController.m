@@ -7,7 +7,7 @@
 //
 
 #import "ExampleScanRuleViewController.h"
-
+#import "EFShowView.h"
 @interface ExampleScanRuleViewController ()
 
 @end
@@ -26,13 +26,20 @@
     self.view.backgroundColor = [UIColor whiteColor];
     // Do any additional setup after loading the view.
     
+    [EFShowView showHUDMsg:@"正在扫描设备"];
     [self.bleManager scanDeviceWithRule:^BOOL(EasyPeripheral *peripheral) {
         
         return peripheral.name.length > 4 ;
         
     } callback:^(EasyPeripheral *peripheral, NSError *error) {
         
+        
         //把peripheral 保存起来。 用来操作数据
+        
+        queueMainStart
+        [EFShowView showSueecssText:@"设备连接成功!"];
+        [EFShowView HideHud];
+        queueEnd
     }];
     
 }

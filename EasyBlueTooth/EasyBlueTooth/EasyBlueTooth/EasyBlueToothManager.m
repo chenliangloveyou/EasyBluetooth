@@ -192,16 +192,23 @@ typedef void (^blueToothFindCharacteristic)(EasyCharacteristic *character ,NSErr
 - (void)connectDeviceWithIdentifier:(NSString *)identifier
                            callback:(blueToothScanCallback)callback
 {
+    NSAssert(identifier, @"you can't connect a empty uuid");
+    
+    if (ISEMPTY(identifier)) {
+        NSError *error = [NSError errorWithDomain:@"the identifier is empty" code:bluetoothErrorStateNoDevice userInfo:nil];
+        callback(nil,error);
+    }
     kWeakSelf(self)
-    if ([self.centerManager.connectedDeviceDict objectForKey:identifier]) {
+    NSUUID *uuid = [[NSUUID alloc]initWithUUIDString:identifier];
+    if ([self.centerManager.connectedDeviceDict objectForKey:uuid]) {
      
-        EasyPeripheral *peripheral = weakself.centerManager.connectedDeviceDict[identifier];
+        EasyPeripheral *peripheral = weakself.centerManager.connectedDeviceDict[uuid];
         
         [weakself connectDeviceWithPeripheral:peripheral callback:callback];
     }
     else{
         [weakself scanDeviceWithRule:^BOOL(EasyPeripheral *peripheral) {
-            return [peripheral.identifier isEqual:identifier];
+            return [peripheral.identifier isEqual:uuid];
         } callback:^(EasyPeripheral *peripheral, NSError *error) {
            
             if (error) {

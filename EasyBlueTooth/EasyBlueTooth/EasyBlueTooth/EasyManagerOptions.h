@@ -12,7 +12,7 @@
 
 /**
  * 蓝牙所有操作所在的线程。如果不传，将会在主线程上操作。
- * note：最好创建一个线程传入。因为返回数据后的操作已经都放到了主线程上。
+ * note：如果传入线程，那么返回数据的UI操作需要放到主线程上
  */
 @property (nonatomic,strong)dispatch_queue_t managerQueue ;
 
@@ -53,6 +53,11 @@
  * 连接设备最大时长 默认为5秒
  */
 @property (nonatomic,assign)NSUInteger connectTimeOut ;
+
+/**
+ * 断开连接后重新连接
+ */
+@property (nonatomic,assign)BOOL autoConnectAfterDisconnect ;
 
 
 - (instancetype)initWithManagerQueue:(dispatch_queue_t)queue managerDictionary:(NSDictionary *)managerDictionary ;

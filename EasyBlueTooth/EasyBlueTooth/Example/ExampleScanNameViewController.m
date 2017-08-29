@@ -8,6 +8,8 @@
 
 #import "ExampleScanNameViewController.h"
 
+#import "EFShowView.h"
+
 @interface ExampleScanNameViewController ()
 
 @property (nonatomic,strong) EasyPeripheral *peripheral ;
@@ -27,12 +29,28 @@
     self.title = @"扫描设备名称";
     self.view.backgroundColor = [UIColor whiteColor];
     
+    self.bleManager.bluetoothStateChanged = ^(EasyPeripheral *peripheral, bluetoothState state) {
+        queueMainStart
+        switch (state) {
+            case bluetoothStateSystemReadly:
+                [EFShowView showInfoText:@"蓝牙已准备就绪.." ];
+                break;
+            case bluetoothStateDeviceFounded:
+                [EFShowView showInfoText:@"已发现设备"];
+                break ;
+                case bluetoothStateDeviceConnected:
+                [EFShowView showInfoText:@"设备连成功"];
+            default:
+                break;
+        }
+        queueEnd
+    };
+    
+    [EFShowView showInfoText:@"正在扫描并连接设别..."];
     kWeakSelf(self)
     [self.bleManager scanAndConnectDeviceWithName:@"BLT_M70C" callback:^(EasyPeripheral *peripheral, NSError *error) {
         if (!error) {
-            
-            weakself.peripheral = peripheral ;
-            
+            weakself.peripheral = peripheral ;            
         }
     }];
 }

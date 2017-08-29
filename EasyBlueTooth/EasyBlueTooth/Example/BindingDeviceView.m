@@ -14,7 +14,6 @@
 @interface BindingDeviceView()<UITableViewDelegate,UITableViewDataSource>
 
 @property (nonatomic,weak)id<BindingDeviceViewProtocol>Delegate ;
-@property (nonatomic,strong)NSString *name ;
 @property (nonatomic,strong)NSArray *dataArray ;
 
 @property (nonatomic,assign)long selectIndex ;
@@ -26,11 +25,10 @@
 {
 
 }
-+(instancetype)BindingDeviceViewDelegate:(id<BindingDeviceViewProtocol>)Delegate name:(NSString *)name dataArray:(NSArray *)dataArray
++(instancetype)BindingDeviceViewDelegate:(id<BindingDeviceViewProtocol>)Delegate dataArray:(NSArray *)dataArray
 {
     BindingDeviceView *view = [[BindingDeviceView alloc]init];
     view.Delegate = Delegate ;
-    view.name = name ;
     view.dataArray = dataArray ;
     
     return view ;
@@ -60,7 +58,7 @@
     
     UILabel *titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0,300 , 49 )];
     titleLabel.textAlignment = NSTextAlignmentCenter ;
-    titleLabel.text = @"绑定设备";
+    titleLabel.text = @"选择一个需要绑定的设备";
     titleLabel.font = [UIFont boldSystemFontOfSize:19];
     titleLabel.tag = 1091 ;
 //    titleLabel.textColor = kColorDefult ;
@@ -146,7 +144,9 @@
 {
     
     if (self.Delegate) {
-        [self.Delegate BindingDeviceViewSure:self device:self.dataArray[self.selectIndex]];
+        EasyPeripheral *tempP = _dataArray[self.selectIndex];
+
+        [self.Delegate BindingDeviceViewSure:self device:tempP.identifier.UUIDString];
     }
     UIView *vi = [[UIApplication sharedApplication].keyWindow viewWithTag:10101];
     if (vi)   [vi removeFromSuperview];

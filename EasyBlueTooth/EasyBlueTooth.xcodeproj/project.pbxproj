@@ -21,6 +21,7 @@
 		AD1552571F5411FA00DBBBDC /* ExampleScanNameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD1552561F5411FA00DBBBDC /* ExampleScanNameViewController.m */; };
 		AD15525A1F5413A800DBBBDC /* ExampleScanRuleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD1552591F5413A800DBBBDC /* ExampleScanRuleViewController.m */; };
 		AD15525D1F541E2500DBBBDC /* BindingDeviceView.m in Sources */ = {isa = PBXBuildFile; fileRef = AD15525C1F541E2500DBBBDC /* BindingDeviceView.m */; };
+		AD1552601F55102B00DBBBDC /* ExampleAllRuleDeviceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD15525F1F55102B00DBBBDC /* ExampleAllRuleDeviceViewController.m */; };
 		AD32B2071F4A79D600A1746C /* ExampleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AD32B1EC1F4A79D600A1746C /* ExampleCell.m */; };
 		AD32B2081F4A79D600A1746C /* ExampleCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AD32B1ED1F4A79D600A1746C /* ExampleCell.xib */; };
 		AD32B2091F4A79D600A1746C /* ExampleTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD32B1EF1F4A79D600A1746C /* ExampleTableViewController.m */; };
@@ -97,6 +98,8 @@
 		AD1552591F5413A800DBBBDC /* ExampleScanRuleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExampleScanRuleViewController.m; sourceTree = "<group>"; };
 		AD15525B1F541E2500DBBBDC /* BindingDeviceView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BindingDeviceView.h; sourceTree = "<group>"; };
 		AD15525C1F541E2500DBBBDC /* BindingDeviceView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BindingDeviceView.m; sourceTree = "<group>"; };
+		AD15525E1F55102B00DBBBDC /* ExampleAllRuleDeviceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExampleAllRuleDeviceViewController.h; sourceTree = "<group>"; };
+		AD15525F1F55102B00DBBBDC /* ExampleAllRuleDeviceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExampleAllRuleDeviceViewController.m; sourceTree = "<group>"; };
 		AD32B1EB1F4A79D600A1746C /* ExampleCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExampleCell.h; sourceTree = "<group>"; };
 		AD32B1EC1F4A79D600A1746C /* ExampleCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExampleCell.m; sourceTree = "<group>"; };
 		AD32B1ED1F4A79D600A1746C /* ExampleCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ExampleCell.xib; sourceTree = "<group>"; };
@@ -223,6 +226,8 @@
 				AD15525C1F541E2500DBBBDC /* BindingDeviceView.m */,
 				AD1552521F5410F600DBBBDC /* ExampleOneLineCodeViewController.h */,
 				AD1552531F5410F600DBBBDC /* ExampleOneLineCodeViewController.m */,
+				AD15525E1F55102B00DBBBDC /* ExampleAllRuleDeviceViewController.h */,
+				AD15525F1F55102B00DBBBDC /* ExampleAllRuleDeviceViewController.m */,
 			);
 			path = Example;
 			sourceTree = "<group>";
@@ -544,6 +549,7 @@
 				AD32B2111F4A79D600A1746C /* ToolDetailOperationCell.m in Sources */,
 				AD32B2151F4A79D600A1746C /* ToolInputView.m in Sources */,
 				AD7DCAB11E7A5E9F00589BBA /* main.m in Sources */,
+				AD1552601F55102B00DBBBDC /* ExampleAllRuleDeviceViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

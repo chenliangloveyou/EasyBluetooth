@@ -16,6 +16,7 @@
 #import "ExampleScanNameViewController.h"
 #import "ExampleOneLineCodeViewController.h"
 #import "ExampleSavedViewController.h"
+#import "ExampleAllRuleDeviceViewController.h"
 
 @interface ExampleTableViewController ()
 
@@ -74,8 +75,7 @@
         case 1:vc = [[ExampleScanRuleViewController alloc]init];  break;
         case 2:vc = [[ExampleSavedViewController alloc]init];break ;
         case 3:vc = [[ExampleOneLineCodeViewController alloc]init];break ;
-        default:
-            break;
+        default:vc= [[ExampleAllRuleDeviceViewController alloc]init]; break;
     }
     
     ((ExampleSavedViewController *)vc).bleManager = self.bleManager ;
@@ -118,6 +118,7 @@
         EasyManagerOptions *options = [[EasyManagerOptions alloc]initWithManagerQueue:queue managerDictionary:managerDict scanOptions:scanDict scanServiceArray:nil connectOptions:connectDict];
         options.scanTimeOut = 6 ;
         options.connectTimeOut = 5 ;
+        options.autoConnectAfterDisconnect = YES ;
         
         _bleManager.managerOptions = options ;
         
