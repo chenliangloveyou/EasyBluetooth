@@ -7,10 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		68815D011F48A44C00F99E2D /* UIView+Ext.m in Sources */ = {isa = PBXBuildFile; fileRef = 68815D001F48A44C00F99E2D /* UIView+Ext.m */; };
 		AD1552251F4C345000DBBBDC /* ExampleModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AD1552241F4C345000DBBBDC /* ExampleModel.m */; };
-		AD1552311F4D7E1B00DBBBDC /* EFShowView.m in Sources */ = {isa = PBXBuildFile; fileRef = AD1552301F4D7E1B00DBBBDC /* EFShowView.m */; };
-		AD1552371F4FF3FD00DBBBDC /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = AD1552361F4FF3FD00DBBBDC /* MBProgressHUD.m */; };
 		AD1552481F4FFED900DBBBDC /* preview_1.gif in Resources */ = {isa = PBXBuildFile; fileRef = AD1552441F4FFED900DBBBDC /* preview_1.gif */; };
 		AD1552491F4FFED900DBBBDC /* preview_2.gif in Resources */ = {isa = PBXBuildFile; fileRef = AD1552451F4FFED900DBBBDC /* preview_2.gif */; };
 		AD15524A1F4FFED900DBBBDC /* preview_3.png in Resources */ = {isa = PBXBuildFile; fileRef = AD1552461F4FFED900DBBBDC /* preview_3.png */; };
@@ -22,6 +19,10 @@
 		AD15525A1F5413A800DBBBDC /* ExampleScanRuleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD1552591F5413A800DBBBDC /* ExampleScanRuleViewController.m */; };
 		AD15525D1F541E2500DBBBDC /* BindingDeviceView.m in Sources */ = {isa = PBXBuildFile; fileRef = AD15525C1F541E2500DBBBDC /* BindingDeviceView.m */; };
 		AD1552601F55102B00DBBBDC /* ExampleAllRuleDeviceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD15525F1F55102B00DBBBDC /* ExampleAllRuleDeviceViewController.m */; };
+		AD1552631F55140900DBBBDC /* EasyUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = AD1552621F55140900DBBBDC /* EasyUtils.m */; };
+		AD1552751F55148600DBBBDC /* EFShowView.m in Sources */ = {isa = PBXBuildFile; fileRef = AD1552701F55148600DBBBDC /* EFShowView.m */; };
+		AD1552761F55148600DBBBDC /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = AD1552721F55148600DBBBDC /* MBProgressHUD.m */; };
+		AD1552771F55148600DBBBDC /* UIView+Ext.m in Sources */ = {isa = PBXBuildFile; fileRef = AD1552741F55148600DBBBDC /* UIView+Ext.m */; };
 		AD32B2071F4A79D600A1746C /* ExampleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AD32B1EC1F4A79D600A1746C /* ExampleCell.m */; };
 		AD32B2081F4A79D600A1746C /* ExampleCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AD32B1ED1F4A79D600A1746C /* ExampleCell.xib */; };
 		AD32B2091F4A79D600A1746C /* ExampleTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD32B1EF1F4A79D600A1746C /* ExampleTableViewController.m */; };
@@ -53,7 +54,6 @@
 		AD92FA171F42D8D100D8B811 /* EasyPeripheral.m in Sources */ = {isa = PBXBuildFile; fileRef = AD92FA0A1F42D8D100D8B811 /* EasyPeripheral.m */; };
 		AD92FA181F42D8D100D8B811 /* EasyProfiles.m in Sources */ = {isa = PBXBuildFile; fileRef = AD92FA0C1F42D8D100D8B811 /* EasyProfiles.m */; };
 		AD92FA191F42D8D100D8B811 /* EasyService.m in Sources */ = {isa = PBXBuildFile; fileRef = AD92FA0E1F42D8D100D8B811 /* EasyService.m */; };
-		AD92FA1A1F42D8D100D8B811 /* EasyUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = AD92FA111F42D8D100D8B811 /* EasyUtils.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -74,14 +74,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		68815CFF1F48A44C00F99E2D /* UIView+Ext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Ext.h"; sourceTree = "<group>"; };
-		68815D001F48A44C00F99E2D /* UIView+Ext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Ext.m"; sourceTree = "<group>"; };
 		AD1552231F4C345000DBBBDC /* ExampleModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExampleModel.h; sourceTree = "<group>"; };
 		AD1552241F4C345000DBBBDC /* ExampleModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExampleModel.m; sourceTree = "<group>"; };
-		AD15522F1F4D7E1B00DBBBDC /* EFShowView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EFShowView.h; sourceTree = "<group>"; };
-		AD1552301F4D7E1B00DBBBDC /* EFShowView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EFShowView.m; sourceTree = "<group>"; };
-		AD1552351F4FF3FD00DBBBDC /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
-		AD1552361F4FF3FD00DBBBDC /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
 		AD1552441F4FFED900DBBBDC /* preview_1.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = preview_1.gif; sourceTree = "<group>"; };
 		AD1552451F4FFED900DBBBDC /* preview_2.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = preview_2.gif; sourceTree = "<group>"; };
 		AD1552461F4FFED900DBBBDC /* preview_3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = preview_3.png; sourceTree = "<group>"; };
@@ -100,6 +94,14 @@
 		AD15525C1F541E2500DBBBDC /* BindingDeviceView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BindingDeviceView.m; sourceTree = "<group>"; };
 		AD15525E1F55102B00DBBBDC /* ExampleAllRuleDeviceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExampleAllRuleDeviceViewController.h; sourceTree = "<group>"; };
 		AD15525F1F55102B00DBBBDC /* ExampleAllRuleDeviceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExampleAllRuleDeviceViewController.m; sourceTree = "<group>"; };
+		AD1552611F55140900DBBBDC /* EasyUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EasyUtils.h; sourceTree = "<group>"; };
+		AD1552621F55140900DBBBDC /* EasyUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EasyUtils.m; sourceTree = "<group>"; };
+		AD15526F1F55148600DBBBDC /* EFShowView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EFShowView.h; sourceTree = "<group>"; };
+		AD1552701F55148600DBBBDC /* EFShowView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EFShowView.m; sourceTree = "<group>"; };
+		AD1552711F55148600DBBBDC /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
+		AD1552721F55148600DBBBDC /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
+		AD1552731F55148600DBBBDC /* UIView+Ext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Ext.h"; sourceTree = "<group>"; };
+		AD1552741F55148600DBBBDC /* UIView+Ext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Ext.m"; sourceTree = "<group>"; };
 		AD32B1EB1F4A79D600A1746C /* ExampleCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExampleCell.h; sourceTree = "<group>"; };
 		AD32B1EC1F4A79D600A1746C /* ExampleCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExampleCell.m; sourceTree = "<group>"; };
 		AD32B1ED1F4A79D600A1746C /* ExampleCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ExampleCell.xib; sourceTree = "<group>"; };
@@ -157,8 +159,6 @@
 		AD92FA0C1F42D8D100D8B811 /* EasyProfiles.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EasyProfiles.m; sourceTree = "<group>"; };
 		AD92FA0D1F42D8D100D8B811 /* EasyService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EasyService.h; sourceTree = "<group>"; };
 		AD92FA0E1F42D8D100D8B811 /* EasyService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EasyService.m; sourceTree = "<group>"; };
-		AD92FA101F42D8D100D8B811 /* EasyUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EasyUtils.h; sourceTree = "<group>"; };
-		AD92FA111F42D8D100D8B811 /* EasyUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EasyUtils.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -205,6 +205,19 @@
 				AD1552471F4FFED900DBBBDC /* preview_4.png */,
 			);
 			path = preview;
+			sourceTree = "<group>";
+		};
+		AD15526E1F55148600DBBBDC /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				AD15526F1F55148600DBBBDC /* EFShowView.h */,
+				AD1552701F55148600DBBBDC /* EFShowView.m */,
+				AD1552711F55148600DBBBDC /* MBProgressHUD.h */,
+				AD1552721F55148600DBBBDC /* MBProgressHUD.m */,
+				AD1552731F55148600DBBBDC /* UIView+Ext.h */,
+				AD1552741F55148600DBBBDC /* UIView+Ext.m */,
+			);
+			path = Utils;
 			sourceTree = "<group>";
 		};
 		AD32B1EA1F4A79D600A1746C /* Example */ = {
@@ -295,6 +308,7 @@
 				AD7DCABB1E7A5E9F00589BBA /* Assets.xcassets */,
 				AD7DCABD1E7A5E9F00589BBA /* LaunchScreen.storyboard */,
 				AD7DCAC01E7A5E9F00589BBA /* Info.plist */,
+				AD15526E1F55148600DBBBDC /* Utils */,
 				AD15523B1F4FFE7A00DBBBDC /* preview */,
 			);
 			path = EasyBlueTooth;
@@ -331,7 +345,6 @@
 			isa = PBXGroup;
 			children = (
 				AD92FA001F42D8D100D8B811 /* EasyCore */,
-				AD92FA0F1F42D8D100D8B811 /* EasyUtils */,
 				AD92F9FE1F42D8D100D8B811 /* EasyBlueToothManager.h */,
 				AD92F9FF1F42D8D100D8B811 /* EasyBlueToothManager.m */,
 				AD15524C1F501D2200DBBBDC /* EasyManagerOptions.h */,
@@ -355,23 +368,10 @@
 				AD92FA081F42D8D100D8B811 /* EasyDescriptor.m */,
 				AD92FA0B1F42D8D100D8B811 /* EasyProfiles.h */,
 				AD92FA0C1F42D8D100D8B811 /* EasyProfiles.m */,
+				AD1552611F55140900DBBBDC /* EasyUtils.h */,
+				AD1552621F55140900DBBBDC /* EasyUtils.m */,
 			);
 			path = EasyCore;
-			sourceTree = "<group>";
-		};
-		AD92FA0F1F42D8D100D8B811 /* EasyUtils */ = {
-			isa = PBXGroup;
-			children = (
-				68815CFF1F48A44C00F99E2D /* UIView+Ext.h */,
-				68815D001F48A44C00F99E2D /* UIView+Ext.m */,
-				AD1552351F4FF3FD00DBBBDC /* MBProgressHUD.h */,
-				AD1552361F4FF3FD00DBBBDC /* MBProgressHUD.m */,
-				AD92FA101F42D8D100D8B811 /* EasyUtils.h */,
-				AD92FA111F42D8D100D8B811 /* EasyUtils.m */,
-				AD15522F1F4D7E1B00DBBBDC /* EFShowView.h */,
-				AD1552301F4D7E1B00DBBBDC /* EFShowView.m */,
-			);
-			path = EasyUtils;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -526,20 +526,19 @@
 				AD32B20A1F4A79D600A1746C /* ToolCell.m in Sources */,
 				AD92FA171F42D8D100D8B811 /* EasyPeripheral.m in Sources */,
 				AD32B2131F4A79D600A1746C /* ToolDetailOperationViewController.m in Sources */,
+				AD1552751F55148600DBBBDC /* EFShowView.m in Sources */,
+				AD1552631F55140900DBBBDC /* EasyUtils.m in Sources */,
 				AD92FA151F42D8D100D8B811 /* EasyCharacteristic.m in Sources */,
 				AD32B20F1F4A79D600A1746C /* ToolDetailHeaderView.m in Sources */,
 				AD32B2141F4A79D600A1746C /* ToolDetailViewController.m in Sources */,
 				AD32B20E1F4A79D600A1746C /* ToolDetailHeaderCell.m in Sources */,
+				AD1552761F55148600DBBBDC /* MBProgressHUD.m in Sources */,
 				AD1552541F5410F600DBBBDC /* ExampleOneLineCodeViewController.m in Sources */,
-				AD1552371F4FF3FD00DBBBDC /* MBProgressHUD.m in Sources */,
 				AD1552571F5411FA00DBBBDC /* ExampleScanNameViewController.m in Sources */,
-				AD92FA1A1F42D8D100D8B811 /* EasyUtils.m in Sources */,
 				AD92FA161F42D8D100D8B811 /* EasyDescriptor.m in Sources */,
 				AD15524E1F501D2200DBBBDC /* EasyManagerOptions.m in Sources */,
 				AD1552251F4C345000DBBBDC /* ExampleModel.m in Sources */,
 				AD15525D1F541E2500DBBBDC /* BindingDeviceView.m in Sources */,
-				68815D011F48A44C00F99E2D /* UIView+Ext.m in Sources */,
-				AD1552311F4D7E1B00DBBBDC /* EFShowView.m in Sources */,
 				AD7DCAB71E7A5E9F00589BBA /* ViewController.m in Sources */,
 				AD92FA181F42D8D100D8B811 /* EasyProfiles.m in Sources */,
 				AD7DCAB41E7A5E9F00589BBA /* AppDelegate.m in Sources */,
@@ -547,6 +546,7 @@
 				AD92FA191F42D8D100D8B811 /* EasyService.m in Sources */,
 				AD1552511F5410DF00DBBBDC /* ExampleSavedViewController.m in Sources */,
 				AD32B2111F4A79D600A1746C /* ToolDetailOperationCell.m in Sources */,
+				AD1552771F55148600DBBBDC /* UIView+Ext.m in Sources */,
 				AD32B2151F4A79D600A1746C /* ToolInputView.m in Sources */,
 				AD7DCAB11E7A5E9F00589BBA /* main.m in Sources */,
 				AD1552601F55102B00DBBBDC /* ExampleAllRuleDeviceViewController.m in Sources */,
