@@ -27,7 +27,13 @@
 /**打印****/
 #define ISSHOWLOG 1
 
+#define ISSHOWSYSTEMLOG 1
+
+#define ISSHOWSendLOG 1
+
 #define EasyLog(fmt, ...) if(ISSHOWLOG) { NSLog(fmt,##__VA_ARGS__); }
+
+#define EasyLog_S(fmt, ...) if(ISSHOWSYSTEMLOG) { NSLog(fmt,##__VA_ARGS__); }
 
 
 // 是否为空

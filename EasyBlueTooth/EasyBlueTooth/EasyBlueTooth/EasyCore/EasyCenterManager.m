@@ -162,7 +162,6 @@
 
 - (void)centralManagerDidUpdateState:(CBCentralManager *)central
 {
-    EasyLog(@"\n蓝牙状态发生改变：%@ - %zd",central , central.state);
     //状态改变，清除所有连接 和发现的设别
     if (_centerState != central.state) {
         [self disConnectAllDevice];
@@ -171,6 +170,9 @@
         if (_stateChangeCallback) {
             _stateChangeCallback(self , central.state );
         }
+        
+        EasyLog_S(@"系统蓝牙发生改变：之前状态：%zd ，改变后状态：%zd",_centerState,central.state) ;
+        
     }
     _centerState = central.state ;
     
@@ -193,7 +195,7 @@
 
 - (void)centralManager:(CBCentralManager *)central willRestoreState:(NSDictionary<NSString *, id> *)dict
 {
-    EasyLog(@"\n蓝牙状态即将重置：%@ - %zd",central , dict);
+    EasyLog_S(@"蓝牙状态即将重置：%@ - %zd",central , dict);
 
     //dict中会传入如下键值对
     /*
@@ -209,7 +211,7 @@
 
 - (void)centralManager:(CBCentralManager *)central didDiscoverPeripheral:(CBPeripheral *)peripheral advertisementData:(NSDictionary *)advertisementData RSSI:(NSNumber *)RSSI
 {
-    EasyLog(@"%@\n", [NSString stringWithFormat:@"发现一个设备 - %@ - %@" ,peripheral.name,RSSI] );
+    EasyLog_S(@"%@", [NSString stringWithFormat:@"发现一个设备 - %@ - %@" ,peripheral.name,peripheral.identifier] );
     
     //去掉重复搜索到的设备
     NSInteger existedIndex = -1 ;
@@ -245,7 +247,8 @@
 
 - (void)centralManager:(CBCentralManager *)central didConnectPeripheral:(CBPeripheral *)peripheral
 {
-    EasyLog(@"\n蓝牙连接上一个设备：%@ %@",peripheral,peripheral.identifier);
+    EasyLog_S(@"蓝牙连接上一个设备：%@",peripheral.identifier);
+    
     EasyPeripheral *existedP = nil ;
     for (NSUUID *tempIden in [self.connectedDeviceDict allKeys]) {
         if ([tempIden isEqual:peripheral.identifier]) {
@@ -270,7 +273,7 @@
 
 - (void)centralManager:(CBCentralManager *)central didFailToConnectPeripheral:(CBPeripheral *)peripheral error:(NSError *)error
 {
-    EasyLog(@"\n蓝牙连接一个设备失败：%@ %@ %@",peripheral,peripheral.identifier,error);
+    EasyLog_S(@"蓝牙连接一个设备失败：uuid:%@  error:%@ ",peripheral.identifier,error);
 
     EasyPeripheral *existedP = nil ;
     for (NSUUID *tempP in [self.connectedDeviceDict allKeys]) {
@@ -303,7 +306,7 @@
 
 - (void)centralManager:(CBCentralManager *)central didDisconnectPeripheral:(CBPeripheral *)peripheral error:(NSError *)error
 {
-    EasyLog(@"\n蓝牙一个设备失去连接：%@ %@ %@",peripheral,peripheral.identifier,error);
+    EasyLog_S(@"蓝牙一个设备失去连接：uuid:%@ error:%@",peripheral.identifier,error);
 
     EasyPeripheral *existedP = nil ;
     for (NSUUID *tempIden in [self.connectedDeviceDict allKeys]) {
@@ -341,7 +344,7 @@
 
 - (NSArray *)retrieveConnectedPeripheralsWithServices:(NSArray *)serviceUUIDs
 {
-    EasyLog(@"\n根据服务的id获取所有系统已连接上的设备：%@",serviceUUIDs);
+    EasyLog_S(@"根据服务的id获取所有系统已连接上的设备：%@",serviceUUIDs);
 
     if (!serviceUUIDs.count) {
         return @[];
@@ -359,7 +362,7 @@
 
 - (NSArray *)retrievePeripheralsWithIdentifiers:(NSArray *)identifiers
 {
-    EasyLog(@"\n蓝牙获取系统所有已知设备：%@",identifiers);
+    EasyLog_S(@"蓝牙获取系统所有已知设备：%@",identifiers);
 
     NSArray *resultArray = [self.manager retrievePeripheralsWithIdentifiers:identifiers];
     
