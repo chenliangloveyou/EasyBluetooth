@@ -211,6 +211,13 @@
                     withCallback:(blueToothOperationCallback )callback ;
 ```              
 
+# 蓝牙学习资料
+
+- [iOS Bluetooth 蓝牙(1)- 蓝牙基本原理](http://www.jianshu.com/p/a72a005190c7)
+- [iOS Bluetooth 蓝牙(2)- 类详细介绍](http://www.jianshu.com/p/6e3984aa76c2)
+- [iOS Bluetooth 蓝牙(3)- Easybluetooth讲解](http://www.jianshu.com/p/f23d04284c61)
+- [iOS Bluetooth 蓝牙(3)- 蓝牙后台模式](http://www.jianshu.com/p/9974a19ff9aa)
+
 # 联系作者
 如果在使用过程中遇到任务问题，或者发现使用不够恰当。希望能Issues我。
 
