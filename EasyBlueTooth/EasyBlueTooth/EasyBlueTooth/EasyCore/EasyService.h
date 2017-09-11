@@ -24,6 +24,7 @@ typedef void (^blueToothFindCharacteristicCallback)(NSArray<EasyCharacteristic *
 
 @interface EasyService : NSObject
 
+
 /**
    * 服务名称
    */
