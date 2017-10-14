@@ -23,19 +23,6 @@
 }
 - (IBAction)findDevices:(id)sender {
     
-//  [[EasyBlueToothManager shareInstance]searchDeviceWithName:@"hxsb" timeInterval:5 callBack:^(EasyPeripheral *peripheral) {
-//     [[EasyBlueToothManager shareInstance]connectDeviceWihtPeripheral:peripheral callback:^(NSError *error) {
-//         if (nil == error) {
-//             [[EasyBlueToothManager shareInstance]writeDataWithPeripheral:peripheral data:nil writeUUID:@"0xff01" callback:^(NSData *data, NSError *error) {
-//                 [[EasyBlueToothManager shareInstance] notifyDataWithPeripheral:peripheral notifyUUID:@"ff01" withCallback:^(NSData *data, NSError *error) {
-//                     if (data) {
-//                         NSLog(@"%@",data);
-//                     }
-//                 }];
-//             }];
-//         }
-//     }];
-//  }];
     
 }
 - (IBAction)connectDevice:(id)sender {
