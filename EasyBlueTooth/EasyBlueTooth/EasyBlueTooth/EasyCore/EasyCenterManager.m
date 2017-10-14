@@ -20,12 +20,10 @@
 {
     CBManagerState _centerState ;//当前系统蓝牙状态
     
-    
     NSTimeInterval _scanTimeInterval ;      //当前扫描的时间
     NSArray *_scanServicesArray ;//扫描的条件
     NSDictionary *_scanOptionsDictionary ;//扫描条件
     blueToothSearchDeviceCallback _blueToothSearchDeviceCallback ;
-    
     
     dispatch_source_t _searchDeviceTimer ;
 }
@@ -38,11 +36,7 @@
 
 - (instancetype)initWithQueue:(dispatch_queue_t)queue
 {
-    if (self = [super init]) {
-        EasyLog(@"manager 创建 %@",queue);
-        _manager = [[CBCentralManager alloc]initWithDelegate:self queue:queue];
-    }
-    return self ;
+    return [self initWithQueue:queue options:nil];
 }
 - (instancetype)initWithQueue:(dispatch_queue_t)queue options:(NSDictionary *)options
 {
@@ -96,14 +90,14 @@
         //如果不在扫描设备、已连接设备的集合中就加入其中，并通知外部调用者
         EasyPeripheral *easyP = (EasyPeripheral *)obj ;
         BOOL isExited = NO ;
-        for (NSUUID *tempIden in [self.foundDeviceDict allKeys]) {
-            if ([tempIden isEqual:easyP.identifier]) {
+        for (NSString *tempIdentify in [self.foundDeviceDict allKeys]) {
+            if ([tempIdentify isEqualToString:easyP.identifierString]) {
                 isExited = YES ;
                 break  ;
             }
         }
         if (!isExited) {
-            [self.foundDeviceDict setObject:easyP forKey:easyP.identifier];
+            [self.foundDeviceDict setObject:easyP forKey:easyP.identifierString];
         }
         
         if (_blueToothSearchDeviceCallback) {
@@ -222,8 +216,8 @@
     
     //去掉重复搜索到的设备
     NSInteger existedIndex = -1 ;
-    for (NSUUID *tempIndefy in [self.foundDeviceDict allKeys]) {
-        if ([tempIndefy isEqual:peripheral.identifier]) {
+    for (NSString *tempIndefy in [self.foundDeviceDict allKeys]) {
+        if ([tempIndefy isEqualToString:peripheral.identifier.UUIDString]) {
             EasyPeripheral *tempP = self.foundDeviceDict[tempIndefy];
             tempP.deviceScanCount++ ;
             existedIndex = tempP.deviceScanCount ;
@@ -235,12 +229,12 @@
         EasyPeripheral *easyP = [[EasyPeripheral alloc]initWithPeripheral:peripheral central:self];
         easyP.RSSI = RSSI ;
         easyP.advertisementData = advertisementData ;
-        [self.foundDeviceDict setObject:easyP forKey:easyP.identifier];
+        [self.foundDeviceDict setObject:easyP forKey:easyP.identifierString];
         if (_blueToothSearchDeviceCallback) {
             _blueToothSearchDeviceCallback(easyP , !self.isScanning );
         }
     }else if (existedIndex%10 == 0){//扫描到的此个设备超过10次
-        EasyPeripheral *tempP = self.foundDeviceDict[peripheral.identifier];
+        EasyPeripheral *tempP = self.foundDeviceDict[peripheral.identifier.UUIDString];
         tempP.RSSI = RSSI ;
         tempP.deviceScanCount = 0 ;
         tempP.advertisementData = advertisementData ;
@@ -257,21 +251,25 @@
     EasyLog_R(@"蓝牙连接上一个设备：%@",peripheral.identifier);
     
     EasyPeripheral *existedP = nil ;
-    for (NSUUID *tempIden in [self.connectedDeviceDict allKeys]) {
-        if ([tempIden isEqual:peripheral.identifier]) {
+    for (NSString *tempIden in [self.connectedDeviceDict allKeys]) {
+        if ([tempIden isEqualToString:peripheral.identifier.UUIDString]) {
             existedP = self.connectedDeviceDict[tempIden] ;
             break  ;
         }
     }
     
     if (!existedP) {
-        for (NSUUID *tempIden in [self.foundDeviceDict allKeys]) {
-            if ([tempIden isEqual:peripheral.identifier]) {
+        for (NSString *tempIden in [self.foundDeviceDict allKeys]) {
+            if ([tempIden isEqualToString:peripheral.identifier.UUIDString]) {
                 existedP = self.foundDeviceDict[tempIden] ;
                 break  ;
             }
         }
-        [self.connectedDeviceDict setObject:existedP forKey:peripheral.identifier];
+        if (!existedP) {
+            existedP = [[EasyPeripheral alloc]initWithPeripheral:peripheral central:self];
+        }
+        [self.connectedDeviceDict setObject:existedP forKey:peripheral.identifier.UUIDString];
+        [self.foundDeviceDict setObject:existedP forKey:peripheral.identifier.UUIDString];
         
         [existedP dealDeviceConnectWithError:nil];
     }
@@ -283,20 +281,20 @@
     EasyLog_R(@"蓝牙连接一个设备失败：uuid:%@  error:%@ ",peripheral.identifier,error);
 
     EasyPeripheral *existedP = nil ;
-    for (NSUUID *tempP in [self.connectedDeviceDict allKeys]) {
-        if ([tempP isEqual:peripheral.identifier]) {
+    for (NSString *tempP in [self.connectedDeviceDict allKeys]) {
+        if ([tempP isEqualToString:peripheral.identifier.UUIDString]) {
             existedP = self.connectedDeviceDict[tempP];
             break  ;
         }
     }
     
     if (existedP) {
-        [self.connectedDeviceDict removeObjectForKey:peripheral.identifier ];
+        [self.connectedDeviceDict removeObjectForKey:peripheral.identifier.UUIDString ];
     }
     else{
         
-        for (NSUUID *tempIden in [self.foundDeviceDict allKeys]) {
-            if ([tempIden isEqual:peripheral.identifier]) {
+        for (NSString *tempIden in [self.foundDeviceDict allKeys]) {
+            if ([tempIden isEqualToString:peripheral.identifier.UUIDString]) {
                 existedP = self.foundDeviceDict[tempIden] ;
                 break  ;
             }
@@ -307,8 +305,9 @@
     NSAssert(existedP, @"attention: you should deal with this error");
     
 //    existedP.errorDescription = error ;
-    [existedP dealDeviceConnectWithError:error];
-    
+    if (existedP) {
+        [existedP dealDeviceConnectWithError:error];
+    }
 }
 
 - (void)centralManager:(CBCentralManager *)central didDisconnectPeripheral:(CBPeripheral *)peripheral error:(NSError *)error
@@ -316,8 +315,8 @@
     EasyLog_R(@"蓝牙一个设备失去连接：uuid:%@ error:%@",peripheral.identifier,error);
 
     EasyPeripheral *existedP = nil ;
-    for (NSUUID *tempIden in [self.connectedDeviceDict allKeys]) {
-        if ([tempIden isEqual:peripheral.identifier]) {
+    for (NSString *tempIden in [self.connectedDeviceDict allKeys]) {
+        if ([tempIden isEqualToString:peripheral.identifier.UUIDString]) {
             existedP = self.connectedDeviceDict[tempIden] ;
             break  ;
         }
@@ -332,9 +331,8 @@
         }
         [existedP.serviceArray removeAllObjects];
         
-        [self.connectedDeviceDict removeObjectForKey:existedP.identifier];
-        
-        [self.foundDeviceDict removeObjectForKey:existedP.identifier];
+        [self.connectedDeviceDict removeObjectForKey:existedP.identifierString];
+        [self.foundDeviceDict removeObjectForKey:existedP.identifierString];
     }
     else{
         NSAssert(NO, @"attention: you should deal with this error");
@@ -342,7 +340,7 @@
     
 //    existedP.errorDescription = error ;
 
-    if (error) {
+    if (error && existedP) {
         [existedP dealDisconnectWithError:error];
     }
     

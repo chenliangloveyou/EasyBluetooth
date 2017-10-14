@@ -68,6 +68,10 @@
 {
     return self.peripheral.identifier ;
 }
+- (NSString *)identifierString
+{
+    return self.peripheral.identifier.UUIDString ;
+}
 - (CBPeripheralState)state
 {
     return self.peripheral.state ;

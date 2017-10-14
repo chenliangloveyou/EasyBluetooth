@@ -47,7 +47,8 @@ typedef void (^blueToothFindServiceCallback)(EasyPeripheral *peripheral , NSArra
 /**
  * 设备的唯一ID
  */
-@property(nonatomic, strong,readonly) NSUUID *identifier ;
+@property (nonatomic, strong,readonly) NSUUID *identifier ;
+@property (nonatomic, strong,readonly) NSString *identifierString ;
 
 /**
  * 系统提供出来的当前设备
