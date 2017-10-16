@@ -18,7 +18,7 @@
     NSUInteger _connectTimeOut ;//连接设备超时时间
     NSDictionary *_connectOpertion ;//需要连接设备所遵循的条件
     blueToothDisconnectCallback _disconnectCallback ;
-    __block blueToothConnectDeviceCallback _connectCallback ;
+     blueToothConnectDeviceCallback _connectCallback ;
     
     __block BOOL  _isReconnectDevice ;//用来处理发起连接时的参数问题。因为没调用连接一次，只能返回一次连接结果。
     
@@ -87,7 +87,7 @@
 - (NSNumber *)RSSI
 {
     if (_RSSI.intValue == 127) {
-        return nil ;
+        return [NSNumber new] ;
     }
     
     return _RSSI ;
@@ -140,10 +140,11 @@
     }
     
     NSAssert(callback, @"you should handle connect device callback !");
-    
+#warning ---------
     if (callback) {
-        _connectCallback = [callback copy];
+        _connectCallback = callback ;
     }
+    NSLog(@"开始连接设备：%@ --- %@",self ,_connectCallback);
     _connectTimeOut = timeout ;
     _connectOpertion = options ;
 
@@ -192,6 +193,8 @@
     if (_connectCallback) {
         _connectCallback(self, error);
     }
+    NSLog(@"  ==== %@ --- %@",self ,_connectCallback);
+
     _isReconnectDevice = NO ;
 }
 

@@ -248,7 +248,7 @@
 
 - (void)centralManager:(CBCentralManager *)central didConnectPeripheral:(CBPeripheral *)peripheral
 {
-    EasyLog_R(@"蓝牙连接上一个设备：%@",peripheral.identifier);
+    EasyLog_R(@"蓝牙连接上一个设备：%@ , %@",peripheral,peripheral.identifier);
     
     EasyPeripheral *existedP = nil ;
     for (NSString *tempIden in [self.connectedDeviceDict allKeys]) {
@@ -289,7 +289,8 @@
     }
     
     if (existedP) {
-        [self.connectedDeviceDict removeObjectForKey:peripheral.identifier.UUIDString ];
+        [self.connectedDeviceDict removeObjectForKey:existedP.identifierString];
+        existedP = nil ;
     }
     else{
         
@@ -333,6 +334,7 @@
         
         [self.connectedDeviceDict removeObjectForKey:existedP.identifierString];
         [self.foundDeviceDict removeObjectForKey:existedP.identifierString];
+        existedP = nil ;
     }
     else{
         NSAssert(NO, @"attention: you should deal with this error");
