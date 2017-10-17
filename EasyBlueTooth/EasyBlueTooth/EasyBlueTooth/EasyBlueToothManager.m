@@ -68,7 +68,7 @@ typedef void (^blueToothFindCharacteristic)(EasyCharacteristic *character ,NSErr
         callback(nil,tempError);
     }
     
-    [self.centerManager scanDeviceWithTimeInterval:self.managerOptions.scanTimeOut services:self.managerOptions.scanServiceArray  options:self.managerOptions.scanOptions callBack:^(EasyPeripheral *peripheral, BOOL isfinish) {
+    [self.centerManager scanDeviceWithTimeInterval:self.managerOptions.scanTimeOut services:self.managerOptions.scanServiceArray  options:self.managerOptions.scanOptions callBack:^(EasyPeripheral *peripheral, searchFlagType searchType) {
         
         if ([condition isKindOfClass:[NSString class]]) {
             NSString *name = (NSString *)condition ;
@@ -99,7 +99,7 @@ typedef void (^blueToothFindCharacteristic)(EasyCharacteristic *character ,NSErr
             }
         }
         
-        if (isfinish) {
+        if (searchType&searchFlagTypeFinish) {
             [weakself.centerManager stopScanDevice];
             
             if (weakself.centerManager.manager.state == CBCentralManagerStatePoweredOff ) {
@@ -134,7 +134,7 @@ typedef void (^blueToothFindCharacteristic)(EasyCharacteristic *character ,NSErr
     
     kWeakSelf(self)
     __block NSMutableArray *tempArray = [NSMutableArray arrayWithCapacity:5];
-    [self.centerManager scanDeviceWithTimeInterval:self.managerOptions.scanTimeOut services:self.managerOptions.scanServiceArray  options:self.managerOptions.scanOptions callBack:^(EasyPeripheral *peripheral, BOOL isfinish) {
+    [self.centerManager scanDeviceWithTimeInterval:self.managerOptions.scanTimeOut services:self.managerOptions.scanServiceArray  options:self.managerOptions.scanOptions callBack:^(EasyPeripheral *peripheral, searchFlagType searchType) {
         
         if ([condition isKindOfClass:[NSString class]]) {
             NSString *name = (NSString *)condition ;
@@ -166,7 +166,7 @@ typedef void (^blueToothFindCharacteristic)(EasyCharacteristic *character ,NSErr
             }
         }
         
-        if (isfinish) {
+        if (searchType&searchFlagTypeFinish) {
             [weakself.centerManager stopScanDevice];
             
             

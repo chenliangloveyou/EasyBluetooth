@@ -30,7 +30,7 @@
     
     [self.centerManager startScanDevice];
     
-    [self.tableView reloadData];
+//    [self.tableView reloadData];
 }
 - (void)viewWillDisappear:(BOOL)animated
 {
@@ -45,9 +45,21 @@
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([ToolCell class]) bundle:nil] forCellReuseIdentifier:NSStringFromClass([ToolCell class])];
     
     kWeakSelf(self)
-    [self.centerManager scanDeviceWithTimeInterval:NSIntegerMax services:@[]  options:@{ CBCentralManagerScanOptionAllowDuplicatesKey: @YES }  callBack:^(EasyPeripheral *peripheral, BOOL isfinish) {
+    [self.centerManager scanDeviceWithTimeInterval:NSIntegerMax services:nil options:@{ CBCentralManagerScanOptionAllowDuplicatesKey: @YES }  callBack:^(EasyPeripheral *peripheral, searchFlagType searchType) {
         if (peripheral) {
-            [weakself managerScanedDevice:peripheral];
+            if (searchType&searchFlagTypeChanged) {
+                NSInteger perpheralIndex = [weakself.dataArray indexOfObject:peripheral];
+                [weakself.dataArray replaceObjectAtIndex:perpheralIndex withObject:peripheral];
+            }
+            else if(searchType&searchFlagTypeAdded){
+                [weakself.dataArray addObject:peripheral];
+            }
+            else if (searchType&searchFlagTypeDelete){
+                [weakself.dataArray removeObject:peripheral];
+            }
+            queueMainStart
+            [weakself.tableView reloadData];
+            queueEnd
         }
     }];
     
@@ -58,27 +70,7 @@
 }
 
 #pragma mark - bluetooth callback
-- (void)managerScanedDevice:(EasyPeripheral *)peripheral
-{
-    NSInteger perpheralIndex = -1 ;
-    for (int i = 0;  i < self.dataArray.count; i++) {
-        EasyPeripheral *tempP = self.dataArray[i];
-        if ([tempP.identifier isEqual:peripheral.identifier]) {
-            perpheralIndex = i ;
-            break ;
-        }
-    }
-    if (perpheralIndex != -1) {
-        [self.dataArray replaceObjectAtIndex:perpheralIndex withObject:peripheral];
-    }
-    else{
-        [self.dataArray addObject:peripheral];
-    }
-    
-    queueMainStart
-    [self.tableView reloadData];
-    queueEnd
-}
+
 - (void)managerStateChanged:(CBManagerState)state
 {
     queueMainStart

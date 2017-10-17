@@ -18,11 +18,21 @@
 @class EasyDescriptor ;
 @class EasyCenterManager ;
 
+
+typedef NS_ENUM(NSUInteger ,searchFlagType) {
+    searchFlagTypeDefaut = 0 << 0,
+    searchFlagTypeFinish = 1 << 1,//扫描时间到
+    searchFlagTypeDelete = 1 << 2,//设备断开连接 删除设别
+    searchFlagTypeAdded  = 1 << 3,//扫描到新设备
+    searchFlagTypeChanged= 1 << 4,//已经扫描到设别，设备的状态改变
+//    searchFlagType ,
+};
+
 /**
  * 搜索到设备的回到，只要系统搜索到设备，都会回调这个block
- * isfinish 搜索是否已经停止
+ * searchType 通知外部所用的类型
  */
-typedef void (^blueToothSearchDeviceCallback)(EasyPeripheral *peripheral , BOOL isfinish);
+typedef void (^blueToothSearchDeviceCallback)(EasyPeripheral *peripheral , searchFlagType searchType);
 
 /**
  * 系统蓝牙状态改变

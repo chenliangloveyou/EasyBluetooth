@@ -80,7 +80,7 @@
 - (NSString *)name
 {
     NSString* localName = [_advertisementData objectForKey:CBAdvertisementDataLocalNameKey];
-    return localName ? localName : @"Unknown";
+    return localName ? localName : @"无名称";
     
     return localName ;
 }
@@ -230,6 +230,8 @@
         EasyLog_S(@"断开设备连接 %@",self.peripheral.identifier.UUIDString);
         [self.centerManager.manager cancelPeripheralConnection:self.peripheral];
     }
+
+    [NSObject cancelPreviousPerformRequestsWithTarget:self.centerManager.manager selector:@selector(connectPeripheral:options:) object:_connectOpertion];
 //    [self.centerManager.connectedDeviceDict removeObjectForKey:self.identifier];
 }
 

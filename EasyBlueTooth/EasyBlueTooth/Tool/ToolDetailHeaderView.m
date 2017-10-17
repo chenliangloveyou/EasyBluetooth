@@ -55,16 +55,19 @@
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
+    kWeakSelf(self)
+    queueMainStart
     CBPeripheral *periheral = (CBPeripheral *)object ;
     NSLog(@" peripheral state changed-----> %zd",periheral.state );
     if (periheral.state == CBPeripheralStateDisconnected) {
-        self.stateLabel.textColor = [UIColor redColor];
-        self.stateLabel.text = @"设备失去连接...";
+        weakself.stateLabel.textColor = [UIColor redColor];
+        weakself.stateLabel.text = @"设备失去连接...";
     }
     else{
-        self.stateLabel.textColor = [UIColor blackColor];
-        self.stateLabel.text = @"设备已连接";
+        weakself.stateLabel.textColor = [UIColor blackColor];
+        weakself.stateLabel.text = @"设备已连接";
     }
+    queueEnd
     
     
     

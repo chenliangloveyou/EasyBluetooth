@@ -101,7 +101,7 @@
         }
         
         if (_blueToothSearchDeviceCallback) {
-            _blueToothSearchDeviceCallback(easyP ,!_isScanning);
+            _blueToothSearchDeviceCallback(easyP , isExited?searchFlagTypeChanged : searchFlagTypeAdded );
         }
     }];
     
@@ -115,7 +115,7 @@
         _isScanning = NO ;
         
         if (weakself.manager.isScanning && _blueToothSearchDeviceCallback) {
-            _blueToothSearchDeviceCallback(nil,!_isScanning);
+            _blueToothSearchDeviceCallback(nil,searchFlagTypeFinish);
             [weakself stopScanDevice];
         }
         
@@ -212,8 +212,10 @@
 
 - (void)centralManager:(CBCentralManager *)central didDiscoverPeripheral:(CBPeripheral *)peripheral advertisementData:(NSDictionary *)advertisementData RSSI:(NSNumber *)RSSI
 {
-    EasyLog_R(@"%@", [NSString stringWithFormat:@"发现一个设备 - %@ - %@" ,peripheral.name,peripheral.identifier] );
     
+    if (peripheral.name.length == 0) {
+        EasyLog_R(@"%@", [NSString stringWithFormat:@"发现一个设备 - %@ - %@" ,peripheral.name,peripheral.identifier] );
+    }
     //去掉重复搜索到的设备
     NSInteger existedIndex = -1 ;
     for (NSString *tempIndefy in [self.foundDeviceDict allKeys]) {
@@ -231,7 +233,7 @@
         easyP.advertisementData = advertisementData ;
         [self.foundDeviceDict setObject:easyP forKey:easyP.identifierString];
         if (_blueToothSearchDeviceCallback) {
-            _blueToothSearchDeviceCallback(easyP , !self.isScanning );
+            _blueToothSearchDeviceCallback(easyP ,searchFlagTypeAdded );
         }
     }else if (existedIndex%10 == 0){//扫描到的此个设备超过10次
         EasyPeripheral *tempP = self.foundDeviceDict[peripheral.identifier.UUIDString];
@@ -239,7 +241,7 @@
         tempP.deviceScanCount = 0 ;
         tempP.advertisementData = advertisementData ;
         if (_blueToothSearchDeviceCallback) {
-            _blueToothSearchDeviceCallback(tempP , !self.isScanning );
+            _blueToothSearchDeviceCallback(tempP , searchFlagTypeChanged );
         }
     }
 }
@@ -265,15 +267,22 @@
                 break  ;
             }
         }
-        if (!existedP) {
-            existedP = [[EasyPeripheral alloc]initWithPeripheral:peripheral central:self];
-        }
-        [self.connectedDeviceDict setObject:existedP forKey:peripheral.identifier.UUIDString];
-        [self.foundDeviceDict setObject:existedP forKey:peripheral.identifier.UUIDString];
         
-        [existedP dealDeviceConnectWithError:nil];
+        if (existedP) {
+            [self.connectedDeviceDict setObject:existedP forKey:peripheral.identifier.UUIDString];
+        }
+        else{
+            existedP = [[EasyPeripheral alloc]initWithPeripheral:peripheral central:self];
+            [self.connectedDeviceDict setObject:existedP forKey:peripheral.identifier.UUIDString];
+            if (_blueToothSearchDeviceCallback) {
+                _blueToothSearchDeviceCallback(existedP,searchFlagTypeAdded);
+            }
+            [self.foundDeviceDict setObject:existedP forKey:peripheral.identifier.UUIDString];
+        }
+        
     }
-    
+    [existedP dealDeviceConnectWithError:nil];
+
 }
 
 - (void)centralManager:(CBCentralManager *)central didFailToConnectPeripheral:(CBPeripheral *)peripheral error:(NSError *)error
@@ -305,6 +314,9 @@
     
     NSAssert(existedP, @"attention: you should deal with this error");
     
+    if (_blueToothSearchDeviceCallback && existedP) {
+        _blueToothSearchDeviceCallback(existedP,searchFlagTypeDelete);
+    }
 //    existedP.errorDescription = error ;
     if (existedP) {
         [existedP dealDeviceConnectWithError:error];
@@ -334,18 +346,23 @@
         
         [self.connectedDeviceDict removeObjectForKey:existedP.identifierString];
         [self.foundDeviceDict removeObjectForKey:existedP.identifierString];
-        existedP = nil ;
     }
     else{
         NSAssert(NO, @"attention: you should deal with this error");
     }
     
 //    existedP.errorDescription = error ;
+    
+    if (_blueToothSearchDeviceCallback && existedP) {
+        _blueToothSearchDeviceCallback(existedP,searchFlagTypeDelete);
+    }
 
     if (error && existedP) {
         [existedP dealDisconnectWithError:error];
     }
-    
+    if (existedP) {
+        existedP = nil ;
+    }
 }
 
 
