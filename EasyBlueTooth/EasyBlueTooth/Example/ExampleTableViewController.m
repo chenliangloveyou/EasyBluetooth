@@ -113,12 +113,12 @@
         dispatch_queue_t queue = dispatch_queue_create("com.easyBluetooth.queue", 0);
         NSDictionary *managerDict = @{CBCentralManagerOptionShowPowerAlertKey:@YES};
         NSDictionary *scanDict = @{CBCentralManagerScanOptionAllowDuplicatesKey: @YES };
-        NSDictionary *connectDict = @{CBConnectPeripheralOptionNotifyOnConnectionKey:@YES,CBConnectPeripheralOptionNotifyOnDisconnectionKey:@YES,CBConnectPeripheralOptionNotifyOnNotificationKey:@YES};
+        NSDictionary *connectDict = nil;//@{CBConnectPeripheralOptionNotifyOnConnectionKey:@YES,CBConnectPeripheralOptionNotifyOnDisconnectionKey:@YES,CBConnectPeripheralOptionNotifyOnNotificationKey:@YES};
         
         EasyManagerOptions *options = [[EasyManagerOptions alloc]initWithManagerQueue:queue managerDictionary:managerDict scanOptions:scanDict scanServiceArray:nil connectOptions:connectDict];
         options.scanTimeOut = 6 ;
         options.connectTimeOut = 5 ;
-        options.autoConnectAfterDisconnect = YES ;
+        options.autoConnectAfterDisconnect = NO ;
         
         [EasyBlueToothManager shareInstance].managerOptions = options ;
         
