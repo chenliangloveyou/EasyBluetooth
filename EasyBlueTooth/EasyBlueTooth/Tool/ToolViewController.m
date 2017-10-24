@@ -154,14 +154,17 @@
     if (peripheral.state==CBPeripheralStateConnected) {
         ToolDetailViewController *tooD = [[ToolDetailViewController alloc]init];
         tooD.peripheral = peripheral ;
-        [weakself.navigationController  pushViewController:tooD animated:YES];
+        [weakself.navigationController pushViewController:tooD animated:YES];
     }
     else{
         [EFShowView showHUDMsg:@"正在连接设备..."];
-        [peripheral connectDeviceWithDisconnectCallback:^(EasyPeripheral *peripheral, NSError *error) {
-            [weakself deviceDisconnect:peripheral error:error];
-        } Callback:^(EasyPeripheral *perpheral, NSError *error) {
-            [weakself deviceConnect:peripheral error:error];
+        [peripheral connectDeviceWithCallback:^(EasyPeripheral *perpheral, NSError *error, deviceConnectType deviceConnectType) {
+            if (deviceConnectType == deviceConnectTypeDisConnect) {
+                [weakself deviceDisconnect:peripheral error:error];
+            }
+            else{
+                [weakself deviceConnect:peripheral error:error];
+            }
         }];
     }
 }

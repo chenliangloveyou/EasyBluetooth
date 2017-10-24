@@ -105,12 +105,10 @@ typedef void (^blueToothOperationCallback)(NSData *data , NSError *error);
 
 
 
-
-
-
+#pragma mark - 单例
 /**
  * 单例
- * alloc init 同样可以用。（建议用单例形式）
+ * alloc init 同样适用。（建议用单例形式）
  */
 + (instancetype)shareInstance ;
 
@@ -118,26 +116,24 @@ typedef void (^blueToothOperationCallback)(NSData *data , NSError *error);
 #pragma mark - 扫描设备
 
 /**
- * 根据给定名称扫描单个设备
+ * 扫描单个设备 ---> 发现第一个设备符合name/rule的规则就会回调callback，停止扫描。
+ * name：需要扫描设备的名称。
+ * rule：给定的设备匹配规则。
  */
 - (void)scanDeviceWithName:(NSString *)name
                   callback:(blueToothScanCallback)callback ;
-
-/**
- * 根据给定规则扫描单个设备
- */
 - (void)scanDeviceWithRule:(blueToothScanRule)rule
                   callback:(blueToothScanCallback)callback ;
 
 /**
- * 根据给定名称扫描符合名称的所有设备
+ * 扫描所有设备  ---> 发现一个设备当符合给定name/rule的规则就回调block。
+ * 最好给定一个扫描时间，不然会一直扫描。（在EasyManagerOptions.h中给定时间）
+ *
+ * name：需要扫描设备的名称。
+ * rule：给定的设备匹配规则。
  */
 - (void)scanAllDeviceWithName:(NSString *)name
                      callback:(blueToothScanAllCallback)callback ;
-
-/**
- * 根据规则扫描符合名称的所有设备
- */
 - (void)scanAllDeviceWithRule:(blueToothScanRule)rule
                      callback:(blueToothScanAllCallback)callback ;
 
@@ -145,56 +141,38 @@ typedef void (^blueToothOperationCallback)(NSData *data , NSError *error);
 #pragma mark - 连接设备
 
 /**
- * 根据设备的唯一ID 连接设备 <此种方法适合把设备的ID保存到本地的情况>
+ * 连接一个设备
+ * identifier 设备唯一ID <上一步扫描成功后，可以把这个ID保存到本地。然后在下一次连接的时候，可以直接拿这个ID来连接，省略了扫描一步>
+ * peripheral 一般来自上面搜索设备出来的设备。
  */
 - (void)connectDeviceWithIdentifier:(NSString *)identifier
                            callback:(blueToothScanCallback)callback ;
-
-/**
- * 根据给定的设备直接连接
- */
 - (void)connectDeviceWithPeripheral:(EasyPeripheral *)peripheral
                            callback:(blueToothScanCallback)callback ;
 
-#pragma mark - 扫描设备 后 直接连接 设备 （上面两步操作同时完成）
+
+#pragma mark - 扫描/连接 同时进行
 
 /**
- * 连接一个已知名字的设备
- * name 设备名称
- * callback 连接设备的回调信息
+ * 扫描、连接同时进行，返回的是已经连接上的设备。一旦发现符合条件的设备就会停止搜索，然后直接连接，最后返回连接结果。
+ * name       根据设备名称查找/连接设备。
+ * rule       根据一定规则连接设备，依据peripheral里面的名称，广播数据，RSSI来赛选需要的连接的设备
+ * identifier 连接一个确定ID的设备，一般此ID可以保存在本地。然后直接连接
  */
 - (void)scanAndConnectDeviceWithName:(NSString *)name
                             callback:(blueToothScanCallback)callback ;
-
-/**
- * 连接一个一定规则的设备，依据peripheral里面的名称，广播数据，RSSI来赛选需要的连接的设备
- * name 设备名称
- * callback 连接设备的回调信息
- */
 - (void)scanAndConnectDeviceWithRule:(blueToothScanRule)rule
                             callback:(blueToothScanCallback)callback ;
-
-/**
- * 连接一个确定ID的设备，一般此ID可以保存在本地。然后直接连接
- * name 设备名称
- * callback 连接设备的回调信息
- */
 - (void)scanAndConnectDeviceWithIdentifier:(NSString *)identifier
                                   callback:(blueToothScanCallback)callback ;
 
 /**
- * 连接已知名称的所有设备（返回的是一组此名称的设备全部连接成功）
+ * 连接已知名称的所有设备（返回的是一组此名称的设备全部连接成功）--->（慎用此功能）
  * name 设备名称
- * callback 连接设备的回调信息
+ * rule 规则
  */
 - (void)scanAndConnectAllDeviceWithName:(NSString *)name
                                callback:(blueToothScanAllCallback)callback ;
-
-/**
- * 连接已知规则的全部设备（返回的是一组此名称的设备全部连接成功）
- * name 设备名称
- * callback 连接设备的回调信息
- */
 - (void)scanAndConnectAllDeviceWithRule:(blueToothScanRule)rule
                                callback:(blueToothScanAllCallback)callback ;
 

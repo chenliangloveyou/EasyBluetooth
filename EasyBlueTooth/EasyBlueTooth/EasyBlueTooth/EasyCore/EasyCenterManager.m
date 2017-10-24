@@ -115,8 +115,8 @@
         _isScanning = NO ;
         
         if (weakself.manager.isScanning && _blueToothSearchDeviceCallback) {
-            _blueToothSearchDeviceCallback(nil,searchFlagTypeFinish);
             [weakself stopScanDevice];
+            _blueToothSearchDeviceCallback(nil,searchFlagTypeFinish);
         }
         
     });
@@ -124,13 +124,11 @@
 
 - (void)stopScanDevice
 {
- 
     if (_isScanning) {
         _isScanning = NO ;
     }
     EasyLog_S(@"停止扫描设备");
     [self.manager stopScan];
-    
 }
 
 - (void)removeAllScanFoundDevice
@@ -274,14 +272,15 @@
         else{
             existedP = [[EasyPeripheral alloc]initWithPeripheral:peripheral central:self];
             [self.connectedDeviceDict setObject:existedP forKey:peripheral.identifier.UUIDString];
-            if (_blueToothSearchDeviceCallback) {
-                _blueToothSearchDeviceCallback(existedP,searchFlagTypeAdded);
-            }
+//            if (_blueToothSearchDeviceCallback) {
+//                _blueToothSearchDeviceCallback(existedP,searchFlagTypeAdded);
+//            }
             [self.foundDeviceDict setObject:existedP forKey:peripheral.identifier.UUIDString];
         }
         
     }
-    [existedP dealDeviceConnectWithError:nil];
+    
+    [existedP dealDeviceConnectWithError:nil deviceConnectType:deviceConnectTypeSuccess];
 
 }
 
@@ -319,7 +318,7 @@
     }
 //    existedP.errorDescription = error ;
     if (existedP) {
-        [existedP dealDeviceConnectWithError:error];
+        [existedP dealDeviceConnectWithError:error deviceConnectType:deviceConnectTypeFaild];
     }
 }
 
@@ -358,7 +357,7 @@
     }
 
     if (error && existedP) {
-        [existedP dealDisconnectWithError:error];
+        [existedP dealDeviceConnectWithError:error deviceConnectType:deviceConnectTypeSuccess];
     }
     if (existedP) {
         existedP = nil ;

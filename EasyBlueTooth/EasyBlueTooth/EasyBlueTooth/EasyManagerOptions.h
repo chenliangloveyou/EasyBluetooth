@@ -60,11 +60,19 @@
 @property (nonatomic,assign)BOOL autoConnectAfterDisconnect ;
 
 
-- (instancetype)initWithManagerQueue:(dispatch_queue_t)queue managerDictionary:(NSDictionary *)managerDictionary ;
+- (instancetype)initWithManagerQueue:(dispatch_queue_t)queue
+                   managerDictionary:(NSDictionary *)managerDictionary ;
 
-- (instancetype)initWithManagerQueue:(dispatch_queue_t)queue managerDictionary:(NSDictionary *)managerDictionary scanOptions:(NSDictionary *)scanOptions scanServiceArray:(NSArray *)scanServiceArray ;
+- (instancetype)initWithManagerQueue:(dispatch_queue_t)queue
+                   managerDictionary:(NSDictionary *)managerDictionary
+                         scanOptions:(NSDictionary *)scanOptions
+                    scanServiceArray:(NSArray *)scanServiceArray ;
 
-- (instancetype)initWithManagerQueue:(dispatch_queue_t)queue managerDictionary:(NSDictionary *)managerDictionary scanOptions:(NSDictionary *)scanOptions scanServiceArray:(NSArray *)scanServiceArray connectOptions:(NSDictionary *)connectOptions;
+- (instancetype)initWithManagerQueue:(dispatch_queue_t)queue
+                   managerDictionary:(NSDictionary *)managerDictionary
+                         scanOptions:(NSDictionary *)scanOptions
+                    scanServiceArray:(NSArray *)scanServiceArray
+                      connectOptions:(NSDictionary *)connectOptions;
 @end
 
 

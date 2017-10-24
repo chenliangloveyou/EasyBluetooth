@@ -236,41 +236,48 @@ typedef void (^blueToothFindCharacteristic)(EasyCharacteristic *character ,NSErr
                            callback:(blueToothScanCallback)callback
 {
     kWeakSelf(self)
-    [peripheral connectDeviceWithTimeOut:self.managerOptions.connectTimeOut Options:self.managerOptions.connectOptions disconnectCallback:^(EasyPeripheral *peripheral, NSError *error) {
+    [peripheral connectDeviceWithTimeOut:self.managerOptions.connectTimeOut Options:self.managerOptions.connectOptions callback:^(EasyPeripheral *perpheral, NSError *error, deviceConnectType deviceConnectType) {
         
-        NSInteger errorCode = bluetoothErrorStateDisconnect ;
-        if (weakself.managerOptions.autoConnectAfterDisconnect) {
-            //设备失去连接。正在重连...
-            [peripheral reconnectDevice];
-            errorCode = bluetoothErrorStateDisconnectTring ;
-        }
-        
-        NSError *tempError = nil ;
-        if (error) {
-            tempError = [NSError errorWithDomain:error.domain code:errorCode userInfo:nil];
-        }
-        
-        callback(peripheral,tempError);
-        
-        
-    } callback:^(EasyPeripheral *perpheral, NSError *error) {
-        
-        
-        if (!error) {
-            weakself.bluetoothState = bluetoothStateDeviceConnected ;
-            if (weakself.bluetoothStateChanged) {
-                weakself.bluetoothStateChanged(peripheral,bluetoothStateDeviceConnected);
+        switch (deviceConnectType) {
+            case deviceConnectTypeDisConnect:
+            {
+                NSInteger errorCode = bluetoothErrorStateDisconnect ;
+                if (weakself.managerOptions.autoConnectAfterDisconnect) {
+                    //设备失去连接。正在重连...
+                    [peripheral reconnectDevice];
+                    errorCode = bluetoothErrorStateDisconnectTring ;
+                }
+                
+                NSError *tempError = nil ;
+                if (error) {
+                    tempError = [NSError errorWithDomain:error.domain code:errorCode userInfo:nil];
+                }
+                
+                callback(peripheral,tempError);
             }
+                break;
+            case deviceConnectTypeSuccess :
+            {
+                weakself.bluetoothState = bluetoothStateDeviceConnected ;
+                if (weakself.bluetoothStateChanged) {
+                    weakself.bluetoothStateChanged(peripheral,bluetoothStateDeviceConnected);
+                }
+            }break ;
+            case deviceConnectTypeFaild:
+            case deviceConnectTypeFaildTimeout:
+            {
+                NSError *tempError = nil ;
+                if (error) {
+                    tempError = [NSError errorWithDomain:error.domain code:bluetoothErrorStateConnectError userInfo:nil];
+                }
+                callback(peripheral,tempError);
+            }break ;
+            default:
+                break;
         }
-        
-        //error里面 - (1)连接超时 (2)系统方法连接失败
-        NSError *tempError = nil ;
-        if (error) {
-            tempError = [NSError errorWithDomain:error.domain code:bluetoothErrorStateConnectError userInfo:nil];
-        }
-        callback(peripheral,tempError);
         
     }];
+    
 }
 
 #pragma mark - 扫描设备 后 直接连接 设备 （上面两步操作同时完成）

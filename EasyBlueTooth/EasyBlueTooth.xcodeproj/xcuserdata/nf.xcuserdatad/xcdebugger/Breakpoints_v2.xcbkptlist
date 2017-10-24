@@ -20,11 +20,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "EasyBlueTooth/EasyBlueTooth/EasyCore/EasyPeripheral.m"
-            timestampString = "530520894.589142"
+            timestampString = "530532147.086239"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "280"
-            endingLineNumber = "280"
+            startingLineNumber = "289"
+            endingLineNumber = "289"
             landmarkName = "-discoverDeviceServiceWithUUIDArray:callback:"
             landmarkType = "7">
          </BreakpointContent>
@@ -32,15 +32,15 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "No"
+            shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "EasyBlueTooth/EasyBlueTooth/EasyCore/EasyPeripheral.m"
-            timestampString = "530520894.589212"
+            timestampString = "530532147.086325"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "358"
-            endingLineNumber = "358"
+            startingLineNumber = "368"
+            endingLineNumber = "368"
             landmarkName = "-peripheral:didDiscoverServices:"
             landmarkType = "7">
          </BreakpointContent>
@@ -51,24 +51,8 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "EasyBlueTooth/EasyBlueTooth/EasyCore/EasyPeripheral.m"
-            timestampString = "530520894.589262"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "177"
-            endingLineNumber = "177"
-            landmarkName = "-reconnectDevice"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "EasyBlueTooth/EasyBlueTooth/EasyCore/EasyCenterManager.m"
-            timestampString = "530520860.556007"
+            timestampString = "530532147.086392"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "91"
@@ -84,27 +68,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "EasyBlueTooth/EasyBlueTooth/EasyCore/EasyCenterManager.m"
-            timestampString = "530520860.556073"
+            timestampString = "530532147.086448"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "317"
-            endingLineNumber = "317"
-            landmarkName = "-centralManager:didFailToConnectPeripheral:error:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "EasyBlueTooth/EasyBlueTooth/EasyCore/EasyCenterManager.m"
-            timestampString = "530520860.556125"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "301"
-            endingLineNumber = "301"
+            startingLineNumber = "300"
+            endingLineNumber = "300"
             landmarkName = "-centralManager:didFailToConnectPeripheral:error:"
             landmarkType = "7">
          </BreakpointContent>
@@ -126,12 +94,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "EasyBlueTooth/EasyBlueTooth/EasyCore/EasyPeripheral.m"
-            timestampString = "530520894.589355"
+            timestampString = "530532147.086503"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "147"
-            endingLineNumber = "147"
-            landmarkName = "-connectDeviceWithTimeOut:Options:disconnectCallback:callback:"
+            startingLineNumber = "158"
+            endingLineNumber = "158"
+            landmarkName = "-connectDeviceWithTimeOut:Options:callback:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

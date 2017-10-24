@@ -30,7 +30,7 @@ typedef NS_ENUM(NSUInteger ,searchFlagType) {
 
 /**
  * 搜索到设备的回到，只要系统搜索到设备，都会回调这个block
- * searchType 通知外部所用的类型
+ * searchType 通知外部，对设备操作的类型
  */
 typedef void (^blueToothSearchDeviceCallback)(EasyPeripheral *peripheral , searchFlagType searchType);
 
@@ -54,7 +54,7 @@ typedef void (^blueToothStateChangedCallback)(EasyCenterManager *manager , CBMan
 /**
  * 是否正在扫描周围设备
  */
-@property (nonatomic, assign) BOOL isScanning;
+@property (assign) BOOL isScanning;
 
 /*
  * 已经连接上的设备 key:设备的identifier value:连接上的设备

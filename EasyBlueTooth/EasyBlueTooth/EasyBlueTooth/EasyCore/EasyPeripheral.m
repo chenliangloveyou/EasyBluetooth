@@ -15,13 +15,12 @@
 
 @interface EasyPeripheral()<CBPeripheralDelegate>
 {
-    NSUInteger _connectTimeOut ;//连接设备超时时间
-    NSDictionary *_connectOpertion ;//需要连接设备所遵循的条件
-    blueToothDisconnectCallback _disconnectCallback ;
-     blueToothConnectDeviceCallback _connectCallback ;
-    
-    __block BOOL  _isReconnectDevice ;//用来处理发起连接时的参数问题。因为没调用连接一次，只能返回一次连接结果。
-    
+    NSUInteger       _connectTimeOut ;//连接设备超时时间
+    NSDictionary    *_connectOpertion ;//需要连接设备所遵循的条件
+    __block BOOL     _isReconnectDevice ;//用来处理发起连接时的参数问题。因为没调用连接一次，只能返回一次连接结果。
+
+    //设备连接设备回调
+    blueToothConnectDeviceCallback _connectCallback ;
     //读取rssi回调结果
     blueToothReadRSSICallback _blueToothReadRSSICallback ;
     
@@ -41,6 +40,7 @@
 //    }
     EasyLog(@"\n%@设备已销毁 %@",self.name,self.identifier);
     _peripheral.delegate = nil ;
+    _peripheral = nil ;
 }
 
 - (instancetype)initWithPeripheral:(CBPeripheral *)peripheral
@@ -54,13 +54,11 @@
 {
     if (self = [super init]) {
         _centerManager = manager ;
-        
         _peripheral = peripheral ;
         peripheral.delegate = self ;
         
         _connectTimeOut = 5 ;
         _isReconnectDevice = YES ;
-        
     }
     return self ;
 }
@@ -80,8 +78,12 @@
 - (NSString *)name
 {
     NSString* localName = [_advertisementData objectForKey:CBAdvertisementDataLocalNameKey];
-    return localName ? localName : @"无名称";
-    
+    if (ISEMPTY(localName)) {
+        localName = self.peripheral.name ;
+        if (ISEMPTY(localName)) {
+            localName = @"无名称";
+        }
+    }
     return localName ;
 }
 - (NSNumber *)RSSI
@@ -89,7 +91,6 @@
     if (_RSSI.intValue == 127) {
         return [NSNumber new] ;
     }
-    
     return _RSSI ;
 }
 
@@ -104,51 +105,59 @@
 
 - (void)connectDeviceWithCallback:(blueToothConnectDeviceCallback)callback
 {
-    [self connectDeviceWithDisconnectCallback:nil
-                                     Callback:callback];
-}
-
-- (void)connectDeviceWithDisconnectCallback:(blueToothDisconnectCallback)disconnectCallback
-                                   Callback:(blueToothConnectDeviceCallback)callback
-{
+//    [self connectDeviceWithDisconnectCallback:nil
+//                                     Callback:callback];
     [self connectDeviceWithTimeOut:_connectTimeOut
-                disconnectCallback:disconnectCallback
                           callback:callback];
 }
 
+//- (void)connectDeviceWithDisconnectCallback:(blueToothDisconnectCallback)disconnectCallback
+//                                   Callback:(blueToothConnectDeviceCallback)callback
+//{
+//    [self connectDeviceWithTimeOut:_connectTimeOut
+//                disconnectCallback:disconnectCallback
+//                          callback:callback];
+//}
+
 - (void)connectDeviceWithTimeOut:(NSUInteger)timeout
-              disconnectCallback:(blueToothDisconnectCallback)disconnectCallback
+//              disconnectCallback:(blueToothDisconnectCallback)disconnectCallback
                         callback:(blueToothConnectDeviceCallback)callback
 {
     [self connectDeviceWithTimeOut:timeout
                            Options:nil
-                disconnectCallback:disconnectCallback
+//                disconnectCallback:disconnectCallback
                           callback:callback];
 }
 
 - (void)connectDeviceWithTimeOut:(NSUInteger)timeout
                          Options:(NSDictionary *)options
-              disconnectCallback:(blueToothDisconnectCallback)disconnectCallback
+//              disconnectCallback:(blueToothDisconnectCallback)disconnectCallback
                         callback:(blueToothConnectDeviceCallback)callback
 {
 
-    if (disconnectCallback) {
-        _disconnectCallback = [disconnectCallback copy];
-    }
-    else{
-        EasyLog(@"attention ! disconnectCallback is very importent , you should handle this callback");
-    }
+//    if (disconnectCallback) {
+//        _disconnectCallback = [disconnectCallback copy];
+//    }
+//    else{
+//        EasyLog(@"attention ! disconnectCallback is very importent , you should handle this callback");
+//    }
     
     NSAssert(callback, @"you should handle connect device callback !");
-#warning ---------
+
     if (callback) {
-        _connectCallback = callback ;
+        _connectCallback = [callback copy] ;
     }
-    NSLog(@"开始连接设备：%@ --- %@",self ,_connectCallback);
+
     _connectTimeOut = timeout ;
     _connectOpertion = options ;
 
     _isReconnectDevice = YES ;
+    
+    
+    if (self.peripheral.state == CBPeripheralStateConnected) {
+        EasyLog(@"attention ! the device is readly connected !");
+        [self disconnectDevice];
+    }
 
     EasyLog_S(@"开始连接设备 - 超时时间:%zd",timeout);
     [self.centerManager.manager connectPeripheral:self.peripheral options:options];
@@ -162,7 +171,7 @@
         }
         NSError *error =[NSError errorWithDomain:@"connect device timeout ~~" code:-101 userInfo:nil];
         if (_connectCallback) {
-            _connectCallback(self,error);
+            _connectCallback(self,error,deviceConnectTypeFaildTimeout);
         }
         _isReconnectDevice = NO ;
         
@@ -176,26 +185,24 @@
     _isReconnectDevice = YES ;
     [self connectDeviceWithTimeOut:_connectTimeOut
                            Options:_connectOpertion
-                disconnectCallback:_disconnectCallback
+//                disconnectCallback:_disconnectCallback
                           callback:_connectCallback];
 }
 
+//- (void)dealDeviceDisconnectWithError:(NSError *)error
+//{
+//    if (_disconnectCallback) {
+//        _disconnectCallback(self ,error);
+//    }
+//}
 
-- (void)dealDisconnectWithError:(NSError *)error
+- (void)dealDeviceConnectWithError:(NSError *)error deviceConnectType:(deviceConnectType)deviceConnectType
 {
-    if (_disconnectCallback) {
-        _disconnectCallback(self ,error);
-    }
-}
-
-- (void)dealDeviceConnectWithError:(NSError *)error
-{
-    if (_connectCallback) {
-        _connectCallback(self, error);
-    }
-    NSLog(@"  ==== %@ --- %@",self ,_connectCallback);
-
     _isReconnectDevice = NO ;
+
+    if (_connectCallback) {
+        _connectCallback(self, error , deviceConnectType);
+    }
 }
 
 
@@ -231,7 +238,9 @@
         [self.centerManager.manager cancelPeripheralConnection:self.peripheral];
     }
 
-    [NSObject cancelPreviousPerformRequestsWithTarget:self.centerManager.manager selector:@selector(connectPeripheral:options:) object:_connectOpertion];
+    [NSObject cancelPreviousPerformRequestsWithTarget:self.centerManager.manager
+                                             selector:@selector(connectPeripheral:options:)
+                                               object:_connectOpertion];
 //    [self.centerManager.connectedDeviceDict removeObjectForKey:self.identifier];
 }
 
@@ -282,7 +291,6 @@
             
             [self.findServiceCallbackArray removeObjectAtIndex:0];
         }
-        
     }
     else{
         
@@ -308,7 +316,9 @@
 {
     NSAssert(callback, @"you should deal the callback");
     
-    _blueToothReadRSSICallback = [callback copy];
+    if (callback) {
+        _blueToothReadRSSICallback = [callback copy];
+    }
     
     EasyLog_S(@"读取设备的rssi %@",self.peripheral.identifier.UUIDString);
     [self.peripheral readRSSI];
@@ -369,7 +379,7 @@
     EasyLog_R(@"已连接上行的设备发现了服务%@ serviceArray:%@ error:%@",peripheral.identifier,peripheral.services,error);
 
     NSAssert(NO, @"");
-#warning  待处理
+
 }
 
 #pragma mark characteristic

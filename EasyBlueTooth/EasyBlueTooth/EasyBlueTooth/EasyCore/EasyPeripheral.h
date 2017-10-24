@@ -16,14 +16,26 @@
 @class EasyDescriptor ;
 @class EasyCenterManager ;
 
+
+typedef NS_ENUM(NSUInteger ,deviceConnectType) {
+    deviceConnectTypeSuccess = 0 ,  //设备连接成功
+    deviceConnectTypeFaild = 1 ,    //设备连接失败
+    deviceConnectTypeFaildTimeout , //设备连接失败（原因：连接超时）
+    deviceConnectTypeDisConnect ,   //设备断开连接
+};
+
+
 /**
  * 连接设备回调
+ * perpheral 连接的设备
+ * deviceConnectType 设备连接的状态
+ * error 错误信息
  */
-typedef void (^blueToothConnectDeviceCallback)(EasyPeripheral *perpheral,NSError *error);
-/**
- * 设备断开连接回调
- */
-typedef void (^blueToothDisconnectCallback)(EasyPeripheral *peripheral , NSError *error );
+typedef void (^blueToothConnectDeviceCallback)(EasyPeripheral *perpheral,NSError *error,deviceConnectType deviceConnectType);
+///**
+// * 设备断开连接回调
+// */
+//typedef void (^blueToothDisconnectCallback)(EasyPeripheral *peripheral , NSError *error );
 
 /**
  * 读取RSSI回调，次回掉之后会一次返回结果
@@ -110,32 +122,32 @@ typedef void (^blueToothFindServiceCallback)(EasyPeripheral *peripheral , NSArra
 /**
  * 连接一个设备
  *
- * callback 是否连接成功回调
- * disconnectCallback 当设备失去连接的时候回到。
- * timeout 连接时间，如果超过这个时间还没有连接上设备就 回调失败 (默认为5秒)
- * options 连接设备的条件
+ * callback           是否连接成功回调
+ * disconnectCallback 当设备失去连接的时候的回调
+ * timeout            连接时间，如果超过这个时间还没有连接上设备就停止连接，回调设备连接失败 (默认为5秒)
+ * options            连接设备的条件
  */
 - (void)connectDeviceWithCallback:(blueToothConnectDeviceCallback)callback ;
 
-- (void)connectDeviceWithDisconnectCallback:(blueToothDisconnectCallback)disconnectCallback
-                                   Callback:(blueToothConnectDeviceCallback)callback ;
+//- (void)connectDeviceWithDisconnectCallback:(blueToothDisconnectCallback)disconnectCallback
+//                                   Callback:(blueToothConnectDeviceCallback)callback ;
 
 - (void)connectDeviceWithTimeOut:(NSUInteger)timeout
-              disconnectCallback:(blueToothDisconnectCallback)disconnectCallback
+//              disconnectCallback:(blueToothDisconnectCallback)disconnectCallback
                         callback:(blueToothConnectDeviceCallback)callback;
 
 - (void)connectDeviceWithTimeOut:(NSUInteger)timeout
                          Options:(NSDictionary *)options
-              disconnectCallback:(blueToothDisconnectCallback)disconnectCallback
+//              disconnectCallback:(blueToothDisconnectCallback)disconnectCallback
                         callback:(blueToothConnectDeviceCallback)callback;
 
 /**
- * 如果设备失去连接，调用此方法。将会保留上一次调用的参数 再次连接设备
+ * 如果设备失去连接，调用此方法 再次连接设备(会保留上一次调用的参数)
  */
 - (void)reconnectDevice ;
 
 /**
- * 断开连接 不会回调上面 设备断开的回调
+ * 主动断开设备连接，（不会回调设备失去连接的方法）
  */
 - (void)disconnectDevice;
 
@@ -149,10 +161,11 @@ typedef void (^blueToothFindServiceCallback)(EasyPeripheral *peripheral , NSArra
 - (void)readDeviceRSSIWithCallback:(blueToothReadRSSICallback)callback ;
 
 /**
- * 处理manager的连接结果
+ * 处理manager连接设备的结果。
+ * 只有两种情况（1，连接成功。2，连接失败。）
  */
-- (void)dealDeviceConnectWithError:(NSError *)error ;
-- (void)dealDisconnectWithError:(NSError *)error ;
+- (void)dealDeviceConnectWithError:(NSError *)error deviceConnectType:(deviceConnectType)deviceConnectType ;
+//- (void)dealDeviceDisconnectWithError:(NSError *)error ;
 
 
 /**
