@@ -17,6 +17,38 @@
             endingLineNumber = "507"
             landmarkName = "-notifyCharacteristic:characteristic:"
             landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[EasyPeripheral peripheral:didWriteValueForDescriptor:error:]"
+                  moduleName = "EasyBlueTooth"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/chenliang/Documents/GitHub/EasyBluetooth/EasyBlueTooth/EasyBlueTooth/EasyBlueTooth/EasyCore/EasyPeripheral.m"
+                  timestampString = "530549502.778557"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "507"
+                  endingLineNumber = "507"
+                  offsetFromSymbolStart = "791">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[EasyPeripheral peripheral:didWriteValueForDescriptor:error:]"
+                  moduleName = "EasyBlueTooth"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/chenliang/Documents/GitHub/EasyBluetooth/EasyBlueTooth/EasyBlueTooth/EasyBlueTooth/EasyCore/EasyPeripheral.m"
+                  timestampString = "530549502.783141"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "507"
+                  endingLineNumber = "507"
+                  offsetFromSymbolStart = "799">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy

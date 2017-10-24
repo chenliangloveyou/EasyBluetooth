@@ -17,7 +17,7 @@
 #import "EasyManagerOptions.h"
 
 /**
- * 一个设备所经历的状态
+ * 一个蓝牙设备读写数据，所经历的全部的生命周期
  */
 typedef NS_ENUM(NSUInteger , bluetoothState) {
     
@@ -180,9 +180,11 @@ typedef void (^blueToothOperationCallback)(NSData *data , NSError *error);
 #pragma mark - 读写操作
 
 /**
- * peripheral 写数据的设备
+ * 与设备的数据交互，读、写、监听。
+ *
+ * peripheral 写数据的设备，不管是不是已发现，已连接，未连接状态。内部会处理。
  * data  需要写入的数据
- * uuid 数据需要写入到哪个特征下面
+ * serviceUUID/writeUUID 数据需要写入到哪个特征下面
  * writeCallback 写入数据后的回调
  */
 - (void)writeDataWithPeripheral:(EasyPeripheral *)peripheral
@@ -191,25 +193,11 @@ typedef void (^blueToothOperationCallback)(NSData *data , NSError *error);
                            data:(NSData *)data
                        callback:(blueToothOperationCallback)callback ;
 
-/**
- * peripheral 写数据的设备
- * uuid 需要读取数据的特征
- * writeCallback 读取数据后的回调
- */
 - (void)readValueWithPeripheral:(EasyPeripheral *)peripheral
                     serviceUUID:(NSString *)serviceUUID
                        readUUID:(NSString *)uuid
                        callback:(blueToothOperationCallback)callback ;
-
-/**
- * 建议此方法放在读写操作的前面
- */
-
-/**
- * peripheral 写数据的设备
- * uuid 需要监听的特征值
- * writeCallback 读取数据后的回调
- */
+/**建议此方法放在读写操作的前面**/
 - (void)notifyDataWithPeripheral:(EasyPeripheral *)peripheral
                      serviceUUID:(NSString *)serviceUUID
                       notifyUUID:(NSString *)notifyUUID
@@ -217,9 +205,10 @@ typedef void (^blueToothOperationCallback)(NSData *data , NSError *error);
                     withCallback:(blueToothOperationCallback )callback ;
 
 /**
- * peripheral 写数据的设备
+ * 对描述进行操作。
+ * peripheral 操作描述所在的设备
  * data  需要写入的数据
- * descroptor 需要往描述下写入数据
+ * serviceUUID/characterUUID 所需要的UUID
  * writeCallback 读取数据后的回调
  */
 - (void)writeDescriptorWithPeripheral:(EasyPeripheral *)peripheral
@@ -227,12 +216,6 @@ typedef void (^blueToothOperationCallback)(NSData *data , NSError *error);
                         characterUUID:(NSString *)characterUUID
                                  data:(NSData *)data
                              callback:(blueToothOperationCallback)callback ;
-
-/**
- * peripheral 需要读取描述的设备
- * descroptor 需要往描述下写入数据
- * writeCallback 读取数据后的回调
- */
 - (void)readDescriptorWithPeripheral:(EasyPeripheral *)peripheral
                          serviceUUID:(NSString *)serviceUUID
                        characterUUID:(NSString *)characterUUID
@@ -247,29 +230,21 @@ typedef void (^blueToothOperationCallback)(NSData *data , NSError *error);
 - (void)readRSSIWithPeripheral:(EasyPeripheral *)peripheral
                       callback:(blueToothReadRSSICallback)callback ;
 
+
 #pragma mark - 扫描 断开操作
 
 /**
- * 开始扫描
+ * 主动 开始/停止 扫描
  */
 - (void)startScanDevice ;
-/**
- * 停止扫描
- */
 - (void)stopScanDevice ;
+
 /**
- * peripheral 需要断开的设备
-  */
+ * 断开以及连接上的设备操作
+ * peripheral/identifier 代表设备
+ */
 - (void)disconnectWithPeripheral:(EasyPeripheral *)peripheral ;
-
-/**
- * identifier 需要断开的设备UUID
- */
 - (void)disconnectWithIdentifier:(NSUUID *)identifier ;
-
-/**
- * 断开所有连接的设备
- */
 - (void)disconnectAllPeripheral ;
 
 
@@ -277,9 +252,7 @@ typedef void (^blueToothOperationCallback)(NSData *data , NSError *error);
 /**
  * 一行代码连接所有的设备
  * name         一直设别的名称
- * serviceuuid  服务id
- * notifyuuid   监听端口的id
- * writeuuid    写数据的id
+ * serviceuuid/notifyuuid/writeuuid   监听端口、写书的唯一ID
  * data         需要发送给设备的数据
  * callback     回调信息
  */
