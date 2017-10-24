@@ -72,7 +72,7 @@ typedef void (^blueToothFindCharacteristic)(EasyCharacteristic *character ,NSErr
         
         if ([condition isKindOfClass:[NSString class]]) {
             NSString *name = (NSString *)condition ;
-            if ([peripheral.name isEqualToString:name]) {
+            if ([peripheral.name isEqualToString:name] && searchType&searchFlagTypeAdded) {
                 [weakself.centerManager stopScanDevice];
 
                 
