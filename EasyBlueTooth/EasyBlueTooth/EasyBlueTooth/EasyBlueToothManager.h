@@ -23,15 +23,14 @@ typedef NS_ENUM(NSUInteger , bluetoothState) {
     
 //    bluetoothStateOpenTring = 0 ,//系统蓝牙正在打开
     bluetoothStateSystemReadly = 1,    //蓝牙准备就绪
-    bluetoothStateDeviceFounded ,       //扫描设备
-    bluetoothStateDeviceConnected ,     //连接设备
+    bluetoothStateDeviceFounded ,       //设备已被发现
+    bluetoothStateDeviceConnected ,     //设备连接成功
     bluetoothStateServiceFounded ,     //获取服务
     bluetoothStateCharacterFounded ,   //获取特征
     bluetoothStateNotifySuccess ,       //监听通知成功
     bluetoothStateReadSuccess  ,       //读取数据成功
     bluetoothStateWriteDataSuccess ,   //写数据成功
     bluetoothStateDestory ,            //断开设备
-    
 };
 
 /**
