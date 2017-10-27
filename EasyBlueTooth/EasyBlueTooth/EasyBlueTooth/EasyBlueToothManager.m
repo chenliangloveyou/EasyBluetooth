@@ -32,23 +32,25 @@ typedef void (^blueToothFindCharacteristic)(EasyCharacteristic *character ,NSErr
     return share;
 }
 
-#pragma mark - 扫描设备
+#pragma mark - 扫描设备 （单个设别）
 
 - (void)scanDeviceWithName:(NSString *)name
                   callback:(blueToothScanCallback)callback
 {
-    [self scanDeviceWithCondition:name callback:callback];
+    [self scanDeviceWithCondition:name
+                         callback:callback];
 }
 - (void)scanDeviceWithRule:(blueToothScanRule)rule
                   callback:(blueToothScanCallback)callback
 {
-    [self scanDeviceWithCondition:rule callback:callback];
+    [self scanDeviceWithCondition:rule
+                         callback:callback];
 }
 - (void)scanDeviceWithCondition:(id)condition
                           callback:(blueToothScanCallback)callback
 {
     NSAssert(condition, @"condition can't nil !");
-    NSAssert(callback, @"callbck should handle");
+    NSAssert(callback, @"callbck should handle!");
     
     if (!condition) {
         NSError *tempError = [NSError errorWithDomain:@"the condition is nil" code:bluetoothErrorStateNoDevice userInfo:nil];
@@ -56,36 +58,60 @@ typedef void (^blueToothFindCharacteristic)(EasyCharacteristic *character ,NSErr
         return ;
     }
     
-    kWeakSelf(self)
     if (self.centerManager.manager.state == CBManagerStatePoweredOn) {
-        weakself.bluetoothState = bluetoothStateSystemReadly ;
-        if (weakself.bluetoothStateChanged) {
-            weakself.bluetoothStateChanged(nil,bluetoothStateSystemReadly);
+        self.bluetoothState = bluetoothStateSystemReadly ;
+        if (self.bluetoothStateChanged) {
+            self.bluetoothStateChanged(nil,bluetoothStateSystemReadly);
         }
-    }else{
-        
+    }
+    else{
         NSError *tempError = [NSError errorWithDomain:@"center manager state powered off and wraiting to turn on !" code:bluetoothErrorStateNoReadlyTring userInfo:nil];
         callback(nil,tempError);
     }
     
-    [self.centerManager scanDeviceWithTimeInterval:self.managerOptions.scanTimeOut services:self.managerOptions.scanServiceArray  options:self.managerOptions.scanOptions callBack:^(EasyPeripheral *peripheral, searchFlagType searchType) {
+    kWeakSelf(self)
+    [self.centerManager scanDeviceWithTimeInterval:self.managerOptions.scanTimeOut services:self.managerOptions.scanServiceArray options:self.managerOptions.scanOptions callBack:^(EasyPeripheral *peripheral, searchFlagType searchType) {
+        
+        if (searchType&searchFlagTypeFinish) {//扫描完成
+            //说明在规定的时间没有扫描到设备
+            //1，停止扫描
+            [weakself.centerManager stopScanDevice];
+            
+            //2，通知外部调用者。  此时没找到设备有两种原因。1，系统蓝牙未开启。 2，周围没有设备。
+            NSError *tempError = nil ;
+            if (weakself.centerManager.manager.state == CBCentralManagerStatePoweredOff ) {
+               tempError = [NSError errorWithDomain:@"center manager state powered off" code:bluetoothErrorStateNoReadly userInfo:nil];
+            }
+            else{
+                tempError = [NSError errorWithDomain:@"device not found !" code:bluetoothErrorStateNoDevice userInfo:nil];
+            }
+            callback(nil , tempError);
+            
+            //3，不用往下了。下面是：发现了一个设备，判断是否是需要寻找的设备。
+            return  ;
+        }
         
         if ([condition isKindOfClass:[NSString class]]) {
             NSString *name = (NSString *)condition ;
+            
+            //能进入if里面。说明返回的设备是查找的设备。如果不能就不予处理这个设备
             if ([peripheral.name isEqualToString:name] && searchType&searchFlagTypeAdded) {
+               
+                //1，停止扫描
                 [weakself.centerManager stopScanDevice];
 
-                
+                //2，改变当前状态
                 weakself.bluetoothState = bluetoothStateDeviceFounded ;
                 if (weakself.bluetoothStateChanged) {
                     weakself.bluetoothStateChanged(peripheral,bluetoothStateDeviceFounded);
                 }
-                
+                //3，通知外部
                 callback(peripheral,nil);
                 
             }
         }
         else{
+            
             blueToothScanRule rule = (blueToothScanRule)condition ;
             if (rule(peripheral)) {
                
@@ -99,54 +125,59 @@ typedef void (^blueToothFindCharacteristic)(EasyCharacteristic *character ,NSErr
             }
         }
         
-        if (searchType&searchFlagTypeFinish) {
-            [weakself.centerManager stopScanDevice];
-            
-            if (weakself.centerManager.manager.state == CBCentralManagerStatePoweredOff ) {
-                NSError *tempError = [NSError errorWithDomain:@"center manager state powered off" code:bluetoothErrorStateNoReadly userInfo:nil];
-                callback(nil , tempError);
-            }
-            else{
-                NSError *tempError = [NSError errorWithDomain:@"device not found !" code:bluetoothErrorStateNoDevice userInfo:nil];
-                callback(nil , tempError);
-            }
-            
-        }
     }];
 }
 
+
+#pragma mark 扫描所有符合条件的设备
 - (void)scanAllDeviceWithName:(NSString *)name callback:(blueToothScanAllCallback)callback
 {
-    [self scanAllDeviceWithCondition:name callback:callback];
+    [self scanAllDeviceWithCondition:name
+                            callback:callback];
 }
 - (void)scanAllDeviceWithRule:(blueToothScanRule)rule callback:(blueToothScanAllCallback)callback
 {
-    [self scanAllDeviceWithCondition:rule callback:callback];
+    [self scanAllDeviceWithCondition:rule
+                            callback:callback];
 }
 - (void)scanAllDeviceWithCondition:(id)condition
                   callback:(blueToothScanAllCallback)callback
 {
     if (self.managerOptions.scanTimeOut == NSIntegerMax) {
+        self.managerOptions.scanTimeOut = 20 ;//默认一个时间
         NSAssert(NO, @"you should set a scanTimeOut value on EasyManagerOptions class");
     }
     NSAssert(condition, @"condition can't nil !");
-    NSAssert(callback, @"callbck should handle");
+    NSAssert(callback, @"callbck should handle!");
     
     kWeakSelf(self)
     __block NSMutableArray *tempArray = [NSMutableArray arrayWithCapacity:5];
     [self.centerManager scanDeviceWithTimeInterval:self.managerOptions.scanTimeOut services:self.managerOptions.scanServiceArray  options:self.managerOptions.scanOptions callBack:^(EasyPeripheral *peripheral, searchFlagType searchType) {
         
+        if (searchType&searchFlagTypeFinish) { //扫描时间到
+            
+            //1，停止扫描
+            [weakself.centerManager stopScanDevice];
+            //2，收集错误信息
+            NSError *tempError = nil ;
+            if (weakself.centerManager.manager.state == CBCentralManagerStatePoweredOff ) {
+                tempError = [NSError errorWithDomain:@"center manager state powered off" code:bluetoothErrorStateNoReadly userInfo:nil];
+            }
+            else{
+                if (tempArray.count == 0) {
+                    tempError = [NSError errorWithDomain:@"device not found !" code:bluetoothErrorStateNoDevice userInfo:nil];
+                }
+            }
+            //3，通知外部
+            callback(tempArray,tempError);
+            return ;
+        }
+        
         if ([condition isKindOfClass:[NSString class]]) {
             NSString *name = (NSString *)condition ;
             if ([peripheral.name isEqualToString:name]) {
-                
-                BOOL isExited = NO ;
-                for (EasyPeripheral *temp in tempArray) {
-                    if ([temp.identifier isEqual:peripheral.identifier]) {
-                        isExited = YES ;
-                    }
-                }
-                if (!isExited) {
+                BOOL isEixt = [EasyBlueToothManager isExitObject:peripheral inArray:tempArray];
+                if (!isEixt) {
                     [tempArray addObject:peripheral];
                 }
             }
@@ -154,43 +185,36 @@ typedef void (^blueToothFindCharacteristic)(EasyCharacteristic *character ,NSErr
         else{
             blueToothScanRule rule = (blueToothScanRule) condition ;
             if (rule(peripheral)) {
-                BOOL isExited = NO ;
-                for (EasyPeripheral *temp in tempArray) {
-                    if ([temp.identifier isEqual:peripheral.identifier]) {
-                        isExited = YES ;
-                    }
-                }
-                if (!isExited) {
+                BOOL isEixt = [EasyBlueToothManager isExitObject:peripheral inArray:tempArray];
+                if (!isEixt) {
                     [tempArray addObject:peripheral];
-                }
-            }
-        }
-        
-        if (searchType&searchFlagTypeFinish) {
-            [weakself.centerManager stopScanDevice];
-            
-            
-            if (weakself.centerManager.manager.state == CBCentralManagerStatePoweredOff ) {
-                NSError *tempError = [NSError errorWithDomain:@"center manager state powered off" code:bluetoothErrorStateNoReadly userInfo:nil];
-                callback(tempArray,tempError);
-            }
-            else{
-                
-                if (tempArray.count == 0) {
-                    NSError *tempError = [NSError errorWithDomain:@"device not found !" code:bluetoothErrorStateNoDevice userInfo:nil];
-                    callback(nil,tempError);
-                }
-                else{
-                    callback(tempArray , nil );
                 }
             }
         }
     }];
 }
 
++ (BOOL)isExitObject:(EasyPeripheral *)peripheral inArray:(NSMutableArray *)tempArray
+{
+    __block BOOL isExited = NO ;
+    [tempArray enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        if ([obj isKindOfClass:[EasyPeripheral class]]) {
+            EasyPeripheral *tempP = (EasyPeripheral *)obj ;
+            if ([tempP.identifier isEqual:peripheral.identifier]) {
+                isExited = YES ;
+                *stop = YES ;
+            }
+        }
+        else{
+            NSAssert(NO, @"tempArray have a undefine object !");
+        }
+    }];
+    return isExited ;
+   
+}
+
 
 #pragma mark - 连接设备
-
 
 - (void)connectDeviceWithIdentifier:(NSString *)identifier
                            callback:(blueToothScanCallback)callback
@@ -198,20 +222,30 @@ typedef void (^blueToothFindCharacteristic)(EasyCharacteristic *character ,NSErr
     NSAssert(identifier, @"you can't connect a empty uuid");
     
     if (ISEMPTY(identifier)) {
-        NSError *error = [NSError errorWithDomain:@"the identifier is empty" code:bluetoothErrorStateNoDevice userInfo:nil];
+        NSError *error = [NSError errorWithDomain:@"the identifier is empty !" code:bluetoothErrorStateNoDevice userInfo:nil];
         callback(nil,error);
+        return ;
     }
     kWeakSelf(self)
-    NSUUID *uuid = [[NSUUID alloc]initWithUUIDString:identifier];
-    if ([self.centerManager.connectedDeviceDict objectForKey:uuid]) {
-     
-        EasyPeripheral *peripheral = weakself.centerManager.connectedDeviceDict[uuid];
-        
-        [weakself connectDeviceWithPeripheral:peripheral callback:callback];
+    NSUUID *UUID = [[NSUUID alloc]initWithUUIDString:identifier];
+    NSString *UUIDString = UUID.UUIDString ;
+    if (ISEMPTY(UUIDString)) {
+        NSError *error = [NSError errorWithDomain:@"the identifier is not effect !" code:bluetoothErrorStateNoDevice userInfo:nil];
+        callback(nil,error);
+        NSAssert(NO, @"you should check the identifier !") ;
+        return ;
+    }
+    
+    if ([self.centerManager.connectedDeviceDict objectForKey:UUIDString]) {
+
+        //如果此设备已经连接成功，
+        EasyPeripheral *peripheral = weakself.centerManager.connectedDeviceDict[UUIDString];
+        [weakself connectDeviceWithPeripheral:peripheral
+                                     callback:callback];
     }
     else{
         [weakself scanDeviceWithRule:^BOOL(EasyPeripheral *peripheral) {
-            return [peripheral.identifier isEqual:uuid];
+            return [peripheral.identifier isEqual:UUID];
         } callback:^(EasyPeripheral *peripheral, NSError *error) {
            
             if (error) {
@@ -752,7 +786,15 @@ typedef void (^blueToothFindCharacteristic)(EasyCharacteristic *character ,NSErr
         }
     }];
 }
-
+- (void)connectDeviceWithIdentifier:(NSString *)identifier
+                        serviceUUID:(NSString *)serviceUUID
+                         notifyUUID:(NSString *)notifyUUID
+                          wirteUUID:(NSString *)writeUUID
+                          writeData:(NSData *)data
+                           callback:(blueToothOperationCallback)callback
+{
+    
+}
 
 #pragma mark - getter 
 
