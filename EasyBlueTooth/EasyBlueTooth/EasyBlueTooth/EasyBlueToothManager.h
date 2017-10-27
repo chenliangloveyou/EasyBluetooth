@@ -51,6 +51,8 @@ typedef NS_ENUM(NSUInteger , bluetoothErrorState) {
     bluetoothErrorStateReadError ,  //读书节失败
     bluetoothErrorStateNotifyError ,//监听通知失败
     bluetoothErrorStateNoDescriptor,  //没有对应的特征
+    
+    bluetoothErrorStateIdentifierError ,//identifier不符合规则
 
 };
 

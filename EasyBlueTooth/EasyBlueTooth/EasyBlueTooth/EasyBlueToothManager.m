@@ -113,7 +113,7 @@ typedef void (^blueToothFindCharacteristic)(EasyCharacteristic *character ,NSErr
         else{
             
             blueToothScanRule rule = (blueToothScanRule)condition ;
-            if (rule(peripheral)) {
+            if (rule(peripheral)) {//能进if里面。说明这个设备是符合要求的
                
                 [weakself.centerManager stopScanDevice];
                 
@@ -217,12 +217,12 @@ typedef void (^blueToothFindCharacteristic)(EasyCharacteristic *character ,NSErr
 #pragma mark - 连接设备
 
 - (void)connectDeviceWithIdentifier:(NSString *)identifier
-                           callback:(blueToothScanCallback)callback
+                           callback:(blueToothConnectCallback)callback
 {
     NSAssert(identifier, @"you can't connect a empty uuid");
     
     if (ISEMPTY(identifier)) {
-        NSError *error = [NSError errorWithDomain:@"the identifier is empty !" code:bluetoothErrorStateNoDevice userInfo:nil];
+        NSError *error = [NSError errorWithDomain:@"the identifier is empty !" code:bluetoothErrorStateIdentifierError userInfo:nil];
         callback(nil,error);
         return ;
     }
@@ -230,7 +230,7 @@ typedef void (^blueToothFindCharacteristic)(EasyCharacteristic *character ,NSErr
     NSUUID *UUID = [[NSUUID alloc]initWithUUIDString:identifier];
     NSString *UUIDString = UUID.UUIDString ;
     if (ISEMPTY(UUIDString)) {
-        NSError *error = [NSError errorWithDomain:@"the identifier is not effect !" code:bluetoothErrorStateNoDevice userInfo:nil];
+        NSError *error = [NSError errorWithDomain:@"the identifier is not effect !" code:bluetoothErrorStateIdentifierError userInfo:nil];
         callback(nil,error);
         NSAssert(NO, @"you should check the identifier !") ;
         return ;
@@ -238,12 +238,19 @@ typedef void (^blueToothFindCharacteristic)(EasyCharacteristic *character ,NSErr
     
     if ([self.centerManager.connectedDeviceDict objectForKey:UUIDString]) {
 
-        //如果此设备已经连接成功，
+        //如果此设备已经连接成功，就直接返回
         EasyPeripheral *peripheral = weakself.centerManager.connectedDeviceDict[UUIDString];
-        [weakself connectDeviceWithPeripheral:peripheral
-                                     callback:callback];
+        callback(peripheral ,nil );
+    }
+    else if ([self.centerManager.foundDeviceDict objectForKey:UUIDString]){
+        
+        //如果此设备已经发现，
+        EasyPeripheral *peripheral = weakself.centerManager.foundDeviceDict[UUIDString];
+        [self connectDeviceWithPeripheral:peripheral
+                                 callback:callback];
     }
     else{
+        
         [weakself scanDeviceWithRule:^BOOL(EasyPeripheral *peripheral) {
             return [peripheral.identifier isEqual:UUID];
         } callback:^(EasyPeripheral *peripheral, NSError *error) {
@@ -267,7 +274,7 @@ typedef void (^blueToothFindCharacteristic)(EasyCharacteristic *character ,NSErr
 }
 
 - (void)connectDeviceWithPeripheral:(EasyPeripheral *)peripheral
-                           callback:(blueToothScanCallback)callback
+                           callback:(blueToothConnectCallback)callback
 {
     kWeakSelf(self)
     [peripheral connectDeviceWithTimeOut:self.managerOptions.connectTimeOut Options:self.managerOptions.connectOptions callback:^(EasyPeripheral *perpheral, NSError *error, deviceConnectType deviceConnectType) {
