@@ -287,7 +287,12 @@ typedef void (^blueToothFindCharacteristic)(EasyCharacteristic *character ,NSErr
     
     for (EasyPeripheral *tempP in [self.centerManager.connectedDeviceDict allValues]) {
         if ([tempP isEqual:peripheral]) {
-            tempP.disconnectDevice ;
+            self.bluetoothState = bluetoothStateDeviceConnected ;
+            if (self.bluetoothStateChanged) {
+                self.bluetoothStateChanged(peripheral,bluetoothStateDeviceConnected);
+            }
+            callback(peripheral , nil );
+            return ;
         }
     }
     
@@ -419,14 +424,13 @@ typedef void (^blueToothFindCharacteristic)(EasyCharacteristic *character ,NSErr
     
     kWeakSelf(self)
     for (int i = 0; i < deviceArray.count; i++) {
-        QueueStartAfterTime(0.5*i)
+        QueueStartAfterTime(0.3*i)
         EasyPeripheral *tempPeripheral = deviceArray[i];
         [weakself connectDeviceWithPeripheral:tempPeripheral callback:^(EasyPeripheral *peripheral, NSError *error) {
             if (error) {
                 peripheral.connectErrorDescription = error ;
             }
             if (i == deviceArray.count-1) {
-                
                 callback(deviceArray,nil);
             }
         }];
@@ -453,27 +457,25 @@ typedef void (^blueToothFindCharacteristic)(EasyCharacteristic *character ,NSErr
     [self searchCharacteristicWithPeripheral:peripheral serviceUUID:serviceUUID operationUUID:writeUUID callback:^(EasyCharacteristic *character, NSError *error) {
         
         if (error) {
-            
             callback(nil ,error );
+            return  ;
         }
-        else{
-            NSAssert(character, @"attention : the characteristic is null ");
-            [character writeValueWithData:data callback:^(EasyCharacteristic *characteristic, NSData *data, NSError *error) {
-                
-                
-                NSError *tempError = nil ;
-                if (error) {
-                    tempError = [NSError errorWithDomain:error.domain code:bluetoothErrorStateWriteError userInfo:nil];
-                }else{
-                    weakself.bluetoothState = bluetoothStateWriteDataSuccess ;
-                    if (weakself.bluetoothStateChanged) {
-                        weakself.bluetoothStateChanged(peripheral,bluetoothStateWriteDataSuccess);
-                    }
+        
+        NSAssert(character, @"attention : the characteristic is null ");
+        [character writeValueWithData:data callback:^(EasyCharacteristic *characteristic, NSData *data, NSError *error) {
+            
+            NSError *tempError = nil ;
+            if (error) {
+                tempError = [NSError errorWithDomain:error.domain code:bluetoothErrorStateWriteError userInfo:nil];
+            }else{
+                weakself.bluetoothState = bluetoothStateWriteDataSuccess ;
+                if (weakself.bluetoothStateChanged) {
+                    weakself.bluetoothStateChanged(peripheral,bluetoothStateWriteDataSuccess);
                 }
-                callback(data,tempError);
-                
-            }];
-        }
+            }
+            callback(data,tempError);
+            
+        }];
         
     }];
     
@@ -493,28 +495,26 @@ typedef void (^blueToothFindCharacteristic)(EasyCharacteristic *character ,NSErr
     [self searchCharacteristicWithPeripheral:peripheral serviceUUID:serviceUUID operationUUID:readUUID callback:^(EasyCharacteristic *character, NSError *error) {
         
         if (error) {
-            
             callback(nil ,error );
-        }
-        else{
-            NSAssert(character, @"attention : the characteristic is null ");
-            [character readValueWithCallback:^(EasyCharacteristic *characteristic, NSData *data, NSError *error) {
-                
-                NSError *tempError = nil ;
-                if (error) {
-                    tempError = [NSError errorWithDomain:error.domain code:bluetoothErrorStateReadError userInfo:nil];
-                }
-                else{
-                    weakself.bluetoothState = bluetoothStateReadSuccess ;
-                    if (weakself.bluetoothStateChanged) {
-                        weakself.bluetoothStateChanged(peripheral,bluetoothStateReadSuccess);
-                    }
-                }
-                callback(data,tempError);
-                
-            }];
+            return ;
         }
         
+        NSAssert(character, @"attention : the characteristic is null ");
+        [character readValueWithCallback:^(EasyCharacteristic *characteristic, NSData *data, NSError *error) {
+            
+            NSError *tempError = nil ;
+            if (error) {
+                tempError = [NSError errorWithDomain:error.domain code:bluetoothErrorStateReadError userInfo:nil];
+            }
+            else{
+                weakself.bluetoothState = bluetoothStateReadSuccess ;
+                if (weakself.bluetoothStateChanged) {
+                    weakself.bluetoothStateChanged(peripheral,bluetoothStateReadSuccess);
+                }
+            }
+            callback(data,tempError);
+            
+        }];
     }];
     
 }
@@ -534,27 +534,26 @@ typedef void (^blueToothFindCharacteristic)(EasyCharacteristic *character ,NSErr
     [self searchCharacteristicWithPeripheral:peripheral serviceUUID:serviceUUID operationUUID:notifyUUID callback:^(EasyCharacteristic *character, NSError *error) {
         
         if (error) {
-            
             callback(nil ,error );
+            return  ;
         }
-        else{
-            NSAssert(character, @"attention : the characteristic is null ");
-            [character notifyWithValue:notifyValue callback:^(EasyCharacteristic *characteristic, NSData *data, NSError *error) {
-                
-                NSError *tempError = nil ;
-                if (error) {
-                    tempError = [NSError errorWithDomain:error.domain code:bluetoothErrorStateNotifyError userInfo:nil];
+        
+        NSAssert(character, @"attention : the characteristic is null ");
+        [character notifyWithValue:notifyValue callback:^(EasyCharacteristic *characteristic, NSData *data, NSError *error) {
+            
+            NSError *tempError = nil ;
+            if (error) {
+                tempError = [NSError errorWithDomain:error.domain code:bluetoothErrorStateNotifyError userInfo:nil];
+            }
+            else{
+                weakself.bluetoothState = bluetoothStateNotifySuccess ;
+                if (weakself.bluetoothStateChanged) {
+                    weakself.bluetoothStateChanged(peripheral,bluetoothStateNotifySuccess);
                 }
-                else{
-                    weakself.bluetoothState = bluetoothStateNotifySuccess ;
-                    if (weakself.bluetoothStateChanged) {
-                        weakself.bluetoothStateChanged(peripheral,bluetoothStateNotifySuccess);
-                    }
-                }
-                callback(data,tempError);
-                
-            }];
-        }
+            }
+            callback(data,tempError);
+            
+        }];
     }];
     
 }
@@ -575,26 +574,24 @@ typedef void (^blueToothFindCharacteristic)(EasyCharacteristic *character ,NSErr
     [self searchCharacteristicWithPeripheral:peripheral serviceUUID:serviceUUID operationUUID:characterUUID callback:^(EasyCharacteristic *character, NSError *error) {
         
         if (error) {
-            
             callback(nil ,error );
+            return ;
+        }
+        NSAssert(character, @"attention : the characteristic is null ");
+        
+        if (character.descriptorArray) {
+            for (EasyDescriptor *tempD in character.descriptorArray) {
+                [tempD writeValueWithData:data callback:^(EasyDescriptor *descriptor, NSError *error) {
+                    
+                    callback(descriptor.value,error);
+                    
+                }];
+            }
         }
         else{
-            NSAssert(character, @"attention : the characteristic is null ");
             
-            if (character.descriptorArray) {
-                for (EasyDescriptor *tempD in character.descriptorArray) {
-                    [tempD writeValueWithData:data callback:^(EasyDescriptor *descriptor, NSError *error) {
-                        
-                        callback(descriptor.value,error);
-                        
-                    }];
-                }
-            }
-            else{
-                
-                NSError *tempError = [NSError errorWithDomain:@"the characteristic no have descripotor" code:bluetoothErrorStateNoDescriptor userInfo:nil];
-                callback(nil,tempError);
-            }
+            NSError *tempError = [NSError errorWithDomain:@"the characteristic no have descripotor" code:bluetoothErrorStateNoDescriptor userInfo:nil];
+            callback(nil,tempError);
         }
     }];
 }
@@ -613,25 +610,23 @@ typedef void (^blueToothFindCharacteristic)(EasyCharacteristic *character ,NSErr
     [self searchCharacteristicWithPeripheral:peripheral serviceUUID:serviceUUID operationUUID:characterUUID callback:^(EasyCharacteristic *character, NSError *error) {
         
         if (error) {
-            
             callback(nil ,error );
+            return  ;
+        }
+        NSAssert(character, @"attention : the characteristic is null ");
+        
+        if (character.descriptorArray) {
+            for (EasyDescriptor *tempD in character.descriptorArray) {
+                [tempD readValueWithCallback:^(EasyDescriptor *descriptor, NSError *error) {
+                    
+                    callback(descriptor.value,error);
+                }];
+            }
         }
         else{
-            NSAssert(character, @"attention : the characteristic is null ");
             
-            if (character.descriptorArray) {
-                for (EasyDescriptor *tempD in character.descriptorArray) {
-                    [tempD readValueWithCallback:^(EasyDescriptor *descriptor, NSError *error) {
-                        
-                        callback(descriptor.value,error);
-                    }];
-                }
-            }
-            else{
-                
-                NSError *tempError = [NSError errorWithDomain:@"the characteristic no have descripotor" code:bluetoothErrorStateNoDescriptor userInfo:nil];
-                callback(nil,tempError);
-            }
+            NSError *tempError = [NSError errorWithDomain:@"the characteristic no have descripotor" code:bluetoothErrorStateNoDescriptor userInfo:nil];
+            callback(nil,tempError);
         }
     }];
     
@@ -645,11 +640,11 @@ typedef void (^blueToothFindCharacteristic)(EasyCharacteristic *character ,NSErr
 {
     
     NSAssert([serviceUUID isKindOfClass:[NSString class]], @"you should change the uuid ti nsstring！");
+    
     CBUUID *serviceuuid = [CBUUID UUIDWithString:serviceUUID];
     CBUUID *operationuuid =[CBUUID UUIDWithString:operationUUID];
     
     if (peripheral.state != CBPeripheralStateConnected) {
-        
         NSError *error = [NSError errorWithDomain:@"the device does't connected ! please operation after connected !" code:bluetoothErrorStateNoConnect userInfo:nil] ;
         callback(nil,error);
     }
