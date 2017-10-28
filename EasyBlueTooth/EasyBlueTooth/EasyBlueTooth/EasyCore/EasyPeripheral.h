@@ -111,6 +111,10 @@ typedef void (^blueToothFindServiceCallback)(EasyPeripheral *peripheral , NSArra
  */
 @property(nonatomic, strong) NSMutableArray<EasyService *> *serviceArray;
 
+/**
+ * 连接设备回调
+ */
+@property(nonatomic, copy) blueToothConnectDeviceCallback connectCallback ;
 
 /**
  * 初始化操作

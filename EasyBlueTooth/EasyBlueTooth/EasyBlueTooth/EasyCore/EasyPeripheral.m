@@ -19,8 +19,6 @@
     NSDictionary    *_connectOpertion ;//需要连接设备所遵循的条件
     __block BOOL     _isReconnectDevice ;//用来处理发起连接时的参数问题。因为没调用连接一次，只能返回一次连接结果。
 
-    //设备连接设备回调
-    blueToothConnectDeviceCallback _connectCallback ;
     //读取rssi回调结果
     blueToothReadRSSICallback _blueToothReadRSSICallback ;
     
