@@ -22,10 +22,10 @@
 typedef NS_ENUM(NSUInteger ,searchFlagType) {
     searchFlagTypeDefaut = 0 << 0,
     searchFlagTypeFinish = 1 << 1,//扫描时间到
-    searchFlagTypeDelete = 1 << 2,//设备断开连接 删除设别
+    searchFlagTypeDisconnect = 1 << 2,//设备断开连接 删除设别
     searchFlagTypeAdded  = 1 << 3,//扫描到新设备
-    searchFlagTypeChanged= 1 << 4,//已经扫描到设别，设备的状态改变
-//    searchFlagType ,
+    searchFlagTypeChanged= 1 << 4,//已经扫描到设备，设备的状态改变
+    searchFlagTypeDelete = 1 << 5 ,//设备超过时间未被发现
 };
 
 /**
@@ -124,7 +124,15 @@ typedef void (^blueToothStateChangedCallback)(EasyCenterManager *manager , CBMan
 - (NSArray *)retrievePeripheralsWithIdentifiers:(NSArray *)identifiers;
 - (NSArray *)retrieveConnectedPeripheralsWithServices:(NSArray *)serviceUUIDS;
 
-
-
+/**
+ * 一段时间没有扫描到设备，通知外部处理
+ */
+- (void)foundDeviceTimeout:(EasyPeripheral *)perpheral ;
 @end
+
+
+
+
+
+
 

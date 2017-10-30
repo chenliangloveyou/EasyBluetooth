@@ -15,6 +15,7 @@
     if (self = [super init]) {
         _scanTimeOut = NSIntegerMax ;
         _connectTimeOut = 5 ;
+        _refoundDeviceTime = 5 ;
     }
     return self ;
 }

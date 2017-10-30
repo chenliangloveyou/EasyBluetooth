@@ -12,6 +12,7 @@
 #import "EasyService.h"
 #import "EasyCharacteristic.h"
 #import "EasyDescriptor.h"
+#import "NSObject+Easy.h"
 
 @interface EasyPeripheral()<CBPeripheralDelegate>
 {
@@ -57,8 +58,30 @@
         
         _connectTimeOut = 5 ;
         _isReconnectDevice = YES ;
+        
+        _foundDeviceTime = [NSDate date].timeIntervalSince1970 ;
+
+        if ([self.name containsString:@"70"]) {
+//            [self performSelectorOnMainThread:@selector(devicenotFoundTimeout) withObject:@"2" afterDelay:5];
+            [self performSelector:@selector(devicenotFoundTimeout) withObject:nil afterDelay:5.0f];
+        }
+
     }
     return self ;
+}
+- (void)setDeviceScanCount:(NSUInteger)deviceScanCount
+{
+    _deviceScanCount = deviceScanCount ;
+    
+    if ([self.name containsString:@"70"]) {
+        [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(devicenotFoundTimeout) object:nil];//可以成功取消
+        [self performSelector:@selector(devicenotFoundTimeout) withObject:nil afterDelay:5.0f];
+
+    }
+}
+- (void)devicenotFoundTimeout
+{
+    [self.centerManager foundDeviceTimeout:self];
 }
 - (NSUUID *)identifier
 {

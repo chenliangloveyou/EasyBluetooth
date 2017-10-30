@@ -54,7 +54,7 @@
             else if(searchType&searchFlagTypeAdded){
                 [weakself.dataArray addObject:peripheral];
             }
-            else if (searchType&searchFlagTypeDelete){
+            else if (searchType&searchFlagTypeDisconnect || searchType&searchFlagTypeDelete){
                 [weakself.dataArray removeObject:peripheral];
             }
             queueMainStart
@@ -181,8 +181,8 @@
 {
     if (nil == _centerManager) {
         
-        dispatch_queue_t queue = dispatch_queue_create("com.easyBluetootth.demo", 0);
-        _centerManager = [[EasyCenterManager alloc]initWithQueue:queue options:nil];
+//        dispatch_queue_t queue = dispatch_queue_create("com.easyBluetootth.demo", 0);
+        _centerManager = [[EasyCenterManager alloc]initWithQueue:nil options:nil];
     }
     return _centerManager ;
 }

@@ -155,7 +155,32 @@
     }
     return result;
 }
-
+- (void)foundDeviceTimeout:(EasyPeripheral *)perpheral
+{
+    NSArray *allValues = [self.connectedDeviceDict allValues];
+    [allValues enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        if ([obj isEqual:perpheral]) {
+            *stop = YES ;
+            return  ;
+        }
+    }];
+    
+    __block BOOL isExitDevice ;
+    NSArray *tempAllValues = self.foundDeviceDict.allValues;
+    [tempAllValues enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        if ([obj isEqual:perpheral]) {
+            isExitDevice = YES ;
+            *stop = YES ;
+        }
+    }];
+    if (isExitDevice) {
+        [self.foundDeviceDict removeObjectForKey:perpheral.identifierString];
+        
+        if (_blueToothSearchDeviceCallback) {
+            _blueToothSearchDeviceCallback(perpheral , searchFlagTypeDelete );
+        }
+    }
+}
 
 #pragma mark - centeral manager delegate
 
@@ -314,7 +339,7 @@
     NSAssert(existedP, @"attention: you should deal with this error");
     
     if (_blueToothSearchDeviceCallback && existedP) {
-        _blueToothSearchDeviceCallback(existedP,searchFlagTypeDelete);
+        _blueToothSearchDeviceCallback(existedP,searchFlagTypeDisconnect);
     }
 //    existedP.errorDescription = error ;
     if (existedP) {
@@ -353,7 +378,7 @@
 //    existedP.errorDescription = error ;
     
     if (_blueToothSearchDeviceCallback && existedP) {
-        _blueToothSearchDeviceCallback(existedP,searchFlagTypeDelete);
+        _blueToothSearchDeviceCallback(existedP,searchFlagTypeDisconnect);
     }
 
     if (error && existedP) {

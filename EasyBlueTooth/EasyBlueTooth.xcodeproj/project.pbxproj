@@ -54,6 +54,7 @@
 		AD92FA171F42D8D100D8B811 /* EasyPeripheral.m in Sources */ = {isa = PBXBuildFile; fileRef = AD92FA0A1F42D8D100D8B811 /* EasyPeripheral.m */; };
 		AD92FA181F42D8D100D8B811 /* EasyProfiles.m in Sources */ = {isa = PBXBuildFile; fileRef = AD92FA0C1F42D8D100D8B811 /* EasyProfiles.m */; };
 		AD92FA191F42D8D100D8B811 /* EasyService.m in Sources */ = {isa = PBXBuildFile; fileRef = AD92FA0E1F42D8D100D8B811 /* EasyService.m */; };
+		ADFE658D1FA6FA0F002286DF /* NSObject+Easy.m in Sources */ = {isa = PBXBuildFile; fileRef = ADFE658C1FA6FA0F002286DF /* NSObject+Easy.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -159,6 +160,8 @@
 		AD92FA0C1F42D8D100D8B811 /* EasyProfiles.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EasyProfiles.m; sourceTree = "<group>"; };
 		AD92FA0D1F42D8D100D8B811 /* EasyService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EasyService.h; sourceTree = "<group>"; };
 		AD92FA0E1F42D8D100D8B811 /* EasyService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EasyService.m; sourceTree = "<group>"; };
+		ADFE658B1FA6FA0F002286DF /* NSObject+Easy.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSObject+Easy.h"; sourceTree = "<group>"; };
+		ADFE658C1FA6FA0F002286DF /* NSObject+Easy.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSObject+Easy.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -370,6 +373,8 @@
 				AD92FA0C1F42D8D100D8B811 /* EasyProfiles.m */,
 				AD1552611F55140900DBBBDC /* EasyUtils.h */,
 				AD1552621F55140900DBBBDC /* EasyUtils.m */,
+				ADFE658B1FA6FA0F002286DF /* NSObject+Easy.h */,
+				ADFE658C1FA6FA0F002286DF /* NSObject+Easy.m */,
 			);
 			path = EasyCore;
 			sourceTree = "<group>";
@@ -550,6 +555,7 @@
 				AD32B2151F4A79D600A1746C /* ToolInputView.m in Sources */,
 				AD7DCAB11E7A5E9F00589BBA /* main.m in Sources */,
 				AD1552601F55102B00DBBBDC /* ExampleAllRuleDeviceViewController.m in Sources */,
+				ADFE658D1FA6FA0F002286DF /* NSObject+Easy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

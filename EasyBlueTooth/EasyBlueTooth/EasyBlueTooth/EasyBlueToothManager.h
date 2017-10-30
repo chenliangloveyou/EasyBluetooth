@@ -78,7 +78,7 @@ typedef BOOL (^blueToothScanRule)(EasyPeripheral *peripheral);
  * error       错误信息。（如果没有扫描到设备时，请看这个error里面是什么）
  */
 typedef void (^blueToothScanCallback)(EasyPeripheral *peripheral , NSError *error );
-typedef void (^blueToothScanAsyncCallback)(EasyPeripheral *peripheral ,BOOL isFinish , NSError *error );
+typedef void (^blueToothScanAsyncCallback)(EasyPeripheral *peripheral ,searchFlagType searchFlagType , NSError *error );
 typedef void (^blueToothScanAllCallback)(NSArray<EasyPeripheral *> *deviceArray , NSError *error );
 
 /**

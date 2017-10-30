@@ -149,18 +149,19 @@ typedef void (^blueToothFindCharacteristic)(EasyCharacteristic *character ,NSErr
                 tempError = [NSError errorWithDomain:@"center manager state powered off" code:bluetoothErrorStateNoReadly userInfo:nil];
             }
             //3，通知外部
-            callback(nil , YES ,tempError);
+            callback(nil , searchFlagTypeFinish ,tempError);
             return ;
         }
         
-        if (rule(peripheral) && searchType&searchFlagTypeAdded ) {
+        if (rule(peripheral) ) {
             
-            weakself.bluetoothState = bluetoothStateDeviceFounded ;
-            if (weakself.bluetoothStateChanged) {
-                weakself.bluetoothStateChanged(peripheral,bluetoothStateDeviceFounded);
+            if (searchType&searchFlagTypeAdded) {
+                weakself.bluetoothState = bluetoothStateDeviceFounded ;
+                if (weakself.bluetoothStateChanged) {
+                    weakself.bluetoothStateChanged(peripheral,bluetoothStateDeviceFounded);
+                }
             }
-            
-            callback(peripheral , NO ,nil);
+            callback(peripheral , searchType ,nil);
         }
         
     }];
