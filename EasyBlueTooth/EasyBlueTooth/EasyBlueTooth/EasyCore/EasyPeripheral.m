@@ -12,7 +12,6 @@
 #import "EasyService.h"
 #import "EasyCharacteristic.h"
 #import "EasyDescriptor.h"
-#import "NSObject+Easy.h"
 
 @interface EasyPeripheral()<CBPeripheralDelegate>
 {
@@ -23,6 +22,7 @@
     //读取rssi回调结果
     blueToothReadRSSICallback _blueToothReadRSSICallback ;
     
+    NSTimer *_deviceTimeoutTimer ;
 }
 //设备发现服务回调
 @property (nonatomic,strong)NSMutableArray<blueToothFindServiceCallback> *findServiceCallbackArray ;
@@ -59,12 +59,13 @@
         _connectTimeOut = 5 ;
         _isReconnectDevice = YES ;
         
-        _foundDeviceTime = [NSDate date].timeIntervalSince1970 ;
+        kWeakSelf(self)
+        queueMainStart
+        [weakself performSelector:@selector(devicenotFoundTimeout)
+                       withObject:nil
+                       afterDelay:5.0f];
+        queueEnd
 
-//        if ([self.name containsString:@"70"]) {
-//            [self performSelectorOnMainThread:@selector(devicenotFoundTimeout) withObject:@"2" afterDelay:5];
-            [self performSelector:@selector(devicenotFoundTimeout) withObject:nil afterDelay:5.0f];
-//        }
 
     }
     return self ;
@@ -73,11 +74,15 @@
 {
     _deviceScanCount = deviceScanCount ;
     
-//    if ([self.name containsString:@"70"]) {
-        [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(devicenotFoundTimeout) object:nil];//可以成功取消
-        [self performSelector:@selector(devicenotFoundTimeout) withObject:nil afterDelay:5.0f];
-
-//    }
+        kWeakSelf(self)
+        queueMainStart
+        [NSObject cancelPreviousPerformRequestsWithTarget:weakself
+                                                 selector:@selector(devicenotFoundTimeout)
+                                                   object:nil];
+        [weakself performSelector:@selector(devicenotFoundTimeout)
+                       withObject:nil
+                       afterDelay:5.0f];
+        queueEnd
 }
 - (void)devicenotFoundTimeout
 {

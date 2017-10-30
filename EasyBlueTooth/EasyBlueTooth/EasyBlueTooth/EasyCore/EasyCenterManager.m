@@ -25,7 +25,6 @@
     NSDictionary *_scanOptionsDictionary ;//扫描条件
     blueToothSearchDeviceCallback _blueToothSearchDeviceCallback ;
     
-    dispatch_source_t _searchDeviceTimer ;
 }
 @property (nonatomic, strong) NSMutableDictionary *foundDeviceDict;
 @property (nonatomic, strong) NSMutableDictionary *connectedDeviceDict;

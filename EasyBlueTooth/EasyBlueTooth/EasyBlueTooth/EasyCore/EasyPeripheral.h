@@ -88,11 +88,6 @@ typedef void (^blueToothFindServiceCallback)(EasyPeripheral *peripheral , NSArra
 @property (nonatomic,strong)NSDictionary *advertisementData ;
 
 /**
- * 发现设备时间
- */
-@property (nonatomic,assign)NSTimeInterval foundDeviceTime ;
-
-/**
  * 当前是否连接成功
  */
 @property (nonatomic ,assign ,readonly) BOOL isConnected;

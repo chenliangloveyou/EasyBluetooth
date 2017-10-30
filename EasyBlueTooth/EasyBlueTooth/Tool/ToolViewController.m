@@ -181,8 +181,8 @@
 {
     if (nil == _centerManager) {
         
-//        dispatch_queue_t queue = dispatch_queue_create("com.easyBluetootth.demo", 0);
-        _centerManager = [[EasyCenterManager alloc]initWithQueue:nil options:nil];
+        dispatch_queue_t queue = dispatch_queue_create("com.easyBluetootth.demo", 0);
+        _centerManager = [[EasyCenterManager alloc]initWithQueue:queue options:nil];
     }
     return _centerManager ;
 }

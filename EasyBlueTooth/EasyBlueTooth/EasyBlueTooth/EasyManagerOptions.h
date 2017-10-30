@@ -59,10 +59,6 @@
  */
 @property (nonatomic,assign)BOOL autoConnectAfterDisconnect ;
 
-/**
- * 设备在规定的时间内不可见
- */
-@property (nonatomic,assign)NSUInteger refoundDeviceTime ;
 
 - (instancetype)initWithManagerQueue:(dispatch_queue_t)queue
                    managerDictionary:(NSDictionary *)managerDictionary ;
