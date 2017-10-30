@@ -357,7 +357,7 @@
     }
 
     if (error && existedP) {
-        [existedP dealDeviceConnectWithError:error deviceConnectType:deviceConnectTypeSuccess];
+        [existedP dealDeviceConnectWithError:error deviceConnectType:deviceConnectTypeDisConnect];
     }
     if (existedP) {
         existedP = nil ;

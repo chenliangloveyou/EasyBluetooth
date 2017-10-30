@@ -28,7 +28,7 @@
     
     [EFShowView showHUDMsg:@"正在扫描设备"];
     [self.bleManager scanAndConnectDeviceWithRule:^BOOL(EasyPeripheral *peripheral) {
-        return peripheral.name.length > 0 ;
+        return [peripheral.name containsString:@"_M70"] ;
     } callback:^(EasyPeripheral *peripheral, NSError *error) {
         queueMainStart
         [EFShowView HideHud];
