@@ -128,6 +128,43 @@ typedef void (^blueToothFindCharacteristic)(EasyCharacteristic *character ,NSErr
     }];
 }
 
+- (void)scanAllDeviceAsyncWithRule:(blueToothScanRule)rule
+                          callback:(blueToothScanAsyncCallback)callback
+{
+    if (self.managerOptions.scanTimeOut == NSIntegerMax) {
+        self.managerOptions.scanTimeOut = 20 ;//默认一个时间
+        NSAssert(NO, @"you should set a scanTimeOut value on EasyManagerOptions class");
+    }
+    NSAssert(callback, @"callbck should handle!");
+    
+    kWeakSelf(self)
+    [self.centerManager scanDeviceWithTimeInterval:self.managerOptions.scanTimeOut services:self.managerOptions.scanServiceArray  options:self.managerOptions.scanOptions callBack:^(EasyPeripheral *peripheral, searchFlagType searchType) {
+        
+        if (searchType&searchFlagTypeFinish) { //扫描时间到
+            //1，停止扫描
+            [weakself.centerManager stopScanDevice];
+            //2，收集错误信息
+            NSError *tempError = nil ;
+            if (weakself.centerManager.manager.state == CBCentralManagerStatePoweredOff ) {
+                tempError = [NSError errorWithDomain:@"center manager state powered off" code:bluetoothErrorStateNoReadly userInfo:nil];
+            }
+            //3，通知外部
+            callback(nil , YES ,tempError);
+            return ;
+        }
+        
+        if (rule(peripheral)) {
+            
+            weakself.bluetoothState = bluetoothStateDeviceFounded ;
+            if (weakself.bluetoothStateChanged) {
+                weakself.bluetoothStateChanged(peripheral,bluetoothStateDeviceFounded);
+            }
+            
+            callback(peripheral , NO ,nil);
+        }
+        
+    }];
+}
 
 #pragma mark 扫描所有符合条件的设备
 - (void)scanAllDeviceWithName:(NSString *)name callback:(blueToothScanAllCallback)callback
