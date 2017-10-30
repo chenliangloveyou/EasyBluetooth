@@ -27,25 +27,33 @@
     // Do any additional setup after loading the view.
     
     [EFShowView showHUDMsg:@"正在扫描设备"];
-    [self.bleManager scanDeviceWithRule:^BOOL(EasyPeripheral *peripheral) {
-        
-        return peripheral.name.length > 4 ;
-        
+    [self.bleManager scanAndConnectDeviceWithRule:^BOOL(EasyPeripheral *peripheral) {
+        return peripheral.name.length > 0 ;
     } callback:^(EasyPeripheral *peripheral, NSError *error) {
-        
         queueMainStart
         [EFShowView HideHud];
-
-        if (!error) {
-            //把peripheral 保存起来。 用来操作数据
-            [EFShowView showSueecssText:@"设备连接成功!"];
-        }
-        else{
-            [EFShowView showErrorText:error.domain];
-        }
         queueEnd
-
+        NSLog(@"%@ ====== %@",peripheral , error );
     }];
+//    [self.bleManager scanDeviceWithRule:^BOOL(EasyPeripheral *peripheral) {
+//        
+//        return peripheral.name.length > 0 ;
+//        
+//    } callback:^(EasyPeripheral *peripheral, NSError *error) {
+//        
+//        queueMainStart
+//        [EFShowView HideHud];
+//
+//        if (!error) {
+//            //把peripheral 保存起来。 用来操作数据
+//            [EFShowView showSueecssText:@"设备连接成功!"];
+//        }
+//        else{
+//            [EFShowView showErrorText:error.domain];
+//        }
+//        queueEnd
+//
+//    }];
     
 }
 

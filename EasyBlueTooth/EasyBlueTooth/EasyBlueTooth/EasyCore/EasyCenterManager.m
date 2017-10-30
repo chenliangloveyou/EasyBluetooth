@@ -211,9 +211,9 @@
 - (void)centralManager:(CBCentralManager *)central didDiscoverPeripheral:(CBPeripheral *)peripheral advertisementData:(NSDictionary *)advertisementData RSSI:(NSNumber *)RSSI
 {
     
-    if (peripheral.name.length == 0) {
+//    if (peripheral.name.length == 0) {
         EasyLog_R(@"%@", [NSString stringWithFormat:@"发现一个设备 - %@ - %@" ,peripheral.name,peripheral.identifier] );
-    }
+//    }
     //去掉重复搜索到的设备
     NSInteger existedIndex = -1 ;
     for (NSString *tempIndefy in [self.foundDeviceDict allKeys]) {

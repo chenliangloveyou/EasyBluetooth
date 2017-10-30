@@ -64,7 +64,7 @@ typedef void (^blueToothFindCharacteristic)(EasyCharacteristic *character ,NSErr
             self.bluetoothStateChanged(nil,bluetoothStateSystemReadly);
         }
     }
-    else{
+    else if(self.centerManager.manager.state == CBManagerStatePoweredOff){
         NSError *tempError = [NSError errorWithDomain:@"center manager state powered off and wraiting to turn on !" code:bluetoothErrorStateNoReadlyTring userInfo:nil];
         callback(nil,tempError);
     }
@@ -95,7 +95,7 @@ typedef void (^blueToothFindCharacteristic)(EasyCharacteristic *character ,NSErr
             NSString *name = (NSString *)condition ;
             
             //能进入if里面。说明返回的设备是查找的设备。如果不能就不予处理这个设备
-            if ([peripheral.name isEqualToString:name] && searchType&searchFlagTypeAdded) {
+            if ([(peripheral.name) isEqualToString:(name)] && searchType&searchFlagTypeAdded) {
                 
                 //1，停止扫描
                 [weakself.centerManager stopScanDevice];
@@ -113,7 +113,7 @@ typedef void (^blueToothFindCharacteristic)(EasyCharacteristic *character ,NSErr
         else{
             
             blueToothScanRule rule = (blueToothScanRule)condition ;
-            if (rule(peripheral)) {//能进if里面。说明这个设备是符合要求的
+            if (rule(peripheral) && searchType&searchFlagTypeAdded ) {//能进if里面。说明这个设备是符合要求的
                 
                 [weakself.centerManager stopScanDevice];
                 
