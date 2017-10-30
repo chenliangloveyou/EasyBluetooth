@@ -195,7 +195,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "320"
             endingLineNumber = "320"
-            landmarkName = "-connectDeviceWithIdentifier:callback:"
+            landmarkName = "-connectDeviceWithPeripheral:callback:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -211,7 +211,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "330"
             endingLineNumber = "330"
-            landmarkName = "-connectDeviceWithIdentifier:callback:"
+            landmarkName = "-connectDeviceWithPeripheral:callback:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

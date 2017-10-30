@@ -153,7 +153,7 @@ typedef void (^blueToothFindCharacteristic)(EasyCharacteristic *character ,NSErr
             return ;
         }
         
-        if (rule(peripheral)) {
+        if (rule(peripheral) && searchType&searchFlagTypeAdded ) {
             
             weakself.bluetoothState = bluetoothStateDeviceFounded ;
             if (weakself.bluetoothStateChanged) {
