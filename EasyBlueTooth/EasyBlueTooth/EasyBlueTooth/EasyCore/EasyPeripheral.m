@@ -37,7 +37,7 @@
 //    if (_stateChangedCallback) {
 //        [self.peripheral removeObserver:self forKeyPath:@"state"];
 //    }
-    EasyLog(@"\n%@设备已销毁 %@",self.name,self.identifier);
+    EasyLog(@"\n%@设备已销毁 %@",self.name,self.identifierString);
     _peripheral.delegate = nil ;
     _peripheral = nil ;
 }
@@ -131,33 +131,20 @@
 
 - (void)connectDeviceWithCallback:(blueToothConnectDeviceCallback)callback
 {
-//    [self connectDeviceWithDisconnectCallback:nil
-//                                     Callback:callback];
-    [self connectDeviceWithTimeOut:_connectTimeOut
+  [self connectDeviceWithTimeOut:_connectTimeOut
                           callback:callback];
 }
 
-//- (void)connectDeviceWithDisconnectCallback:(blueToothDisconnectCallback)disconnectCallback
-//                                   Callback:(blueToothConnectDeviceCallback)callback
-//{
-//    [self connectDeviceWithTimeOut:_connectTimeOut
-//                disconnectCallback:disconnectCallback
-//                          callback:callback];
-//}
-
 - (void)connectDeviceWithTimeOut:(NSUInteger)timeout
-//              disconnectCallback:(blueToothDisconnectCallback)disconnectCallback
                         callback:(blueToothConnectDeviceCallback)callback
 {
     [self connectDeviceWithTimeOut:timeout
                            Options:nil
-//                disconnectCallback:disconnectCallback
                           callback:callback];
 }
 
 - (void)connectDeviceWithTimeOut:(NSUInteger)timeout
                          Options:(NSDictionary *)options
-//              disconnectCallback:(blueToothDisconnectCallback)disconnectCallback
                         callback:(blueToothConnectDeviceCallback)callback
 {
 
@@ -211,7 +198,6 @@
     _isReconnectDevice = YES ;
     [self connectDeviceWithTimeOut:_connectTimeOut
                            Options:_connectOpertion
-//                disconnectCallback:_disconnectCallback
                           callback:_connectCallback];
 }
 

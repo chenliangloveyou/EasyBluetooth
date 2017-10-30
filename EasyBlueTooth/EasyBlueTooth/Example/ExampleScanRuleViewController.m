@@ -32,7 +32,8 @@
     } callback:^(EasyPeripheral *peripheral, searchFlagType searchFlagType, NSError *error) {
         NSLog(@"%@ == %lu == %@",peripheral,(unsigned long)searchFlagType ,error) ;
     }];
-    //    [self.bleManager scanDeviceWithRule:^BOOL(EasyPeripheral *peripheral) {
+   
+//    [self.bleManager scanDeviceWithRule:^BOOL(EasyPeripheral *peripheral) {
 //        
 //        return peripheral.name.length > 0 ;
 //        

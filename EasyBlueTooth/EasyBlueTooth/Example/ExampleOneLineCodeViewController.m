@@ -31,9 +31,10 @@
         NSLog(@" ====== %ld ", state);
     } ;
     
-    Byte bytes[8] = {0xfe,0x6a,0x72,0x5b,0x01,0x00,0x00,(0x6a+0x72+0x5b+0x01)%0x100};
-    NSData *D = [[NSData alloc] initWithBytes:bytes length:8];
-    [self.bleManager connectDeviceWithName:@"ClinkBlood" serviceUUID:@"0xFC00" notifyUUID:@"0xFCA1" wirteUUID:@"0xFCA0" writeData:D callback:^(NSData *data, NSError *error) {
+//    Byte bytes[8] = {0xfe,0x6a,0x72,0x5b,0x01,0x00,0x00,(0x6a+0x72+0x5b+0x01)%0x100};
+    Byte bytes[6]= {0xfe ,0x81,0x00,0x00,0x00,0x01};
+    NSData *D = [[NSData alloc] initWithBytes:bytes length:sizeof(bytes)];
+    [self.bleManager connectDeviceWithName:@"SZLSD SPPLE Module" serviceUUID:@"0xFFF0" notifyUUID:@"0xFFF2" wirteUUID:@"0xFFF1" writeData:D callback:^(NSData *data, NSError *error) {
         NSLog(@"%@ -- %@",data ,error );
     }];
     

@@ -134,16 +134,11 @@ typedef void (^blueToothFindServiceCallback)(EasyPeripheral *peripheral , NSArra
  */
 - (void)connectDeviceWithCallback:(blueToothConnectDeviceCallback)callback ;
 
-//- (void)connectDeviceWithDisconnectCallback:(blueToothDisconnectCallback)disconnectCallback
-//                                   Callback:(blueToothConnectDeviceCallback)callback ;
-
 - (void)connectDeviceWithTimeOut:(NSUInteger)timeout
-//              disconnectCallback:(blueToothDisconnectCallback)disconnectCallback
                         callback:(blueToothConnectDeviceCallback)callback;
 
 - (void)connectDeviceWithTimeOut:(NSUInteger)timeout
                          Options:(NSDictionary *)options
-//              disconnectCallback:(blueToothDisconnectCallback)disconnectCallback
                         callback:(blueToothConnectDeviceCallback)callback;
 
 /**

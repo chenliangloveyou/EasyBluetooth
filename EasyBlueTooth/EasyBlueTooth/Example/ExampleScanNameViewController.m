@@ -48,11 +48,31 @@
     
     [EFShowView showInfoText:@"正在扫描并连接设别..."];
     kWeakSelf(self)
-    [self.bleManager scanAndConnectDeviceWithName:@"BLT_M70C" callback:^(EasyPeripheral *peripheral, NSError *error) {
+    [self.bleManager scanAndConnectDeviceWithName:@"SZLSD SPPLE Module" callback:^(EasyPeripheral *peripheral, NSError *error) {
         if (!error) {
             weakself.peripheral = peripheral ;            
         }
     }];
+    
+    
+    UIButton *button  =[UIButton buttonWithType:UIButtonTypeCustom];
+    [button setBackgroundColor:[UIColor redColor]];
+    [button setFrame:CGRectMake(200, 200, 50, 50)];
+    [button addTarget:self action:@selector(sendOrder) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:button];
+}
+- (void)sendOrder
+{
+    Byte bytes[6]= {0xfe ,0x81,0x00,0x00,0x00,0x01};
+    NSData *D = [[NSData alloc] initWithBytes:bytes length:sizeof(bytes)];
+    [self.bleManager notifyDataWithPeripheral:self.peripheral serviceUUID:@"0xFFF0" notifyUUID:@"0xFFF2" notifyValue:YES withCallback:^(NSData *data, NSError *error) {
+        NSLog(@"%@ -- %@",data ,error );
+    }];
+    QueueStartAfterTime(0.5)
+    [self.bleManager writeDataWithPeripheral:self.peripheral serviceUUID:@"0xFFF0" writeUUID:@"0xFFF1" data:D callback:^(NSData *data, NSError *error) {
+        NSLog(@"%@ -- %@",data ,error );
+    }];
+    queueEnd
 }
 - (void)test
 {
