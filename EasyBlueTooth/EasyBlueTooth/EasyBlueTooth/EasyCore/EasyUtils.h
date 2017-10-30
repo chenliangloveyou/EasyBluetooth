@@ -25,7 +25,7 @@
 #define queueEnd  });
 
 /**打印****/
-#define ISSHOWLOG 1
+#define ISSHOWLOG 0
 
 //接受系统消息
 #define ISSHOWRECEIVELOG 1

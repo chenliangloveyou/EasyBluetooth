@@ -20,7 +20,7 @@
 
 
 typedef NS_ENUM(NSUInteger ,searchFlagType) {
-    searchFlagTypeDefaut = 0 << 0,
+    searchFlagTypeDefaut = 1 << 0,
     searchFlagTypeFinish = 1 << 1,//扫描时间到
     searchFlagTypeDisconnect = 1 << 2,//设备断开连接 删除设别
     searchFlagTypeAdded  = 1 << 3,//扫描到新设备

@@ -117,7 +117,16 @@
             [weakself stopScanDevice];
             _blueToothSearchDeviceCallback(nil,searchFlagTypeFinish);
         }
-        
+
+        for (EasyPeripheral *tempP in self.foundDeviceDict.allValues) {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored"-Wundeclared-selector"
+            [NSObject cancelPreviousPerformRequestsWithTarget:tempP
+                                                     selector:@selector(devicenotFoundTimeout)
+                                                       object:nil];
+#pragma clang diagnostic pop
+        }
+
     });
 }
 
