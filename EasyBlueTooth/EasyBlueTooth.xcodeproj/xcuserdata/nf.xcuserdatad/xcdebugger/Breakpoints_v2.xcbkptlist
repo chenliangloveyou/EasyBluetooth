@@ -25,7 +25,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "317"
             endingLineNumber = "317"
-            landmarkName = "-discoverDeviceServiceWithUUIDArray:callback:"
+            landmarkName = "-searchServiceWithService:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -41,8 +41,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "396"
             endingLineNumber = "396"
-            landmarkName = "-peripheral:didDiscoverServices:"
-            landmarkType = "7">
+            landmarkName = "EasyPeripheral"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy

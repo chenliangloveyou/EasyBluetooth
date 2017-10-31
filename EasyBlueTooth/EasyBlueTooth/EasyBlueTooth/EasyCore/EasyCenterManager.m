@@ -196,8 +196,8 @@
 {
     //状态改变，清除所有连接 和发现的设别
     if (_centerState != central.state) {
-        [self disConnectAllDevice];
-        [self removeAllScanFoundDevice];
+//        [self disConnectAllDevice];
+//        [self removeAllScanFoundDevice];
         
         if (_stateChangeCallback) {
             _stateChangeCallback(self , central.state );
