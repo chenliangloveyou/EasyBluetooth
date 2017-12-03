@@ -15,7 +15,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "505"
             endingLineNumber = "505"
-            landmarkName = "-peripheral:didDiscoverDescriptorsForCharacteristic:error:"
+            landmarkName = "-peripheral:didUpdateValueForDescriptor:error:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -31,7 +31,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "513"
             endingLineNumber = "513"
-            landmarkName = "-peripheral:didUpdateValueForDescriptor:error:"
+            landmarkName = "-peripheral:didWriteValueForDescriptor:error:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -95,7 +95,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "394"
             endingLineNumber = "394"
-            landmarkName = "-peripheral:didDiscoverServices:"
+            landmarkName = "-peripheral:didDiscoverIncludedServicesForService:error:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
