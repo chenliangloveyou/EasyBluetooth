@@ -376,7 +376,7 @@
         }
         [existedP.serviceArray removeAllObjects];
         
-//        [self.connectedDeviceDict removeObjectForKey:existedP.identifierString];
+        [self.connectedDeviceDict removeObjectForKey:existedP.identifierString];
         [self.foundDeviceDict removeObjectForKey:existedP.identifierString];
     }
     else{
