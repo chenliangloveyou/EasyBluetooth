@@ -130,7 +130,7 @@
     
     CBCharacteristicWriteType writeType = callback ? CBCharacteristicWriteWithResponse : CBCharacteristicWriteWithoutResponse ;
     
-    for (int i = 0; i < data.length; i=20) {
+    for (int i = 0; i < data.length; i+=20) {
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wdeprecated-declarations"
         dispatch_queue_t currentQueue = dispatch_get_current_queue() ;

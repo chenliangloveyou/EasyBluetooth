@@ -72,6 +72,7 @@ typedef void (^blueToothFindCharacteristic)(EasyCharacteristic *character ,NSErr
     kWeakSelf(self)
     [self.centerManager scanDeviceWithTimeInterval:self.managerOptions.scanTimeOut services:self.managerOptions.scanServiceArray options:self.managerOptions.scanOptions callBack:^(EasyPeripheral *peripheral, searchFlagType searchType) {
         
+        NSLog(@"peripheral - %@  - %@ ,searchType - %zd",peripheral.name,peripheral.identifierString,searchType);
         if (searchType&searchFlagTypeFinish) {//扫描完成
             //说明在规定的时间没有扫描到设备
             //1，停止扫描

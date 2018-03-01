@@ -20,7 +20,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "EasyBlueTooth/EasyBlueTooth/EasyCore/EasyCenterManager.m"
-            timestampString = "534049000.18459"
+            timestampString = "538286139.260041"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "90"
@@ -36,7 +36,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "EasyBlueTooth/EasyBlueTooth/EasyCore/EasyCenterManager.m"
-            timestampString = "534049000.184948"
+            timestampString = "538286139.260363"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "332"
@@ -117,6 +117,38 @@
             endingLineNumber = "327"
             landmarkName = "-connectDeviceWithPeripheral:callback:"
             landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[EasyBlueToothManager connectDeviceWithPeripheral:callback:]"
+                  moduleName = "EasyBlueTooth"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/nf/Documents/GitHub/easyBluetooth/EasyBlueTooth/EasyBlueTooth/EasyBlueTooth/EasyBlueToothManager.m"
+                  timestampString = "538286139.343076"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "327"
+                  endingLineNumber = "327"
+                  offsetFromSymbolStart = "424">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[EasyBlueToothManager connectDeviceWithPeripheral:callback:]"
+                  moduleName = "EasyBlueTooth"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/nf/Documents/GitHub/easyBluetooth/EasyBlueTooth/EasyBlueTooth/EasyBlueTooth/EasyBlueToothManager.m"
+                  timestampString = "538286139.345426"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "327"
+                  endingLineNumber = "327"
+                  offsetFromSymbolStart = "440">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
